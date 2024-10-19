@@ -10,6 +10,7 @@
 
 'use strict';
 
+import RNTesterText from '../../components/RNTesterText';
 import RNTOption from '../../components/RNTOption';
 
 const React = require('react');
@@ -112,7 +113,9 @@ class XHRExampleBinaryUpload extends React.Component<{...}, $FlowFixMeState> {
     return (
       <View>
         <View style={styles.block}>
-          <Text style={styles.title}>Upload 255 bytes as ...</Text>
+          <RNTesterText style={styles.title}>
+            Upload 255 bytes as ...
+          </RNTesterText>
           <View style={styles.row}>
             {Object.keys(BINARY_TYPES).map(type => (
               <RNTOption
@@ -149,6 +152,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
+    marginBottom: 8,
   },
   option: {margin: 6},
   uploadButton: {

@@ -19,6 +19,8 @@ const {
   TouchableHighlight,
   View,
 } = require('react-native');
+import RNTesterText from '../../components/RNTesterText';
+const {RNTesterThemeContext} = require('../../components/RNTesterTheme');
 
 /**
  * Convert number of bytes to MB and round to the nearest 0.1 MB.
@@ -147,7 +149,7 @@ class XHRExampleDownload extends React.Component<{...}, Object> {
     ) : (
       <TouchableHighlight style={styles.wrapper} onPress={this._download}>
         <View style={styles.button}>
-          <Text>
+          <Text style={styles.buttonText}>
             {this.state.chunked
               ? 'Download 10MB File'
               : 'Download 3KB TXT File'}
@@ -161,30 +163,25 @@ class XHRExampleDownload extends React.Component<{...}, Object> {
     if (this.state.readystateHandler && !this.state.arraybuffer) {
       const {responseLength, contentLength} = this.state;
       readystate = (
-        <View>
-          <Text style={styles.progressBarLabel}>
-            responseText: {roundKilo(responseLength)}/{roundKilo(contentLength)}
-            k chars
-          </Text>
-        </View>
+        <RNTesterText style={styles.progressBarLabel}>
+          responseText: {roundKilo(responseLength)}/{roundKilo(contentLength)}k
+          chars
+        </RNTesterText>
       );
     }
     if (this.state.progressHandler) {
       const {progressLoaded, progressTotal} = this.state;
       progress = (
-        <View>
-          <Text style={styles.progressBarLabel}>
-            onprogress: {roundKilo(progressLoaded)}/{roundKilo(progressTotal)}{' '}
-            KB
-          </Text>
-        </View>
+        <RNTesterText style={styles.progressBarLabel}>
+          onprogress: {roundKilo(progressLoaded)}/{roundKilo(progressTotal)} KB
+        </RNTesterText>
       );
     }
 
     return (
-      <View>
+      <>
         <View style={styles.configRow}>
-          <Text>onreadystatechange handler</Text>
+          <RNTesterText>onreadystatechange handler</RNTesterText>
           <Switch
             value={this.state.readystateHandler}
             onValueChange={readystateHandler =>
@@ -193,21 +190,21 @@ class XHRExampleDownload extends React.Component<{...}, Object> {
           />
         </View>
         <View style={styles.configRow}>
-          <Text>onprogress handler</Text>
+          <RNTesterText>onprogress handler</RNTesterText>
           <Switch
             value={this.state.progressHandler}
             onValueChange={progressHandler => this.setState({progressHandler})}
           />
         </View>
         <View style={styles.configRow}>
-          <Text>download as arraybuffer</Text>
+          <RNTesterText>download as arraybuffer</RNTesterText>
           <Switch
             value={this.state.arraybuffer}
             onValueChange={arraybuffer => this.setState({arraybuffer})}
           />
         </View>
         <View style={styles.configRow}>
-          <Text>transfer-encoding: chunked</Text>
+          <RNTesterText>transfer-encoding: chunked</RNTesterText>
           <Switch
             value={this.state.chunked}
             onValueChange={chunked => this.setState({chunked})}
@@ -216,7 +213,7 @@ class XHRExampleDownload extends React.Component<{...}, Object> {
         {button}
         {readystate}
         {progress}
-      </View>
+      </>
     );
   }
 }
@@ -224,11 +221,19 @@ class XHRExampleDownload extends React.Component<{...}, Object> {
 const styles = StyleSheet.create({
   wrapper: {
     borderRadius: 5,
-    marginBottom: 5,
+    marginTop: 16,
   },
   button: {
-    backgroundColor: '#eeeeee',
-    padding: 8,
+    flex: 1,
+    paddingVertical: 12,
+    alignItems: 'center',
+    backgroundColor: 'blue',
+    borderRadius: 4,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '500',
   },
   progressBarLabel: {
     marginTop: 12,
