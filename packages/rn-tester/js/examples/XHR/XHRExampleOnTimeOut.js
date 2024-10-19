@@ -12,6 +12,7 @@
 
 const React = require('react');
 const {StyleSheet, Text, TouchableHighlight, View} = require('react-native');
+const { default: RNTesterText } = require('../../components/RNTesterText');
 
 class XHRExampleOnTimeOut extends React.Component<any, any> {
   xhr: XMLHttpRequest;
@@ -62,7 +63,7 @@ class XHRExampleOnTimeOut extends React.Component<any, any> {
     const button = this.state.loading ? (
       <View style={styles.wrapper}>
         <View style={styles.button}>
-          <Text>Loading...</Text>
+          <Text style={styles.buttonText}>Loading...</Text>
         </View>
       </View>
     ) : (
@@ -71,16 +72,16 @@ class XHRExampleOnTimeOut extends React.Component<any, any> {
         // $FlowFixMe[method-unbinding] added when improving typing for this parameters
         onPress={this.loadTimeOutRequest.bind(this)}>
         <View style={styles.button}>
-          <Text>Make Time Out Request</Text>
+          <Text style={styles.buttonText}>Make Time Out Request</Text>
         </View>
       </TouchableHighlight>
     );
 
     return (
-      <View>
+      <>
         {button}
-        <Text>{this.state.status}</Text>
-      </View>
+        <RNTesterText>{this.state.status}</RNTesterText>
+      </>
     );
   }
 }
@@ -91,8 +92,16 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   button: {
-    backgroundColor: '#eeeeee',
-    padding: 8,
+    flex: 1,
+    paddingVertical: 12,
+    alignItems: 'center',
+    backgroundColor: 'blue',
+    borderRadius: 4,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '500',
   },
 });
 
