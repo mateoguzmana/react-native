@@ -98,7 +98,8 @@ inline bool isYogaStyleProp(const std::string& prop) {
        "paddingTop",
        "paddingBottom",
        "paddingLeft",
-       "paddingRight"}};
+       "paddingRight",
+       "internalBorderStyle"}};
 
   return yogaStylePropNames.find(prop) != yogaStylePropNames.end();
 }

@@ -13,6 +13,7 @@
 #include <yoga/node/Node.h>
 
 #include <react/debug/react_native_assert.h>
+#include <react/renderer/components/view/ViewProps.h>
 #include <react/renderer/components/view/YogaStylableProps.h>
 #include <react/renderer/core/LayoutableShadowNode.h>
 #include <react/renderer/core/Sealable.h>
@@ -209,6 +210,15 @@ class YogaLayoutableShadowNode : public LayoutableShadowNode {
   static yoga::Style applyAliasedProps(
       const yoga::Style& baseStyle,
       const YogaStylableProps& props);
+
+  /*
+   * Combine a base yoga::Style with aliased properties which should be
+   * flattened into it. E.g. reconciling "marginInlineStart" and "marginStart".
+   */
+  static yoga::Style unsetBorderWidthsIfStyleIsNone(
+      const yoga::Style& baseStyle,
+      const YogaStylableProps& props,
+      const ViewProps& viewProps);
 
 #pragma mark - Consistency Ensuring Helpers
 
