@@ -13,6 +13,7 @@
 
 #include <yoga/Yoga.h>
 
+// #include <android/log.h>
 #include <yoga/algorithm/FlexDirection.h>
 #include <yoga/enums/Align.h>
 #include <yoga/enums/BoxSizing.h>
@@ -165,6 +166,8 @@ class YG_EXPORT Style {
     return pool_.getLength(border_[yoga::to_underlying(edge)]);
   }
   void setBorder(Edge edge, Style::Length value) {
+    // __android_log_print(
+    //     ANDROID_LOG_INFO, "Style", "setBorder: %d", static_cast<int>(value.unit()));
     pool_.store(border_[yoga::to_underlying(edge)], value);
   }
 

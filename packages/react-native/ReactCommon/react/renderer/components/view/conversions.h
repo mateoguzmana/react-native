@@ -775,6 +775,10 @@ inline void fromRawValue(
     return;
   }
   auto stringValue = (std::string)value;
+  if (stringValue == "none") {
+    result = BorderStyle::None;
+    return;
+  }
   if (stringValue == "solid") {
     result = BorderStyle::Solid;
     return;

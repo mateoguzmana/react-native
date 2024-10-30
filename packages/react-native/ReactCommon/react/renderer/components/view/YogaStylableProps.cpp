@@ -7,7 +7,9 @@
 
 #include "YogaStylableProps.h"
 
+#include <android/log.h>
 #include <react/renderer/components/view/conversions.h>
+#include <react/renderer/components/view/primitives.h>
 #include <react/renderer/components/view/propsConversions.h>
 #include <react/renderer/core/propsConversions.h>
 #include <react/renderer/debug/debugStringConvertibleUtils.h>
@@ -391,86 +393,143 @@ YogaStylableProps::YogaStylableProps(
           sourceProps.yogaStyle.gap(yoga::Gutter::All),
           yogaStyle.gap(yoga::Gutter::All)));
 
-  yogaStyle.setBorder(
-      yoga::Edge::Left,
-      convertRawProp(
-          context,
-          rawProps,
-          "borderLeftWidth",
-          sourceProps.yogaStyle.border(yoga::Edge::Left),
-          yogaStyle.border(yoga::Edge::Left)));
+  BorderStyle borderStyle = convertRawProp(
+      context, rawProps, "borderStyle", BorderStyle::Solid, BorderStyle::Solid);
 
-  yogaStyle.setBorder(
-      yoga::Edge::Top,
-      convertRawProp(
-          context,
-          rawProps,
-          "borderTopWidth",
-          sourceProps.yogaStyle.border(yoga::Edge::Top),
-          yogaStyle.border(yoga::Edge::Top)));
+  __android_log_print(
+      ANDROID_LOG_INFO,
+      "YogaStylableProps",
+      "borderStyle: %d",
+      static_cast<int>(borderStyle));
 
-  yogaStyle.setBorder(
-      yoga::Edge::Right,
-      convertRawProp(
-          context,
-          rawProps,
-          "borderRightWidth",
-          sourceProps.yogaStyle.border(yoga::Edge::Right),
-          yogaStyle.border(yoga::Edge::Right)));
+  //   yogaStyle.setBorder(
+  //       yoga::Edge::Left,
+  //       borderStyle == BorderStyle::None
+  //           ? yoga::StyleLength{}
+  //           : convertRawProp(
+  //                 context,
+  //                 rawProps,
+  //                 "borderLeftWidth",
+  //                 sourceProps.yogaStyle.border(yoga::Edge::Left),
+  //                 yogaStyle.border(yoga::Edge::Left)));
 
-  yogaStyle.setBorder(
-      yoga::Edge::Bottom,
-      convertRawProp(
-          context,
-          rawProps,
-          "borderBottomWidth",
-          sourceProps.yogaStyle.border(yoga::Edge::Bottom),
-          yogaStyle.border(yoga::Edge::Bottom)));
+  //   yogaStyle.setBorder(
+  //       yoga::Edge::Top,
+  //       borderStyle == BorderStyle::None
+  //           ? yoga::StyleLength{}
+  //           : convertRawProp(
+  //                 context,
+  //                 rawProps,
+  //                 "borderTopWidth",
+  //                 sourceProps.yogaStyle.border(yoga::Edge::Top),
+  //                 yogaStyle.border(yoga::Edge::Top)));
 
-  yogaStyle.setBorder(
-      yoga::Edge::Start,
-      convertRawProp(
-          context,
-          rawProps,
-          "borderStartWidth",
-          sourceProps.yogaStyle.border(yoga::Edge::Start),
-          yogaStyle.border(yoga::Edge::Start)));
+  //   yogaStyle.setBorder(
+  //       yoga::Edge::Right,
+  //       borderStyle == BorderStyle::None
+  //           ? yoga::StyleLength{}
+  //           : convertRawProp(
+  //                 context,
+  //                 rawProps,
+  //                 "borderRightWidth",
+  //                 sourceProps.yogaStyle.border(yoga::Edge::Right),
+  //                 yogaStyle.border(yoga::Edge::Right)));
 
-  yogaStyle.setBorder(
-      yoga::Edge::End,
-      convertRawProp(
-          context,
-          rawProps,
-          "borderEndWidth",
-          sourceProps.yogaStyle.border(yoga::Edge::End),
-          yogaStyle.border(yoga::Edge::End)));
+  //   yogaStyle.setBorder(
+  //       yoga::Edge::Bottom,
+  //       borderStyle == BorderStyle::None
+  //           ? yoga::StyleLength{}
+  //           : convertRawProp(
+  //                 context,
+  //                 rawProps,
+  //                 "borderBottomWidth",
+  //                 sourceProps.yogaStyle.border(yoga::Edge::Bottom),
+  //                 yogaStyle.border(yoga::Edge::Bottom)));
 
-  yogaStyle.setBorder(
-      yoga::Edge::Horizontal,
-      convertRawProp(
-          context,
-          rawProps,
-          "borderHorizontalWidth",
-          sourceProps.yogaStyle.border(yoga::Edge::Horizontal),
-          yogaStyle.border(yoga::Edge::Horizontal)));
+  //   yogaStyle.setBorder(
+  //       yoga::Edge::Start,
+  //       borderStyle == BorderStyle::None
+  //           ? yoga::StyleLength{}
+  //           : convertRawProp(
+  //                 context,
+  //                 rawProps,
+  //                 "borderStartWidth",
+  //                 sourceProps.yogaStyle.border(yoga::Edge::Start),
+  //                 yogaStyle.border(yoga::Edge::Start)));
 
-  yogaStyle.setBorder(
-      yoga::Edge::Vertical,
-      convertRawProp(
-          context,
-          rawProps,
-          "borderVerticalWidth",
-          sourceProps.yogaStyle.border(yoga::Edge::Vertical),
-          yogaStyle.border(yoga::Edge::Vertical)));
+  //   yogaStyle.setBorder(
+  //       yoga::Edge::End,
+  //       borderStyle == BorderStyle::None
+  //           ? yoga::StyleLength{}
+  //           : convertRawProp(
+  //                 context,
+  //                 rawProps,
+  //                 "borderEndWidth",
+  //                 sourceProps.yogaStyle.border(yoga::Edge::End),
+  //                 yogaStyle.border(yoga::Edge::End)));
 
-  yogaStyle.setBorder(
-      yoga::Edge::All,
-      convertRawProp(
-          context,
-          rawProps,
-          "borderWidth",
-          sourceProps.yogaStyle.border(yoga::Edge::All),
-          yogaStyle.border(yoga::Edge::All)));
+  //   yogaStyle.setBorder(
+  //       yoga::Edge::Horizontal,
+  //       borderStyle == BorderStyle::None
+  //           ? yoga::StyleLength{}
+  //           : convertRawProp(
+  //                 context,
+  //                 rawProps,
+  //                 "borderHorizontalWidth",
+  //                 sourceProps.yogaStyle.border(yoga::Edge::Horizontal),
+  //                 yogaStyle.border(yoga::Edge::Horizontal)));
+
+  //   yogaStyle.setBorder(
+  //       yoga::Edge::Vertical,
+  //       borderStyle == BorderStyle::None
+  //           ? yoga::StyleLength{}
+  //           : convertRawProp(
+  //                 context,
+  //                 rawProps,
+  //                 "borderVerticalWidth",
+  //                 sourceProps.yogaStyle.border(yoga::Edge::Vertical),
+  //                 yogaStyle.border(yoga::Edge::Vertical)));
+
+  //   yogaStyle.setBorder(
+  //       yoga::Edge::All,
+  //       borderStyle == BorderStyle::None
+  //           // set 1
+  //           ? yoga::StyleLength::points(2)
+  //           : convertRawProp(
+  //                 context,
+  //                 rawProps,
+  //                 "borderWidth",
+  //                 sourceProps.yogaStyle.border(yoga::Edge::All),
+  //                 yogaStyle.border(yoga::Edge::All)));
+
+  yoga::Style::Length borderWidth = convertRawProp(
+      context,
+      rawProps,
+      "borderWidth",
+      sourceProps.yogaStyle.border(yoga::Edge::All),
+      yogaStyle.border(yoga::Edge::All));
+
+  if (borderWidth.value().isUndefined()) {
+    __android_log_print(
+        ANDROID_LOG_INFO,
+        "YogaStylableProps",
+        "borderWidth: value = undefined, unit = %d",
+        static_cast<int>(borderWidth.unit()));
+  } else {
+    __android_log_print(
+        ANDROID_LOG_INFO,
+        "YogaStylableProps",
+        "borderWidth: value = %f, unit = %d",
+        borderWidth.value().unwrap(), // Use .unwrap() to get the float value
+        static_cast<int>(borderWidth.unit()));
+
+    yogaStyle.setBorder(
+        yoga::Edge::All,
+        borderStyle == BorderStyle::None
+            // set 1
+            ? yoga::StyleLength::points(0)
+            : yoga::StyleLength::points(10));
+  }
 
   yogaStyle.setDimension(
       yoga::Dimension::Width,
@@ -882,6 +941,12 @@ void YogaStylableProps::convertRawPropAliases(
       "paddingBlockEnd",
       sourceProps.paddingBlockEnd,
       yoga::StyleLength::undefined());
+  //   internalBorderStyle = convertRawProp(
+  //       context,
+  //       rawProps,
+  //       "paddingBlockEnd",
+  //       sourceProps.paddingBlockEnd,
+  //       yoga::StyleLength::undefined());
 }
 
 } // namespace facebook::react

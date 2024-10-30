@@ -6,6 +6,7 @@
  */
 
 #include "YogaLayoutableShadowNode.h"
+#include <android/log.h>
 #include <cxxreact/SystraceSection.h>
 #include <logger/react_native_log.h>
 #include <react/debug/flags.h>
@@ -371,8 +372,12 @@ void YogaLayoutableShadowNode::updateYogaChildren() {
 void YogaLayoutableShadowNode::updateYogaProps() {
   ensureUnsealed();
 
+  auto& viewProps = static_cast<const ViewProps&>(*props_);
   auto& props = static_cast<const YogaStylableProps&>(*props_);
-  auto styleResult = applyAliasedProps(props.yogaStyle, props);
+
+  auto applyAliasedPropsStyleResult = applyAliasedProps(props.yogaStyle, props);
+  auto styleResult = unsetBorderWidthsIfStyleIsNone(
+      applyAliasedPropsStyleResult, props, viewProps);
 
   // Resetting `dirty` flag only if `yogaStyle` portion of `Props` was changed.
   if (!yogaNode_.isDirty() && (styleResult != yogaNode_.style())) {
@@ -381,7 +386,6 @@ void YogaLayoutableShadowNode::updateYogaProps() {
 
   yogaNode_.setStyle(styleResult);
   if (getTraits().check(ShadowNodeTraits::ViewKind)) {
-    auto& viewProps = static_cast<const ViewProps&>(*props_);
     // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
     bool alwaysFormsContainingBlock =
         viewProps.transform != Transform::Identity() ||
@@ -451,6 +455,66 @@ void YogaLayoutableShadowNode::updateYogaProps() {
   }
   if (result.padding(yoga::Edge::Bottom).isUndefined()) {
     result.setPadding(yoga::Edge::Bottom, props.paddingBlockEnd);
+  }
+
+  return result;
+}
+
+/*static*/ yoga::Style YogaLayoutableShadowNode::unsetBorderWidthsIfStyleIsNone(
+    const yoga::Style& baseStyle,
+    const YogaStylableProps& props,
+    const ViewProps& viewProps) {
+  yoga::Style result{baseStyle};
+
+  __android_log_print(
+      ANDROID_LOG_INFO,
+      "YogaLayoutableShadowNode",
+      "unsetBorderWidthsIfStyleIsNone");
+
+  //   OptionalT left{};
+  // OptionalT top{};
+  // OptionalT right{};
+  // OptionalT bottom{};
+  // OptionalT start{};
+  // OptionalT end{};
+  // OptionalT horizontal{};
+  // OptionalT vertical{};
+  // OptionalT all{};
+  // OptionalT block{};
+  // OptionalT blockStart{};
+  // OptionalT blockEnd{};
+
+    __android_log_print(
+      ANDROID_LOG_INFO,
+      "YogaLayoutableShadowNode",
+      "borderStyles: left=%d top=%d right=%d bottom=%d start=%d end=%d horizontal=%d vertical=%d all=%d block=%d blockStart=%d blockEnd=%d",
+      static_cast<int>(
+          viewProps.borderStyles.left.value_or(BorderStyle::Solid)),
+      static_cast<int>(viewProps.borderStyles.top.value_or(BorderStyle::Solid)),
+      static_cast<int>(
+          viewProps.borderStyles.right.value_or(BorderStyle::Solid)),
+      static_cast<int>(
+          viewProps.borderStyles.bottom.value_or(BorderStyle::Solid)),
+      static_cast<int>(
+          viewProps.borderStyles.start.value_or(BorderStyle::Solid)),
+      static_cast<int>(viewProps.borderStyles.end.value_or(BorderStyle::Solid)),
+      static_cast<int>(
+          viewProps.borderStyles.horizontal.value_or(BorderStyle::Solid)),
+      static_cast<int>(
+          viewProps.borderStyles.vertical.value_or(BorderStyle::Solid)),
+      static_cast<int>(viewProps.borderStyles.all.value_or(BorderStyle::Solid)),
+      static_cast<int>(
+          viewProps.borderStyles.block.value_or(BorderStyle::Solid)),
+      static_cast<int>(
+          viewProps.borderStyles.blockStart.value_or(BorderStyle::Solid)),
+      static_cast<int>(
+          viewProps.borderStyles.blockEnd.value_or(BorderStyle::Solid)));
+
+  if (viewProps.borderStyles.all == BorderStyle::None) {
+    __android_log_print(
+        ANDROID_LOG_INFO, "YogaLayoutableShadowNode", "BorderStyle::None");
+
+    result.setBorder(yoga::Edge::All, yoga::StyleLength::points(0));
   }
 
   return result;
