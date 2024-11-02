@@ -43,6 +43,9 @@ internal class ReactOkHttpNetworkFetcher(private val okHttpClient: OkHttpClient)
         ImageCacheControl.RELOAD -> {
           cacheControlBuilder.noCache()
         }
+        ImageCacheControl.FORCE_CACHE -> {
+          CacheControl.FORCE_CACHE
+        }
         ImageCacheControl.ONLY_IF_CACHED -> {
           cacheControlBuilder.onlyIfCached()
         }
