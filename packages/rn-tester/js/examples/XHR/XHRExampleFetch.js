@@ -19,6 +19,7 @@ const {
   TextInput,
   View,
 } = require('react-native');
+const {RNTesterThemeContext} = require('../../components/RNTesterTheme');
 
 class XHRExampleFetch extends React.Component<any, any> {
   responseURL: ?string;
@@ -113,24 +114,29 @@ class XHRExampleFetch extends React.Component<any, any> {
     ) : null;
 
     return (
-      <View>
-        <Button
-          title="RepeatedlyFetch"
-          onPress={() => this.startRepeatedlyFetch()}
-        />
-        <Text style={styles.label}>Edit URL to submit:</Text>
-        <TextInput
-          returnKeyType="go"
-          defaultValue="http://www.posttestserver.com/post.php"
-          onSubmitEditing={event => {
-            this.submit(event.nativeEvent.text);
-          }}
-          style={styles.textInput}
-        />
-        {responseURL}
-        {responseHeaders}
-        {response}
-      </View>
+      <RNTesterThemeContext.Consumer>
+        {theme => (
+          <>
+            <Button
+              title="RepeatedlyFetch"
+              onPress={() => this.startRepeatedlyFetch()}
+            />
+            <Text style={styles.label}>Edit URL to submit:</Text>
+            <TextInput
+              returnKeyType="go"
+              defaultValue="http://www.posttestserver.com/post.php"
+              onSubmitEditing={event => {
+                this.submit(event.nativeEvent.text);
+              }}
+              style={styles.textInput}
+              color={theme.LabelColor}
+            />
+            {responseURL}
+            {responseHeaders}
+            {response}
+          </>
+        )}
+      </RNTesterThemeContext.Consumer>
     );
   }
 }
@@ -143,6 +149,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: Platform.OS === 'android' ? 44 : 30,
     paddingLeft: 8,
+    color: 'white',
   },
   label: {
     flex: 1,

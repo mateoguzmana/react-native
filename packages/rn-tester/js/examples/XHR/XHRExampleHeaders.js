@@ -12,6 +12,7 @@
 
 const React = require('react');
 const {StyleSheet, Text, TouchableHighlight, View} = require('react-native');
+const {default: RNTesterText} = require('../../components/RNTesterText');
 
 class XHRExampleHeaders extends React.Component {
   xhr: XMLHttpRequest;
@@ -78,7 +79,7 @@ class XHRExampleHeaders extends React.Component {
       this.state.status === 'Downloading...' ? (
         <View style={styles.wrapper}>
           <View style={styles.button}>
-            <Text>...</Text>
+            <Text style={styles.buttonText}>...</Text>
           </View>
         </View>
       ) : (
@@ -86,16 +87,16 @@ class XHRExampleHeaders extends React.Component {
           style={styles.wrapper}
           onPress={this.download.bind(this)}>
           <View style={styles.button}>
-            <Text>Get headers</Text>
+            <Text style={styles.buttonText}>Get headers</Text>
           </View>
         </TouchableHighlight>
       );
 
     return (
-      <View>
+      <>
         {button}
-        <Text>{this.state.headers}</Text>
-      </View>
+        <RNTesterText>{this.state.headers}</RNTesterText>
+      </>
     );
   }
 }
@@ -103,11 +104,19 @@ class XHRExampleHeaders extends React.Component {
 const styles = StyleSheet.create({
   wrapper: {
     borderRadius: 5,
-    marginBottom: 5,
+    marginTop: 5,
   },
   button: {
-    backgroundColor: '#eeeeee',
-    padding: 8,
+    flex: 1,
+    paddingVertical: 12,
+    alignItems: 'center',
+    backgroundColor: 'blue',
+    borderRadius: 4,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '500',
   },
 });
 
