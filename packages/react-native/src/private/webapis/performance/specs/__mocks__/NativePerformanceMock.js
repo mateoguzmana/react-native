@@ -69,7 +69,6 @@ function createMockObserver(callback: NativeBatchedObserverCallback) {
 
       if (!observer.didScheduleFlushBuffer) {
         observer.didScheduleFlushBuffer = true;
-        // $FlowFixMe[incompatible-call]
         global.queueMicrotask(() => {
           observer.didScheduleFlushBuffer = false;
           // We want to emulate the way it's done in native (i.e. async/batched)
