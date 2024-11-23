@@ -18,8 +18,11 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentCaptor
+import org.mockito.Captor
 import org.mockito.Mockito.any
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when` as whenever
 import org.robolectric.RobolectricTestRunner
@@ -30,14 +33,22 @@ import org.robolectric.RobolectricTestRunner
  */
 private fun <T> anyOrNull(type: Class<T>): T = any(type)
 
+/**
+ * Returns ArgumentCaptor.capture() as nullable type to avoid java.lang.IllegalStateException when
+ * null is returned.
+ */
+fun <T> capture(argumentCaptor: ArgumentCaptor<T>): T = argumentCaptor.capture()
+
 @RunWith(RobolectricTestRunner::class)
 class ReactOkHttpNetworkFetcherTest {
+  @Captor private lateinit var requestArgumentCaptor: ArgumentCaptor<Request>
 
   @Test
   fun testFetch() {
     val okHttpClient = mock(OkHttpClient::class.java)
     val dispatcher = mock(Dispatcher::class.java)
     val executorService = mock(ExecutorService::class.java)
+    requestArgumentCaptor = ArgumentCaptor.forClass(Request::class.java)
 
     whenever(okHttpClient.dispatcher).thenReturn(dispatcher)
     whenever(dispatcher.executorService).thenReturn(executorService)
@@ -58,10 +69,25 @@ class ReactOkHttpNetworkFetcherTest {
 
     whenever(fetchState.context).thenReturn(producerContext)
     whenever(producerContext.imageRequest).thenReturn(imageRequest)
-    whenever(imageRequest.cacheControl).thenReturn(ImageCacheControl.RELOAD)
+    whenever(imageRequest.cacheControl).thenReturn(ImageCacheControl.FORCE_CACHE)
 
     fetcher.fetch(fetchState, callback)
 
-    verify(okHttpClient).newCall(anyOrNull(Request::class.java))
+    verify(okHttpClient, times(1)).newCall(anyOrNull(Request::class.java))
+    verify(okHttpClient).newCall(capture(requestArgumentCaptor))
+
+    val capturedRequest = requestArgumentCaptor.value
+
+    // Check if the capturedRequest is not null
+    if (capturedRequest != null) {
+      // Print all fields of the Request object using reflection
+      println("Captured Request Fields:")
+      capturedRequest.javaClass.declaredFields.forEach { field ->
+        field.isAccessible = true // Make sure we can access private fields
+        println("${field.name}: ${field.get(capturedRequest)}")
+      }
+    } else {
+      println("Captured Request is null")
+    }
   }
 }
