@@ -11,6 +11,7 @@ import android.net.Uri
 import com.facebook.imagepipeline.backends.okhttp3.OkHttpNetworkFetcher
 import com.facebook.imagepipeline.producers.NetworkFetcher
 import com.facebook.imagepipeline.producers.ProducerContext
+import com.facebook.react.bridge.JavaOnlyMap
 import java.util.concurrent.ExecutorService
 import okhttp3.Call
 import okhttp3.Dispatcher
@@ -69,7 +70,15 @@ class ReactOkHttpNetworkFetcherTest {
 
     whenever(fetchState.context).thenReturn(producerContext)
     whenever(producerContext.imageRequest).thenReturn(imageRequest)
-    whenever(imageRequest.cacheControl).thenReturn(ImageCacheControl.FORCE_CACHE)
+    whenever(imageRequest.cacheControl).thenReturn(ImageCacheControl.ONLY_IF_CACHED)
+    // Create headers as a JavaOnlyMap
+    // val headers = JavaOnlyMap()
+    // headers.putString("key1", "value1")
+    // headers.putString("key2", "value2")
+
+    // // Set the headers on the imageRequest
+    // whenever(imageRequest.headers).thenReturn(headers)
+    whenever(imageRequest.headers).thenReturn(null)
 
     fetcher.fetch(fetchState, callback)
 
@@ -78,9 +87,22 @@ class ReactOkHttpNetworkFetcherTest {
 
     val capturedRequest = requestArgumentCaptor.value
 
-    // Check if the capturedRequest is not null
+    val cacheControlInRequest = capturedRequest.cacheControl
+    assert(cacheControlInRequest != null) { "CacheControl is null in the Request" }
+
+    println("CacheControl Details:")
+    println("noCache: ${cacheControlInRequest.noCache}")
+    println("noStore: ${cacheControlInRequest.noStore}")
+    println("maxAgeSeconds: ${cacheControlInRequest.maxAgeSeconds}")
+    println("maxStaleSeconds: ${cacheControlInRequest.maxStaleSeconds}")
+    println("onlyIfCached: ${cacheControlInRequest.onlyIfCached}")
+    println("noTransform: ${cacheControlInRequest.noTransform}")
+    println("immutable: ${cacheControlInRequest.immutable}")
+
+    val requestUri = capturedRequest.url
+    println("Request URL: $requestUri")
+
     if (capturedRequest != null) {
-      // Print all fields of the Request object using reflection
       println("Captured Request Fields:")
       capturedRequest.javaClass.declaredFields.forEach { field ->
         field.isAccessible = true // Make sure we can access private fields

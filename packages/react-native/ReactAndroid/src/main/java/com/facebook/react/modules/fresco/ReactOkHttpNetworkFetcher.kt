@@ -18,7 +18,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 
 internal class ReactOkHttpNetworkFetcher(private val okHttpClient: OkHttpClient) :
-    OkHttpNetworkFetcher(okHttpClient) {
+        OkHttpNetworkFetcher(okHttpClient) {
   private fun getHeaders(readableMap: ReadableMap?): Map<String, String>? {
     if (readableMap == null) {
       return null
@@ -40,6 +40,7 @@ internal class ReactOkHttpNetworkFetcher(private val okHttpClient: OkHttpClient)
     if (fetchState.context.imageRequest is ReactNetworkImageRequest) {
       val networkImageRequest = fetchState.context.imageRequest as ReactNetworkImageRequest
       requestHeaders = getHeaders(networkImageRequest.headers)
+      println("networkImageRequest.cacheControl: ${networkImageRequest.cacheControl}")
       when (networkImageRequest.cacheControl) {
         ImageCacheControl.RELOAD -> {
           cacheControlBuilder.noStore().noCache()
@@ -58,13 +59,15 @@ internal class ReactOkHttpNetworkFetcher(private val okHttpClient: OkHttpClient)
       cacheControlBuilder.noStore()
     }
     val headers = OkHttpCompat.getHeadersFromMap(requestHeaders)
-    val request =
-        Request.Builder()
-            .cacheControl(cacheControlBuilder.build())
-            .url(uri.toString())
-            .headers(headers)
-            .get()
-            .build()
+    val requestBuilder =
+            Request.Builder().cacheControl(cacheControlBuilder.build()).url(uri.toString()).get()
+
+    if (headers.size > 0) {
+      requestBuilder.headers(headers)
+    }
+
+    val request = requestBuilder.build()
+
     fetchWithRequest(fetchState, callback, request)
   }
 }
