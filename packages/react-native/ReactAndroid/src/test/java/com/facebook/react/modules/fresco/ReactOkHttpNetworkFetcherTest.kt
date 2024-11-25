@@ -11,12 +11,12 @@ import android.net.Uri
 import com.facebook.imagepipeline.backends.okhttp3.OkHttpNetworkFetcher
 import com.facebook.imagepipeline.producers.NetworkFetcher
 import com.facebook.imagepipeline.producers.ProducerContext
-import com.facebook.react.bridge.JavaOnlyMap
 import java.util.concurrent.ExecutorService
 import okhttp3.Call
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
@@ -42,13 +42,22 @@ fun <T> capture(argumentCaptor: ArgumentCaptor<T>): T = argumentCaptor.capture()
 
 @RunWith(RobolectricTestRunner::class)
 class ReactOkHttpNetworkFetcherTest {
+  private lateinit var okHttpClient: OkHttpClient
+  private lateinit var dispatcher: Dispatcher
+  private lateinit var executorService: ExecutorService
+  private lateinit var fetcher: ReactOkHttpNetworkFetcher
+  private lateinit var fetchState: OkHttpNetworkFetcher.OkHttpNetworkFetchState
+  private lateinit var callback: NetworkFetcher.Callback
+  private lateinit var producerContext: ProducerContext
+  private lateinit var imageRequest: ReactNetworkImageRequest
+
   @Captor private lateinit var requestArgumentCaptor: ArgumentCaptor<Request>
 
-  @Test
-  fun testFetch() {
-    val okHttpClient = mock(OkHttpClient::class.java)
-    val dispatcher = mock(Dispatcher::class.java)
-    val executorService = mock(ExecutorService::class.java)
+  @Before
+  fun prepareModules() {
+    okHttpClient = mock(OkHttpClient::class.java)
+    dispatcher = mock(Dispatcher::class.java)
+    executorService = mock(ExecutorService::class.java)
     requestArgumentCaptor = ArgumentCaptor.forClass(Request::class.java)
 
     whenever(okHttpClient.dispatcher).thenReturn(dispatcher)
@@ -58,26 +67,23 @@ class ReactOkHttpNetworkFetcherTest {
       callMock
     }
 
-    val fetcher = ReactOkHttpNetworkFetcher(okHttpClient)
-    val fetchState = mock(OkHttpNetworkFetcher.OkHttpNetworkFetchState::class.java)
-    val callback = mock(NetworkFetcher.Callback::class.java)
+    fetcher = ReactOkHttpNetworkFetcher(okHttpClient)
+    fetchState = mock(OkHttpNetworkFetcher.OkHttpNetworkFetchState::class.java)
+    callback = mock(NetworkFetcher.Callback::class.java)
 
     val mockUri = Uri.parse("http://www.facebook.com")
     whenever(fetchState.uri).thenReturn(mockUri)
 
-    val producerContext = mock(ProducerContext::class.java)
-    val imageRequest = mock(ReactNetworkImageRequest::class.java)
+    producerContext = mock(ProducerContext::class.java)
+    imageRequest = mock(ReactNetworkImageRequest::class.java)
 
     whenever(fetchState.context).thenReturn(producerContext)
     whenever(producerContext.imageRequest).thenReturn(imageRequest)
-    whenever(imageRequest.cacheControl).thenReturn(ImageCacheControl.ONLY_IF_CACHED)
-    // Create headers as a JavaOnlyMap
-    // val headers = JavaOnlyMap()
-    // headers.putString("key1", "value1")
-    // headers.putString("key2", "value2")
+  }
 
-    // // Set the headers on the imageRequest
-    // whenever(imageRequest.headers).thenReturn(headers)
+  @Test
+  fun testFetch() {
+    whenever(imageRequest.cacheControl).thenReturn(ImageCacheControl.ONLY_IF_CACHED)
     whenever(imageRequest.headers).thenReturn(null)
 
     fetcher.fetch(fetchState, callback)
@@ -112,4 +118,13 @@ class ReactOkHttpNetworkFetcherTest {
       println("Captured Request is null")
     }
   }
+
+  // TODO: this can be used to add more test cases for the headers only.
+  // Create headers as a JavaOnlyMap
+  // val headers = JavaOnlyMap()
+  // headers.putString("key1", "value1")
+  // headers.putString("key2", "value2")
+
+  // // Set the headers on the imageRequest
+  // whenever(imageRequest.headers).thenReturn(headers)
 }

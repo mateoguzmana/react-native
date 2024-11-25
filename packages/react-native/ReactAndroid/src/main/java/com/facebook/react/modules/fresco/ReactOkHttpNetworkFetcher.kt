@@ -40,7 +40,6 @@ internal class ReactOkHttpNetworkFetcher(private val okHttpClient: OkHttpClient)
     if (fetchState.context.imageRequest is ReactNetworkImageRequest) {
       val networkImageRequest = fetchState.context.imageRequest as ReactNetworkImageRequest
       requestHeaders = getHeaders(networkImageRequest.headers)
-      println("networkImageRequest.cacheControl: ${networkImageRequest.cacheControl}")
       when (networkImageRequest.cacheControl) {
         ImageCacheControl.RELOAD -> {
           cacheControlBuilder.noStore().noCache()
@@ -59,15 +58,13 @@ internal class ReactOkHttpNetworkFetcher(private val okHttpClient: OkHttpClient)
       cacheControlBuilder.noStore()
     }
     val headers = OkHttpCompat.getHeadersFromMap(requestHeaders)
-    val requestBuilder =
-            Request.Builder().cacheControl(cacheControlBuilder.build()).url(uri.toString()).get()
-
-    if (headers.size > 0) {
-      requestBuilder.headers(headers)
-    }
-
-    val request = requestBuilder.build()
-
+    val request =
+        Request.Builder()
+            .headers(headers)
+            .cacheControl(cacheControlBuilder.build())
+            .url(uri.toString())
+            .get()
+            .build()
     fetchWithRequest(fetchState, callback, request)
   }
 }

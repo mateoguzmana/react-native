@@ -661,6 +661,9 @@ function CacheControlAndroidExample(): React.Node {
             source={{
               uri: fullImage.uri + '?cacheBust=reload',
               cache: 'reload',
+              headers: {
+                'some-header': 'some-header-value',
+              },
             }}
             style={styles.base}
             key={reload}
