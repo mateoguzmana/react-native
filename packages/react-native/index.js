@@ -315,7 +315,6 @@ module.exports = {
   get Systrace(): Systrace {
     return require('./Libraries/Performance/Systrace');
   },
-  // $FlowFixMe[value-as-type]
   get ToastAndroid(): ToastAndroid {
     return require('./Libraries/Components/ToastAndroid/ToastAndroid');
   },
