@@ -439,8 +439,7 @@ public object MatrixMathHelper {
   @JvmStatic
   public fun applySkewX(m: DoubleArray, radians: Double) {
     FLog.w("ReactNative", "Radians equals: $radians")
-    // m[4] = Math.tan(radians)
-    m[1] = Math.tan(radians)
+    m[4] = Math.tan(radians)
   }
 
   @JvmStatic

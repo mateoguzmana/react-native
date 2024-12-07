@@ -41,6 +41,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import android.graphics.Matrix;
+import com.facebook.common.logging.FLog;
 
 /**
  * Base class that should be suitable for the majority of subclasses of {@link ViewManager}. It
@@ -577,6 +579,15 @@ public abstract class BaseViewManager<T extends View, C extends LayoutShadowNode
         sanitizeFloatPropertyValue((float) sMatrixDecompositionContext.rotationDegrees[1]));
     view.setScaleX(sanitizeFloatPropertyValue((float) sMatrixDecompositionContext.scale[0]));
     view.setScaleY(sanitizeFloatPropertyValue((float) sMatrixDecompositionContext.scale[1]));
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+      Matrix skewMatrix = new Matrix();
+      skewMatrix.setSkew(
+        sanitizeFloatPropertyValue((float) sMatrixDecompositionContext.skew[0]),
+        sanitizeFloatPropertyValue((float) sMatrixDecompositionContext.skew[1])
+      );
+      view.setAnimationMatrix(skewMatrix);
+    }
 
     double[] perspectiveArray = sMatrixDecompositionContext.perspective;
 
