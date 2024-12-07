@@ -8,6 +8,7 @@
 package com.facebook.react.uimanager
 
 import com.facebook.infer.annotation.Assertions
+import com.facebook.common.logging.FLog
 
 /**
  * Provides helper methods for converting transform operations into a matrix and then into a list of
@@ -437,7 +438,9 @@ public object MatrixMathHelper {
 
   @JvmStatic
   public fun applySkewX(m: DoubleArray, radians: Double) {
-    m[4] = Math.tan(radians)
+    FLog.w("ReactNative", "Radians equals: $radians")
+    // m[4] = Math.tan(radians)
+    m[1] = Math.tan(radians)
   }
 
   @JvmStatic
