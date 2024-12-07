@@ -14,6 +14,13 @@ import type {RNTesterModuleExample} from '../../types/RNTesterTypes';
 import RNTesterText from '../../components/RNTesterText';
 import * as React from 'react';
 import {StyleSheet, View, ScrollView, Text} from 'react-native';
+import { Networking } from "react-native";
+import AndroidNetworking from "react-native/Libraries/Network/RCTNetworking.android.js";
+import IOSNetworking from "react-native/Libraries/Network/RCTNetworking.ios.js";
+
+// IOSNetworking is defined (module with e.g. sendRequest method and others),
+// Networking / AndroidNetworking is an empty object
+console.log({ Networking, AndroidNetworking, IOSNetworking });
 
 function Playground() {
   return (
@@ -21,66 +28,6 @@ function Playground() {
       <View style={styles.box}>
         <Text style={styles.text}>Original Object</Text>
       </View>
-
-      {/* <View
-        style={[
-          styles.box,
-          {
-            transform: [{scale: 2}],
-          },
-        ]}>
-        <Text style={styles.text}>Scale by 2</Text>
-      </View> */}
-
-      {/* <View
-        style={[
-          styles.box,
-          {
-            transform: [{scaleX: 2}],
-          },
-        ]}>
-        <Text style={styles.text}>ScaleX by 2</Text>
-      </View> */}
-
-      {/* <View
-        style={[
-          styles.box,
-          {
-            transform: [{scaleY: 2}],
-          },
-        ]}>
-        <Text style={styles.text}>ScaleY by 2</Text>
-      </View> */}
-
-      {/* <View
-        style={[
-          styles.box,
-          {
-            transform: [{rotate: '45deg'}],
-          },
-        ]}>
-        <Text style={styles.text}>Rotate by 45 deg</Text>
-      </View> */}
-
-      {/* <View
-        style={[
-          styles.box,
-          {
-            transform: [{rotateX: '45deg'}, {rotateZ: '45deg'}],
-          },
-        ]}>
-        <Text style={styles.text}>Rotate X&Z by 45 deg</Text>
-      </View> */}
-
-      {/* <View
-        style={[
-          styles.box,
-          {
-            transform: [{rotateY: '45deg'}, {rotateZ: '45deg'}],
-          },
-        ]}>
-        <Text style={styles.text}>Rotate Y&Z by 45 deg</Text>
-      </View> */}
 
       <View
         style={[
@@ -101,36 +48,6 @@ function Playground() {
         ]}>
         <Text style={styles.text}>SkewY by 45 deg</Text>
       </View>
-
-      {/* <View
-        style={[
-          styles.box,
-          {
-            transform: [{skewX: '30deg'}, {skewY: '30deg'}],
-          },
-        ]}>
-        <Text style={styles.text}>Skew X&Y by 30 deg</Text>
-      </View> */}
-
-      {/* <View
-        style={[
-          styles.box,
-          {
-            transform: [{translateX: -50}],
-          },
-        ]}>
-        <Text style={styles.text}>TranslateX by -50 </Text>
-      </View> */}
-
-      {/* <View
-        style={[
-          styles.box,
-          {
-            transform: [{translateY: 50}],
-          },
-        ]}>
-        <Text style={styles.text}>TranslateY by 50 </Text>
-      </View> */}
     </ScrollView>
   );
 }
