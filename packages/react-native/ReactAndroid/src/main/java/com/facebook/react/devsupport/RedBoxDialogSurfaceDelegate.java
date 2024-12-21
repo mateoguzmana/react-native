@@ -40,6 +40,8 @@ class RedBoxDialogSurfaceDelegate implements SurfaceDelegate {
 
   private @Nullable Dialog mDialog;
   private @Nullable RedBoxContentView mRedBoxContentView;
+  private @Nullable ModernRedBoxContentView mModernRedBoxContentView;
+  private boolean mUseModernRedBox = true;
 
   public RedBoxDialogSurfaceDelegate(DevSupportManager devSupportManager) {
     mDevSupportManager = devSupportManager;
@@ -62,20 +64,35 @@ class RedBoxDialogSurfaceDelegate implements SurfaceDelegate {
       return;
     }
     // Create a new RedBox when currentActivity get updated
-    mRedBoxContentView = new RedBoxContentView(context);
-    mRedBoxContentView
-        .setDevSupportManager(mDevSupportManager)
-        .setRedBoxHandler(redBoxHandler)
-        .init();
+    if (mUseModernRedBox) {
+      mModernRedBoxContentView = new ModernRedBoxContentView(context);
+      mModernRedBoxContentView
+          .setDevSupportManager(mDevSupportManager)
+          .setRedBoxHandler(redBoxHandler)
+          .init();
+    } else {
+      mRedBoxContentView = new RedBoxContentView(context);
+      mRedBoxContentView
+          .setDevSupportManager(mDevSupportManager)
+          .setRedBoxHandler(redBoxHandler)
+          .init();
+    }
   }
 
   @Override
   public boolean isContentViewReady() {
+    if (mUseModernRedBox) {
+      return mModernRedBoxContentView != null;
+    }
     return mRedBoxContentView != null;
   }
 
   @Override
   public void destroyContentView() {
+    if (mUseModernRedBox) {
+      mModernRedBoxContentView = null;
+      return;
+    }
     mRedBoxContentView = null;
   }
 
@@ -102,12 +119,21 @@ class RedBoxDialogSurfaceDelegate implements SurfaceDelegate {
       return;
     }
 
-    if (mRedBoxContentView == null || mRedBoxContentView.getContext() != context) {
-      // Create a new RedBox when currentActivity get updated
-      createContentView("RedBox");
-    }
+    if (mUseModernRedBox) {
+      if (mModernRedBoxContentView == null || mModernRedBoxContentView.getContext() != context) {
+        // Create a new RedBox when currentActivity get updated
+        createContentView("ModernRedBox");
+      }
 
-    mRedBoxContentView.refreshContentView();
+      mModernRedBoxContentView.refreshContentView();
+    } else {
+      if (mRedBoxContentView == null || mRedBoxContentView.getContext() != context) {
+        // Create a new RedBox when currentActivity get updated
+        createContentView("RedBox");
+      }
+
+      mRedBoxContentView.refreshContentView();
+    }
     if (mDialog == null) {
       mDialog =
           new Dialog(context, R.style.Theme_Catalyst_RedBox) {
@@ -134,20 +160,38 @@ class RedBoxDialogSurfaceDelegate implements SurfaceDelegate {
               int insetsType =
                   WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout();
 
-              ViewCompat.setOnApplyWindowInsetsListener(
-                  mRedBoxContentView,
-                  (view, windowInsetsCompat) -> {
-                    Insets insets = windowInsetsCompat.getInsets(insetsType);
+              if (mUseModernRedBox) {
+                ViewCompat.setOnApplyWindowInsetsListener(
+                    mModernRedBoxContentView,
+                    (view, windowInsetsCompat) -> {
+                      Insets insets = windowInsetsCompat.getInsets(insetsType);
 
-                    FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) view.getLayoutParams();
-                    lp.setMargins(insets.left, insets.top, insets.right, insets.bottom);
+                      FrameLayout.LayoutParams lp =
+                          (FrameLayout.LayoutParams) view.getLayoutParams();
+                      lp.setMargins(insets.left, insets.top, insets.right, insets.bottom);
 
-                    return WindowInsetsCompat.CONSUMED;
-                  });
+                      return WindowInsetsCompat.CONSUMED;
+                    });
+              } else {
+                ViewCompat.setOnApplyWindowInsetsListener(
+                    mRedBoxContentView,
+                    (view, windowInsetsCompat) -> {
+                      Insets insets = windowInsetsCompat.getInsets(insetsType);
+
+                      FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) view.getLayoutParams();
+                      lp.setMargins(insets.left, insets.top, insets.right, insets.bottom);
+
+                      return WindowInsetsCompat.CONSUMED;
+                    });
+              }
             }
           };
       mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-      mDialog.setContentView(mRedBoxContentView);
+      if (mUseModernRedBox) {
+        mDialog.setContentView(mModernRedBoxContentView);
+      } else {
+        mDialog.setContentView(mRedBoxContentView);
+      }
     }
     mDialog.show();
   }
