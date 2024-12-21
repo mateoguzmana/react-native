@@ -18,6 +18,7 @@ import android.widget.FrameLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.facebook.react.R
+import android.util.Log
 
 /** Dialog for displaying JS errors in LogBox. */
 internal class LogBoxDialog(context: Activity, private val reactRootView: View?) :
@@ -30,6 +31,7 @@ internal class LogBoxDialog(context: Activity, private val reactRootView: View?)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    Log.d("LogBoxDialog", "onCreate")
     super.onCreate(savedInstanceState)
     // set background color so it will show below transparent system bars on forced edge-to-edge
     this.window?.setBackgroundDrawable(ColorDrawable(Color.BLACK))

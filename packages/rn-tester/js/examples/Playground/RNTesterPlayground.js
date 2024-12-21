@@ -12,15 +12,26 @@
 import type {RNTesterModuleExample} from '../../types/RNTesterTypes';
 
 import RNTesterText from '../../components/RNTesterText';
+
 import * as React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Button, StyleSheet, View, LogBox} from 'react-native';
 
 function Playground() {
+  const onShowWarning = () => {
+    throw new Error('This is a warning');
+  };
+
+  React.useEffect(() => {
+    LogBox.install();
+  }, []);
+
   return (
     <View style={styles.container}>
       <RNTesterText>
         Edit "RNTesterPlayground.js" to change this file
       </RNTesterText>
+
+      <Button onPress={onShowWarning} title="Show Warning" />
     </View>
   );
 }
