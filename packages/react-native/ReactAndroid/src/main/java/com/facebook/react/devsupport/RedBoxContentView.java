@@ -40,6 +40,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import org.json.JSONObject;
+import com.facebook.react.devsupport.OpenStackFrameTask;
 
 /** Dialog for displaying JS errors in an eye-catching form (red box). */
 public class RedBoxContentView extends LinearLayout implements AdapterView.OnItemClickListener {
@@ -189,48 +190,6 @@ public class RedBoxContentView extends LinearLayout implements AdapterView.OnIte
         holder.mFileView.setTextColor(frame.isCollapsed() ? 0xFF808080 : 0xFFB3B3B3);
         return convertView;
       }
-    }
-  }
-
-  private static class OpenStackFrameTask extends AsyncTask<StackFrame, Void, Void> {
-    private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-
-    private final DevSupportManager mDevSupportManager;
-
-    private OpenStackFrameTask(DevSupportManager devSupportManager) {
-      mDevSupportManager = devSupportManager;
-    }
-
-    @Override
-    protected Void doInBackground(StackFrame... stackFrames) {
-      try {
-        String openStackFrameUrl =
-            Uri.parse(mDevSupportManager.getSourceUrl())
-                .buildUpon()
-                .path("/open-stack-frame")
-                .query(null)
-                .build()
-                .toString();
-        OkHttpClient client = new OkHttpClient();
-        for (StackFrame frame : stackFrames) {
-          String payload = stackFrameToJson(frame).toString();
-          RequestBody body = RequestBody.create(JSON, payload);
-          Request request = new Request.Builder().url(openStackFrameUrl).post(body).build();
-          client.newCall(request).execute();
-        }
-      } catch (Exception e) {
-        FLog.e(ReactConstants.TAG, "Could not open stack frame", e);
-      }
-      return null;
-    }
-
-    private static JSONObject stackFrameToJson(StackFrame frame) {
-      return new JSONObject(
-          MapBuilder.of(
-              "file", frame.getFile(),
-              "methodName", frame.getMethod(),
-              "lineNumber", frame.getLine(),
-              "column", frame.getColumn()));
     }
   }
 
