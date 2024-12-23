@@ -24,9 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
-
 import com.facebook.common.logging.FLog;
 import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.R;
@@ -37,15 +35,11 @@ import com.facebook.react.devsupport.interfaces.ErrorType;
 import com.facebook.react.devsupport.interfaces.RedBoxHandler;
 import com.facebook.react.devsupport.interfaces.RedBoxHandler.ReportCompletedListener;
 import com.facebook.react.devsupport.interfaces.StackFrame;
-
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-
 import org.json.JSONObject;
-
-import com.facebook.react.devsupport.OpenStackFrameTask;
 
 /* internal */ class OpenStackFrameTask extends AsyncTask<StackFrame, Void, Void> {
   private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
