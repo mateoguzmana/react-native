@@ -76,10 +76,10 @@ public class RedBoxContentView public constructor(context: Context?) :
     Assertions.assertNotNull(mLineSeparator).visibility = VISIBLE
     Assertions.assertNotNull(mReportButton).isEnabled = false
 
-    val title = Assertions.assertNotNull(mDevSupportManager!!.lastErrorTitle)
-    val stack = Assertions.assertNotNull(mDevSupportManager!!.lastErrorStack)
-    val sourceUrl = mDevSupportManager!!.sourceUrl
-    mRedBoxHandler!!.reportRedbox(
+    val title = Assertions.assertNotNull(mDevSupportManager?.lastErrorTitle)
+    val stack = Assertions.assertNotNull(mDevSupportManager?.lastErrorStack)
+    val sourceUrl = mDevSupportManager?.sourceUrl
+    mRedBoxHandler?.reportRedbox(
             view.context,
             title,
             stack!!,
@@ -149,7 +149,7 @@ public class RedBoxContentView public constructor(context: Context?) :
           convertView.tag = FrameViewHolder(convertView)
         }
         val frame = mStack[position - 1]
-        val holder = convertView!!.tag as FrameViewHolder
+        val holder = convertView.tag as FrameViewHolder
         holder.mMethodView.text = frame.method
         holder.mFileView.text = StackTraceHelper.formatFrameSource(frame)
         holder.mMethodView.setTextColor(if (frame.isCollapsed) -0x555556 else Color.WHITE)
@@ -179,14 +179,14 @@ public class RedBoxContentView public constructor(context: Context?) :
     LayoutInflater.from(context).inflate(R.layout.redbox_view, this)
 
     mStackView = findViewById<View>(R.id.rn_redbox_stack) as ListView
-    mStackView!!.onItemClickListener = this
+    mStackView?.onItemClickListener = this
 
     mReloadJsButton = findViewById<View>(R.id.rn_redbox_reload_button) as Button
-    mReloadJsButton!!.setOnClickListener {
+    mReloadJsButton?.setOnClickListener {
       Assertions.assertNotNull(mDevSupportManager).handleReloadJS()
     }
     mDismissButton = findViewById<View>(R.id.rn_redbox_dismiss_button) as Button
-    mDismissButton!!.setOnClickListener {
+    mDismissButton?.setOnClickListener {
       Assertions.assertNotNull(mDevSupportManager).hideRedboxDialog()
     }
 
@@ -194,15 +194,15 @@ public class RedBoxContentView public constructor(context: Context?) :
       mLoadingIndicator = findViewById<View>(R.id.rn_redbox_loading_indicator) as ProgressBar
       mLineSeparator = findViewById(R.id.rn_redbox_line_separator) as View
       mReportTextView = findViewById<View>(R.id.rn_redbox_report_label) as TextView
-      mReportTextView!!.movementMethod = LinkMovementMethod.getInstance()
-      mReportTextView!!.highlightColor = Color.TRANSPARENT
+      mReportTextView?.movementMethod = LinkMovementMethod.getInstance()
+      mReportTextView?.highlightColor = Color.TRANSPARENT
       mReportButton = findViewById<View>(R.id.rn_redbox_report_button) as Button
-      mReportButton!!.setOnClickListener(mReportButtonOnClickListener)
+      mReportButton?.setOnClickListener(mReportButtonOnClickListener)
     }
   }
 
   public fun setExceptionDetails(title: String, stack: Array<StackFrame>) {
-    mStackView!!.adapter = StackAdapter(title, stack)
+    mStackView?.adapter = StackAdapter(title, stack)
   }
 
   /** Show the report button, hide the report textview and the loading indicator. */
@@ -222,20 +222,20 @@ public class RedBoxContentView public constructor(context: Context?) :
     OpenStackFrameTask(Assertions.assertNotNull(mDevSupportManager))
             .executeOnExecutor(
                     AsyncTask.THREAD_POOL_EXECUTOR,
-                    mStackView!!.adapter.getItem(position) as StackFrame
+                    mStackView?.adapter?.getItem(position) as StackFrame
             )
   }
 
   /** Refresh the content view with latest errors from dev support manager */
   public fun refreshContentView() {
-    val message = mDevSupportManager!!.lastErrorTitle
-    val stack = mDevSupportManager!!.lastErrorStack
-    val errorType = mDevSupportManager!!.lastErrorType
-    val errorInfo = mDevSupportManager!!.processErrorCustomizers(Pair.create(message, stack))
+    val message = mDevSupportManager?.lastErrorTitle
+    val stack = mDevSupportManager?.lastErrorStack
+    val errorType = mDevSupportManager?.lastErrorType
+    val errorInfo = mDevSupportManager?.processErrorCustomizers(Pair.create(message, stack))
     setExceptionDetails(errorInfo!!.first, errorInfo.second)
 
     // JS errors are reported here after source mapping.
-    val redBoxHandler = mDevSupportManager!!.redBoxHandler
+    val redBoxHandler = mDevSupportManager?.redBoxHandler
     if (redBoxHandler != null) {
       redBoxHandler.handleRedbox(message, stack!!, errorType!!)
       resetReporting()
