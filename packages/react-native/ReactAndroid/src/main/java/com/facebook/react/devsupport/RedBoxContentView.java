@@ -54,6 +54,7 @@ public class RedBoxContentView extends LinearLayout implements AdapterView.OnIte
   private @Nullable ProgressBar mLoadingIndicator;
   private @Nullable View mLineSeparator;
   private boolean isReporting = false;
+  private boolean mShowStack = true;
 
   private ReportCompletedListener mReportCompletedListener =
       new ReportCompletedListener() {
@@ -283,6 +284,11 @@ public class RedBoxContentView extends LinearLayout implements AdapterView.OnIte
   }
 
   public void setExceptionDetails(String title, StackFrame[] stack) {
+    if (title != null && title.startsWith("Unable to load script")) {
+        mStackView.setAdapter(new StackAdapter(title, new StackFrame[0]));
+        return; // Exit the method
+    }
+
     mStackView.setAdapter(new StackAdapter(title, stack));
   }
 
