@@ -2,7 +2,3 @@
     --dokka-logo-height: 35px;
     --dokka-logo-width: 35px;
 }
-
-.library-name--link::after {
-    content: "React Native for Android";
-}
