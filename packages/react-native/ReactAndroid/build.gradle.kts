@@ -742,13 +742,13 @@ tasks.dokkaHtml.configure {
               file("$projectDir/src/main/java"),
               file("$projectDir/src/main/kotlin")
           )
-          displayName.set("Android JVM")
+          displayName.set("JVM")
       }
   }
 
   pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
     customStyleSheets = listOf(file("logo-styles.css"))
-    customAssets = listOf(file("react-native-logo.svg"))
-    moduleName = "React Native for Android"
+    customAssets = listOf(file("logo-icon.svg"))
+    moduleName = "ReactAndroid"
   }
 }
