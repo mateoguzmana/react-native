@@ -19,6 +19,8 @@ plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.download)
   alias(libs.plugins.kotlin.android)
+
+  id("org.jetbrains.dokka") version "1.9.0"
 }
 
 version = project.findProperty("VERSION_NAME")?.toString()!!
@@ -720,4 +722,18 @@ apply(from = "./publish.gradle")
 // as they caused https://github.com/facebook/react-native/issues/35210
 publishing {
   publications { getByName("release", MavenPublication::class) { artifactId = "react-android" } }
+}
+
+tasks.dokkaHtml.configure {
+  outputDirectory.set(buildDir.resolve("dokka"))
+
+  dokkaSourceSets {
+      named("main") {
+          sourceRoots.from(
+              file("$projectDir/src/main/java"),
+              file("$projectDir/src/main/kotlin")
+          )
+          displayName.set("ReactAndroid")
+      }
+  }
 }

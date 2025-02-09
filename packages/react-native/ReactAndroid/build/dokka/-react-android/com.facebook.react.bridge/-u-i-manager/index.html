@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>UIManager</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            ReactAndroid
+                    </a>
+            </div>
+            <div class="library-version">
+1000.0.0            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":packages:react-native:ReactAndroid:dokkaHtml/main">ReactAndroid</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="ReactAndroid::com.facebook.react.bridge/UIManager///PointingToDeclaration//-1416184628">
+  <div class="breadcrumbs"><a href="../../../index.html">ReactAndroid</a><span class="delimiter">/</span><a href="../index.html">com.facebook.react.bridge</a><span class="delimiter">/</span><span class="current">UIManager</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>UIManager</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">UIManager</a> : <a href="../-performance-counter/index.html">PerformanceCounter</a></div><h4 class="">Inheritors</h4><div class="table"><div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../../com.facebook.react.fabric/-fabric-u-i-manager/index.html">FabricUIManager</a></div></span></div><div></div></div></div><div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../../com.facebook.react.uimanager/-u-i-manager-module/index.html">UIManagerModule</a></div></span></div><div></div></div></div></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="-134062066%2FProperties%2F-1416184628" anchor-label="eventDispatcher" id="-134062066%2FProperties%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="event-dispatcher.html"><span>event</span><wbr></wbr><span><span>Dispatcher</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-134062066%2FProperties%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">val </span><a href="event-dispatcher.html">eventDispatcher</a><span class="token operator">: </span><a href="../../com.facebook.react.uimanager.events/-event-dispatcher/index.html">EventDispatcher</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-274815235%2FProperties%2F-1416184628" anchor-label="performanceCounters" id="-274815235%2FProperties%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-performance-counter/performance-counters.html"><span>performance</span><wbr></wbr><span><span>Counters</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-274815235%2FProperties%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">val </span><a href="../-performance-counter/performance-counters.html">performanceCounters</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token operator">&gt;</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-1297293378%2FFunctions%2F-1416184628" anchor-label="addRootView" id="-1297293378%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="add-root-view.html"><span>add</span><wbr></wbr><span>Root</span><wbr></wbr><span><span>View</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1297293378%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/UiThread.html"><span class="token annotation builtin">UiThread</span></a></div></div><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="add-root-view.html">T</a><span class="token operator"> : </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span><span class="token operator">&gt; </span><a href="add-root-view.html"><span class="token function"><strike>addRootView</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">rootView<span class="token operator">: </span><a href="add-root-view.html">T</a><span class="token punctuation">, </span></span><span class="parameter ">initialProps<span class="token operator">: </span><a href="../-writable-map/index.html">WritableMap</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Registers a new root view. @Deprecated call startSurface instead</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1912150260%2FFunctions%2F-1416184628" anchor-label="addUIManagerEventListener" id="-1912150260%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="add-u-i-manager-event-listener.html"><span>add</span><wbr></wbr><span>UIManager</span><wbr></wbr><span>Event</span><wbr></wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1912150260%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="add-u-i-manager-event-listener.html"><span class="token function">addUIManagerEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><a href="../-u-i-manager-listener/index.html">UIManagerListener</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Register a <a href="../-u-i-manager-listener/index.html">UIManagerListener</a> with this UIManager to receive lifecycle callbacks.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-44862420%2FFunctions%2F-1416184628" anchor-label="dispatchCommand" id="-44862420%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="dispatch-command.html"><span>dispatch</span><wbr></wbr><span><span>Command</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-44862420%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="dispatch-command.html"><span class="token function">dispatchCommand</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reactTag<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">commandId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">commandArgs<span class="token operator">: </span><a href="../-readable-array/index.html">ReadableArray</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="dispatch-command.html"><span class="token function">dispatchCommand</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reactTag<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">commandId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">commandArgs<span class="token operator">: </span><a href="../-readable-array/index.html">ReadableArray</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Dispatches the commandId received by parameter to the view associated with the reactTag. The command will be processed in the UIThread.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="573626587%2FFunctions%2F-1416184628" anchor-label="initialize" id="573626587%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="initialize.html"><span><span>initialize</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="573626587%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="initialize.html"><span class="token function">initialize</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">This method is called after <a href="../-react-application-context/index.html">ReactApplicationContext</a> has been created.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2050844272%2FFunctions%2F-1416184628" anchor-label="invalidate" id="-2050844272%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="invalidate.html"><span><span>invalidate</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2050844272%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="invalidate.html"><span class="token function">invalidate</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Called before React Native instance is destroyed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1444855117%2FFunctions%2F-1416184628" anchor-label="markActiveTouchForTag" id="1444855117%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mark-active-touch-for-tag.html"><span>mark</span><wbr></wbr><span>Active</span><wbr></wbr><span>Touch</span><wbr></wbr><span>For</span><wbr></wbr><span><span>Tag</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1444855117%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="mark-active-touch-for-tag.html"><span class="token function">markActiveTouchForTag</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">surfaceId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">reactTag<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Mark a view as currently active for a touch event. This information could be used by the <a href="index.html">UIManager</a> to decide if a view could be safely destroyed or not.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="189505240%2FFunctions%2F-1416184628" anchor-label="profileNextBatch" id="189505240%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-performance-counter/profile-next-batch.html"><span>profile</span><wbr></wbr><span>Next</span><wbr></wbr><span><span>Batch</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="189505240%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-performance-counter/profile-next-batch.html"><span class="token function">profileNextBatch</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1944223313%2FFunctions%2F-1416184628" anchor-label="receiveEvent" id="-1944223313%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="receive-event.html"><span>receive</span><wbr></wbr><span><span>Event</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1944223313%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="receive-event.html"><span class="token function"><strike>receiveEvent</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reactTag<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">eventName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">event<span class="token operator">: </span><a href="../-writable-map/index.html">WritableMap</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="receive-event.html"><span class="token function">receiveEvent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">surfaceId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">reactTag<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">eventName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">event<span class="token operator">: </span><a href="../-writable-map/index.html">WritableMap</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">This method dispatches events from RN Android code to JS. The delivery of this event will not be queued in EventDispatcher class.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1060057371%2FFunctions%2F-1416184628" anchor-label="removeUIManagerEventListener" id="-1060057371%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="remove-u-i-manager-event-listener.html"><span>remove</span><wbr></wbr><span>UIManager</span><wbr></wbr><span>Event</span><wbr></wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1060057371%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="remove-u-i-manager-event-listener.html"><span class="token function">removeUIManagerEventListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">listener<span class="token operator">: </span><a href="../-u-i-manager-listener/index.html">UIManagerListener</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Unregister a <a href="../-u-i-manager-listener/index.html">UIManagerListener</a> from this UIManager to stop receiving lifecycle callbacks.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2020374744%2FFunctions%2F-1416184628" anchor-label="resolveCustomDirectEventName" id="2020374744%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="resolve-custom-direct-event-name.html"><span>resolve</span><wbr></wbr><span>Custom</span><wbr></wbr><span>Direct</span><wbr></wbr><span>Event</span><wbr></wbr><span><span>Name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2020374744%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="resolve-custom-direct-event-name.html"><span class="token function"><strike>resolveCustomDirectEventName</strike></span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">eventName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Resolves Direct Event name exposed to JS from the one known to the Native side.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="349371740%2FFunctions%2F-1416184628" anchor-label="resolveView" id="349371740%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="resolve-view.html"><span>resolve</span><wbr></wbr><span><span>View</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="349371740%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="resolve-view.html"><span class="token function">resolveView</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reactTag<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Resolves a view based on its reactTag. Do not mutate properties on this view that are already managed by React, as there are no guarantees this changes will be preserved.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1406385912%2FFunctions%2F-1416184628" anchor-label="sendAccessibilityEvent" id="-1406385912%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="send-accessibility-event.html"><span>send</span><wbr></wbr><span>Accessibility</span><wbr></wbr><span><span>Event</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1406385912%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="send-accessibility-event.html"><span class="token function">sendAccessibilityEvent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reactTag<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">eventType<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Dispatch an accessibility event to a view asynchronously.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2112917824%2FFunctions%2F-1416184628" anchor-label="startSurface" id="-2112917824%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="start-surface.html"><span>start</span><wbr></wbr><span><span>Surface</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2112917824%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/AnyThread.html"><span class="token annotation builtin">AnyThread</span></a></div></div><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><span class="token operator">&lt;</span><span class="token keyword"></span><a href="start-surface.html">T</a><span class="token operator"> : </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">?</span><span class="token operator">&gt; </span><a href="start-surface.html"><span class="token function">startSurface</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">rootView<span class="token operator">: </span><a href="start-surface.html">T</a><span class="token punctuation">, </span></span><span class="parameter ">moduleName<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">initialProps<span class="token operator">: </span><a href="../-writable-map/index.html">WritableMap</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">widthMeasureSpec<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">heightMeasureSpec<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">Registers a new root view with width and height.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="268536706%2FFunctions%2F-1416184628" anchor-label="stopSurface" id="268536706%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="stop-surface.html"><span>stop</span><wbr></wbr><span><span>Surface</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="268536706%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/AnyThread.html"><span class="token annotation builtin">AnyThread</span></a></div></div><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="stop-surface.html"><span class="token function">stopSurface</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">surfaceId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Stop a surface from running in JS and clears up native memory usage. Assumes that the native View hierarchy has already been cleaned up. Fabric-only.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1159096910%2FFunctions%2F-1416184628" anchor-label="sweepActiveTouchForTag" id="-1159096910%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="sweep-active-touch-for-tag.html"><span>sweep</span><wbr></wbr><span>Active</span><wbr></wbr><span>Touch</span><wbr></wbr><span>For</span><wbr></wbr><span><span>Tag</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1159096910%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="sweep-active-touch-for-tag.html"><span class="token function">sweepActiveTouchForTag</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">surfaceId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">reactTag<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sweep a view as currently not active for a touch event. This tells the <a href="index.html">UIManager</a> that the view is not being interacted by the user and can safely be destroyed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-330176539%2FFunctions%2F-1416184628" anchor-label="synchronouslyUpdateViewOnUIThread" id="-330176539%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="synchronously-update-view-on-u-i-thread.html"><span>synchronously</span><wbr></wbr><span>Update</span><wbr></wbr><span>View</span><wbr></wbr><span>On</span><wbr></wbr><span><span>UIThread</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-330176539%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/UiThread.html"><span class="token annotation builtin">UiThread</span></a></div></div><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="synchronously-update-view-on-u-i-thread.html"><span class="token function">synchronouslyUpdateViewOnUIThread</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reactTag<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">props<span class="token operator">: </span><a href="../-readable-map/index.html">ReadableMap</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Used by native animated module to bypass the process of updating the values through the shadow view hierarchy. This method will directly update native views, which means that updates for layout-related propertied won't be handled properly. Make sure you know what you're doing before calling this method :)</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1076510794%2FFunctions%2F-1416184628" anchor-label="updateRootLayoutSpecs" id="1076510794%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="update-root-layout-specs.html"><span>update</span><wbr></wbr><span>Root</span><wbr></wbr><span>Layout</span><wbr></wbr><span><span>Specs</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1076510794%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/UiThread.html"><span class="token annotation builtin">UiThread</span></a></div></div><span class="token keyword">abstract </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="update-root-layout-specs.html"><span class="token function">updateRootLayoutSpecs</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">rootTag<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">widthMeasureSpec<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">heightMeasureSpec<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">offsetX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">offsetY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Updates the layout specs of the RootShadowNode based on the Measure specs received by parameters. offsetX and offsetY are the position of the RootView within the screen.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2025 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

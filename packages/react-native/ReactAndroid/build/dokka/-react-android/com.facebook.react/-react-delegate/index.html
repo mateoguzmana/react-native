@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>ReactDelegate</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            ReactAndroid
+                    </a>
+            </div>
+            <div class="library-version">
+1000.0.0            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":packages:react-native:ReactAndroid:dokkaHtml/main">ReactAndroid</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="ReactAndroid::com.facebook.react/ReactDelegate///PointingToDeclaration//-1416184628">
+  <div class="breadcrumbs"><a href="../../../index.html">ReactAndroid</a><span class="delimiter">/</span><a href="../index.html">com.facebook.react</a><span class="delimiter">/</span><span class="current">ReactDelegate</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>React</span><wbr></wbr><span><span>Delegate</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">ReactDelegate</a></div><p class="paragraph">A delegate for handling React Application support. This delegate is unaware whether it is used in an <a href="https://developer.android.com/reference/kotlin/android/app/Activity.html">Activity</a> or a <a href="https://developer.android.com/reference/kotlin/android/app/Fragment.html">android.app.Fragment</a>.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="-1291767961%2FConstructors%2F-1416184628" anchor-label="ReactDelegate" id="-1291767961%2FConstructors%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-react-delegate.html"><span>React</span><wbr></wbr><span><span>Delegate</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1291767961%2FConstructors%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">activity<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/app/Activity.html">Activity</a><span class="token punctuation">, </span></span><span class="parameter ">reactNativeHost<span class="token operator">: </span><a href="../-react-native-host/index.html">ReactNativeHost</a><span class="token punctuation">, </span></span><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/Nullable.html"><span class="token annotation builtin">Nullable</span></a> </span>appKey<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/lang/String.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/Nullable.html"><span class="token annotation builtin">Nullable</span></a> </span>launchOptions<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a></span></span><span class="token punctuation">)</span></div><div class="brief ">Do not use this constructor as it's not accounting for New Architecture at all.</div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">activity<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/app/Activity.html">Activity</a><span class="token punctuation">, </span></span><span class="parameter ">reactHost<span class="token operator">: </span><a href="../-react-host/index.html">ReactHost</a><span class="token punctuation">, </span></span><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/Nullable.html"><span class="token annotation builtin">Nullable</span></a> </span>appKey<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/lang/String.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/Nullable.html"><span class="token annotation builtin">Nullable</span></a> </span>launchOptions<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">activity<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/app/Activity.html">Activity</a><span class="token punctuation">, </span></span><span class="parameter ">reactNativeHost<span class="token operator">: </span><a href="../-react-native-host/index.html">ReactNativeHost</a><span class="token punctuation">, </span></span><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/Nullable.html"><span class="token annotation builtin">Nullable</span></a> </span>appKey<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/lang/String.html">String</a><span class="token punctuation">, </span></span><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/Nullable.html"><span class="token annotation builtin">Nullable</span></a> </span>launchOptions<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/os/Bundle.html">Bundle</a><span class="token punctuation">, </span></span><span class="parameter ">fabricEnabled<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="73781908%2FFunctions%2F-1416184628" anchor-label="getCurrentReactContext" id="73781908%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-current-react-context.html"><span>get</span><wbr></wbr><span>Current</span><wbr></wbr><span>React</span><wbr></wbr><span><span>Context</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="73781908%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/Nullable.html"><span class="token annotation builtin">Nullable</span></a></div></div><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-current-react-context.html"><span class="token function">getCurrentReactContext</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../com.facebook.react.bridge/-react-context/index.html">ReactContext</a></div><div class="brief ">Get the current <a href="../../com.facebook.react.bridge/-react-context/index.html">ReactContext</a> from ReactHost or ReactInstanceManager Do not store a reference to this, if the React instance is reloaded or destroyed, this context will no longer be valid.</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="801082326%2FFunctions%2F-1416184628" anchor-label="getReactHost" id="801082326%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-react-host.html"><span>get</span><wbr></wbr><span>React</span><wbr></wbr><span><span>Host</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="801082326%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/Nullable.html"><span class="token annotation builtin">Nullable</span></a></div></div><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-react-host.html"><span class="token function">getReactHost</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-react-host/index.html">ReactHost</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1469275644%2FFunctions%2F-1416184628" anchor-label="getReactInstanceManager" id="-1469275644%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-react-instance-manager.html"><span>get</span><wbr></wbr><span>React</span><wbr></wbr><span>Instance</span><wbr></wbr><span><span>Manager</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1469275644%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-react-instance-manager.html"><span class="token function">getReactInstanceManager</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-react-instance-manager/index.html">ReactInstanceManager</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1632245559%2FFunctions%2F-1416184628" anchor-label="getReactRootView" id="1632245559%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-react-root-view.html"><span>get</span><wbr></wbr><span>React</span><wbr></wbr><span>Root</span><wbr></wbr><span><span>View</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1632245559%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/Nullable.html"><span class="token annotation builtin">Nullable</span></a></div></div><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="get-react-root-view.html"><span class="token function">getReactRootView</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-react-root-view/index.html">ReactRootView</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-111679481%2FFunctions%2F-1416184628" anchor-label="loadApp" id="-111679481%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="load-app.html"><span>load</span><wbr></wbr><span><span>App</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-111679481%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="load-app.html"><span class="token function">loadApp</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief ">Start the React surface with the app key supplied in the <a href="index.html">ReactDelegate</a> constructor.</div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="load-app.html"><span class="token function">loadApp</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">appKey<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/lang/String.html">String</a></span></span><span class="token punctuation">)</span></div><div class="brief ">Start the React surface for the given app key.</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-55522689%2FFunctions%2F-1416184628" anchor-label="onActivityResult" id="-55522689%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-activity-result.html"><span>on</span><wbr></wbr><span>Activity</span><wbr></wbr><span><span>Result</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-55522689%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-activity-result.html"><span class="token function">onActivityResult</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">requestCode<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">resultCode<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Intent.html">Intent</a><span class="token punctuation">, </span></span><span class="parameter ">shouldForwardToReactInstance<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1619177833%2FFunctions%2F-1416184628" anchor-label="onBackPressed" id="-1619177833%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-back-pressed.html"><span>on</span><wbr></wbr><span>Back</span><wbr></wbr><span><span>Pressed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1619177833%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-back-pressed.html"><span class="token function">onBackPressed</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1226680612%2FFunctions%2F-1416184628" anchor-label="onConfigurationChanged" id="1226680612%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-configuration-changed.html"><span>on</span><wbr></wbr><span>Configuration</span><wbr></wbr><span><span>Changed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1226680612%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-configuration-changed.html"><span class="token function">onConfigurationChanged</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">newConfig<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/res/Configuration.html">Configuration</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1799260800%2FFunctions%2F-1416184628" anchor-label="onHostDestroy" id="1799260800%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-host-destroy.html"><span>on</span><wbr></wbr><span>Host</span><wbr></wbr><span><span>Destroy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1799260800%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-host-destroy.html"><span class="token function">onHostDestroy</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1806807876%2FFunctions%2F-1416184628" anchor-label="onHostPause" id="1806807876%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-host-pause.html"><span>on</span><wbr></wbr><span>Host</span><wbr></wbr><span><span>Pause</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1806807876%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-host-pause.html"><span class="token function">onHostPause</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-737387757%2FFunctions%2F-1416184628" anchor-label="onHostResume" id="-737387757%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-host-resume.html"><span>on</span><wbr></wbr><span>Host</span><wbr></wbr><span><span>Resume</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-737387757%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-host-resume.html"><span class="token function">onHostResume</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1907736160%2FFunctions%2F-1416184628" anchor-label="onKeyDown" id="-1907736160%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-key-down.html"><span>on</span><wbr></wbr><span>Key</span><wbr></wbr><span><span>Down</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1907736160%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-key-down.html"><span class="token function">onKeyDown</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">keyCode<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">event<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/KeyEvent.html">KeyEvent</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1103003437%2FFunctions%2F-1416184628" anchor-label="onKeyLongPress" id="-1103003437%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-key-long-press.html"><span>on</span><wbr></wbr><span>Key</span><wbr></wbr><span>Long</span><wbr></wbr><span><span>Press</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1103003437%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-key-long-press.html"><span class="token function">onKeyLongPress</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">keyCode<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1331072794%2FFunctions%2F-1416184628" anchor-label="onNewIntent" id="-1331072794%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-new-intent.html"><span>on</span><wbr></wbr><span>New</span><wbr></wbr><span><span>Intent</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1331072794%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-new-intent.html"><span class="token function">onNewIntent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">intent<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Intent.html">Intent</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1501800255%2FFunctions%2F-1416184628" anchor-label="onUserLeaveHint" id="1501800255%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-user-leave-hint.html"><span>on</span><wbr></wbr><span>User</span><wbr></wbr><span>Leave</span><wbr></wbr><span><span>Hint</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1501800255%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-user-leave-hint.html"><span class="token function">onUserLeaveHint</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1785064578%2FFunctions%2F-1416184628" anchor-label="onWindowFocusChanged" id="-1785064578%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-window-focus-changed.html"><span>on</span><wbr></wbr><span>Window</span><wbr></wbr><span>Focus</span><wbr></wbr><span><span>Changed</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1785064578%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="on-window-focus-changed.html"><span class="token function">onWindowFocusChanged</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">hasFocus<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2039209934%2FFunctions%2F-1416184628" anchor-label="reload" id="2039209934%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="reload.html"><span><span>reload</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2039209934%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="reload.html"><span class="token function">reload</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1067193470%2FFunctions%2F-1416184628" anchor-label="shouldShowDevMenuOrReload" id="1067193470%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="should-show-dev-menu-or-reload.html"><span>should</span><wbr></wbr><span>Show</span><wbr></wbr><span>Dev</span><wbr></wbr><span>Menu</span><wbr></wbr><span>Or</span><wbr></wbr><span><span>Reload</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1067193470%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="should-show-dev-menu-or-reload.html"><span class="token function">shouldShowDevMenuOrReload</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">keyCode<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">event<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/KeyEvent.html">KeyEvent</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief ">Handles delegating the <a href="https://developer.android.com/reference/kotlin/android/app/Activity.html#onkeyup">onKeyUp</a> method to determine whether the application should show the developer menu or should reload the React Application.</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="75832209%2FFunctions%2F-1416184628" anchor-label="unloadApp" id="75832209%2FFunctions%2F-1416184628" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main"></a>
+          <div class="table-row" data-filterable-current=":packages:react-native:ReactAndroid:dokkaHtml/main" data-filterable-set=":packages:react-native:ReactAndroid:dokkaHtml/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="unload-app.html"><span>unload</span><wbr></wbr><span><span>App</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="75832209%2FFunctions%2F-1416184628"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="unload-app.html"><span class="token function">unloadApp</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief ">Stop the React surface started with <a href="load-app.html">loadApp</a>.</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2025 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
