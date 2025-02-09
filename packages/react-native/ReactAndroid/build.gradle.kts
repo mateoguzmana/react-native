@@ -12,6 +12,9 @@ import com.facebook.react.tasks.internal.utils.*
 import de.undercouch.gradle.tasks.download.Download
 import java.nio.file.Paths
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.dokka.base.DokkaBase
+import org.jetbrains.dokka.base.DokkaBaseConfiguration
 
 plugins {
   id("maven-publish")
@@ -21,6 +24,12 @@ plugins {
   alias(libs.plugins.kotlin.android)
 
   id("org.jetbrains.dokka") version "1.9.0"
+}
+
+buildscript {
+  dependencies {
+      classpath("org.jetbrains.dokka:dokka-base:2.0.0")
+  }
 }
 
 version = project.findProperty("VERSION_NAME")?.toString()!!
@@ -733,7 +742,13 @@ tasks.dokkaHtml.configure {
               file("$projectDir/src/main/java"),
               file("$projectDir/src/main/kotlin")
           )
-          displayName.set("ReactAndroid")
+          displayName.set("Android JVM")
       }
+  }
+
+  pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+    customStyleSheets = listOf(file("logo-styles.css"))
+    customAssets = listOf(file("react-native-logo.svg"))
+    moduleName = "React Native for Android"
   }
 }

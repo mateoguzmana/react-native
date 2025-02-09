@@ -35,7 +35,7 @@
     "fantom": "JS_DIR='..' yarn jest --config packages/react-native-fantom/config/jest.config.js",
     "trigger-react-native-release": "node ./scripts/releases-local/trigger-react-native-release.js",
     "update-lock": "npx yarn-deduplicate",
-    "dokka": "./gradlew :packages:react-native:ReactAndroid:dokkaHtml",
+    "dokka": "./gradlew :packages:react-native:ReactAndroid:dokkaHtml -PVERSION_NAME=0.78.0",
     "copy:dokka": "cp -r packages/react-native/ReactAndroid/build/dokka/* docs"
   },
   "workspaces": [
