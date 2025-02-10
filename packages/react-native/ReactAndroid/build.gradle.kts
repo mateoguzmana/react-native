@@ -750,5 +750,7 @@ tasks.dokkaHtml.configure {
     customStyleSheets = listOf(file("logo-styles.css"))
     customAssets = listOf(file("logo-icon.svg"))
     moduleName = "ReactAndroid"
+    moduleVersion = "next"
+    footerMessage = "React Native for Android | Unofficial documentation"
   }
 }
