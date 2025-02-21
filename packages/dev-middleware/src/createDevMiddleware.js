@@ -91,6 +91,7 @@ export default function createDevMiddleware({
     serverBaseUrl,
     eventReporter,
     experiments,
+    logger,
     unstable_customInspectorMessageHandler,
   );
 
@@ -147,7 +148,8 @@ function createWrappedEventReporter(
       switch (event.type) {
         case 'profiling_target_registered':
           logger?.info(
-            `Profiling build target "${event.appId}" registered for debugging`,
+            "Profiling build target '%s' registered for debugging",
+            event.appId ?? 'unknown',
           );
           break;
         case 'fusebox_console_notice':

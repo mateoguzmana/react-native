@@ -62,10 +62,12 @@ add_react_common_subdir(runtimeexecutor)
 add_react_common_subdir(reactperflogger)
 add_react_common_subdir(logger)
 add_react_common_subdir(jsiexecutor)
+add_react_common_subdir(jsitooling)
 add_react_common_subdir(cxxreact)
 add_react_common_subdir(jsc)
 add_react_common_subdir(jsi)
 add_react_common_subdir(callinvoker)
+add_react_common_subdir(oscompat)
 add_react_common_subdir(jsinspector-modern)
 add_react_common_subdir(jsinspector-modern/tracing)
 add_react_common_subdir(hermes/executor)
@@ -163,10 +165,12 @@ add_library(reactnative
           $<TARGET_OBJECTS:jni_lib_merge_glue>
           $<TARGET_OBJECTS:jserrorhandler>
           $<TARGET_OBJECTS:jsinspector>
+          $<TARGET_OBJECTS:jsitooling>
           $<TARGET_OBJECTS:jsinspector_tracing>
           $<TARGET_OBJECTS:jsireact>
           $<TARGET_OBJECTS:logger>
           $<TARGET_OBJECTS:mapbufferjni>
+          $<TARGET_OBJECTS:oscompat>
           $<TARGET_OBJECTS:react_bridging>
           $<TARGET_OBJECTS:react_codegen_rncore>
           $<TARGET_OBJECTS:react_cxxreact>
