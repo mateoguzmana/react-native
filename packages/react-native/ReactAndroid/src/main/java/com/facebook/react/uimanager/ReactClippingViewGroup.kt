@@ -45,5 +45,8 @@ public interface ReactClippingViewGroup {
    * Helper method [ReactClippingViewGroupHelper.applyRemoveClippedSubviewsProperty] may be
    * used by [ViewManager] subclass to apply this property based on property update map [ReactStylesDiffMap].
    */
-  public var removeClippedSubviews: Boolean
+  public fun setRemoveClippedSubviews(removeClippedSubviews: Boolean)
+
+  /** Get the current value of [removeClippedSubviews] property. */
+  public fun getRemoveClippedSubviews(): Boolean
 }
