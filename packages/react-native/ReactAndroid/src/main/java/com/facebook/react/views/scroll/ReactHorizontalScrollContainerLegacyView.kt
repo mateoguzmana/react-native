@@ -19,18 +19,18 @@ internal class ReactHorizontalScrollContainerLegacyView(context: Context) :
     ReactViewGroup(context) {
   private val isRTL: Boolean = I18nUtil.instance.isRTL(context)
 
-  override var removeClippedSubviews: Boolean = false
-    set(value) {
-      // removeClippedSubviews logic may read metrics before the offsetting we do in onLayout() and
-      // is such unsafe
-      if (isRTL) {
-        field = false
-      } else {
-        field = value
-      }
+  override fun setRemoveClippedSubviews(removeClippedSubviews: Boolean) {
+    // removeClippedSubviews logic may read metrics before the offsetting we do in onLayout() and is
+    // such unsafe
+    if (isRTL) {
+      super.setRemoveClippedSubviews(false)
+      return
     }
 
-  protected override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+    super.setRemoveClippedSubviews(removeClippedSubviews)
+  }
+
+  override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
     if (isRTL) {
       // When the layout direction is RTL, we expect Yoga to give us a layout
       // that extends off the screen to the left so we re-center it with left=0
