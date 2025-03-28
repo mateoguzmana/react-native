@@ -14,8 +14,8 @@ import com.facebook.react.common.annotations.internal.LegacyArchitecture
  * of the bridge-specific initialization or lifecycle management.
  */
 @LegacyArchitecture
-public interface JSInstance {
-  public fun invokeCallback(callbackID: Int, arguments: NativeArrayInterface)
+internal interface JSInstance {
+  fun invokeCallback(callbackID: Int, arguments: NativeArrayInterface)
 
   // TODO if this interface survives refactoring, think about adding
   // callFunction.
