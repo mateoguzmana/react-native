@@ -8,13 +8,11 @@
  * @flow strict-local
  */
 
+import type {HostInstance} from '../../src/private/types/HostInstance';
 import type {
-  HostComponent,
-  HostInstance,
   InternalInstanceHandle,
   Node,
 } from '../Renderer/shims/ReactNativeTypes';
-import type ReactFabricHostComponent from './ReactFabricPublicInstance/ReactFabricHostComponent';
 import type {ElementRef, ElementType} from 'react';
 
 import {
@@ -61,17 +59,21 @@ export function renderElement({
 }
 
 export function findHostInstance_DEPRECATED<TElementType: ElementType>(
+  // $FlowFixMe[incompatible-call]
   componentOrHandle: ?(ElementRef<TElementType> | number),
 ): ?HostInstance {
   return require('../Renderer/shims/ReactNative').default.findHostInstance_DEPRECATED(
+    // $FlowFixMe[incompatible-call]
     componentOrHandle,
   );
 }
 
 export function findNodeHandle<TElementType: ElementType>(
+  // $FlowFixMe[incompatible-call]
   componentOrHandle: ?(ElementRef<TElementType> | number),
 ): ?number {
   return require('../Renderer/shims/ReactNative').default.findNodeHandle(
+    // $FlowFixMe[incompatible-call]
     componentOrHandle,
   );
 }
@@ -136,8 +138,8 @@ export function isProfilingRenderer(): boolean {
 }
 
 export function isChildPublicInstance(
-  parentInstance: ReactFabricHostComponent | HostComponent<empty>,
-  childInstance: ReactFabricHostComponent | HostComponent<empty>,
+  parentInstance: HostInstance,
+  childInstance: HostInstance,
 ): boolean {
   return require('../Renderer/shims/ReactNative').default.isChildPublicInstance(
     parentInstance,

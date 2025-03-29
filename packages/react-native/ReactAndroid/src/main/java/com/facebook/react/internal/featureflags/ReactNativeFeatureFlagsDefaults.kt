@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<964ac42bbe930d8506dcb9d9834460bd>>
+ * @generated SignedSource<<309ae9cf008963de368916b3d28c5491>>
  */
 
 /**
@@ -25,6 +25,10 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
 
   override fun commonTestFlag(): Boolean = false
 
+  override fun animatedShouldSignalBatch(): Boolean = false
+
+  override fun cxxNativeAnimatedEnabled(): Boolean = false
+
   override fun disableMountItemReorderingAndroid(): Boolean = false
 
   override fun enableAccumulatedUpdatesInRawPropsAndroid(): Boolean = false
@@ -35,15 +39,9 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
 
   override fun enableEagerRootViewAttachment(): Boolean = false
 
-  override fun enableEventEmitterRetentionDuringGesturesOnAndroid(): Boolean = false
-
   override fun enableFabricLogs(): Boolean = false
 
   override fun enableFabricRenderer(): Boolean = false
-
-  override fun enableFixForViewCommandRace(): Boolean = false
-
-  override fun enableGranularShadowTreeStateReconciliation(): Boolean = false
 
   override fun enableIOSViewClipToPaddingBox(): Boolean = false
 
@@ -57,9 +55,11 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
 
   override fun enableLongTaskAPI(): Boolean = false
 
-  override fun enableNewBackgroundAndBorderDrawables(): Boolean = false
+  override fun enableMainQueueModulesOnIOS(): Boolean = false
 
-  override fun enablePreciseSchedulingForPremountItemsOnAndroid(): Boolean = false
+  override fun enableNativeCSSParsing(): Boolean = false
+
+  override fun enableNewBackgroundAndBorderDrawables(): Boolean = false
 
   override fun enablePropsUpdateReconciliationAndroid(): Boolean = false
 
@@ -77,10 +77,6 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
 
   override fun enableViewRecyclingForView(): Boolean = true
 
-  override fun excludeYogaFromRawProps(): Boolean = false
-
-  override fun fixDifferentiatorEmittingUpdatesWithWrongParentTag(): Boolean = true
-
   override fun fixMappingOfEventPrioritiesBetweenFabricAndReact(): Boolean = false
 
   override fun fixMountingCoordinatorReportedPendingTransactionsOnAndroid(): Boolean = false
@@ -89,7 +85,9 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
 
   override fun fuseboxNetworkInspectionEnabled(): Boolean = false
 
-  override fun lazyAnimationCallbacks(): Boolean = false
+  override fun removeTurboModuleManagerDelegateMutex(): Boolean = false
+
+  override fun throwExceptionInsteadOfDeadlockOnTurboModuleSetupDuringSyncRenderIOS(): Boolean = false
 
   override fun traceTurboModulePromiseRejectionsOnAndroid(): Boolean = false
 
@@ -97,7 +95,7 @@ public open class ReactNativeFeatureFlagsDefaults : ReactNativeFeatureFlagsProvi
 
   override fun useEditTextStockAndroidFocusBehavior(): Boolean = true
 
-  override fun useFabricInterop(): Boolean = false
+  override fun useFabricInterop(): Boolean = true
 
   override fun useNativeViewConfigsInBridgelessMode(): Boolean = false
 

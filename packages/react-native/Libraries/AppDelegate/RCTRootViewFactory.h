@@ -8,6 +8,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTRootView.h>
 #import <React/RCTUtils.h>
+#import "RCTJSRuntimeConfiguratorProtocol.h"
 
 @protocol RCTCxxBridgeDelegate;
 @protocol RCTComponentViewFactoryComponentProvider;
@@ -110,6 +111,8 @@ typedef void (^RCTLoadSourceForBridgeBlock)(RCTBridge *bridge, RCTSourceLoadBloc
  */
 @property (nonatomic, nullable) RCTCustomizeRootViewBlock customizeRootView;
 
+@property (nonatomic, weak, nullable) id<RCTJSRuntimeConfiguratorProtocol> jsRuntimeConfiguratorDelegate;
+
 #pragma mark - RCTBridgeDelegate blocks
 
 /**
@@ -208,6 +211,15 @@ typedef void (^RCTLoadSourceForBridgeBlock)(RCTBridge *bridge, RCTSourceLoadBloc
 - (UIView *_Nonnull)viewWithModuleName:(NSString *)moduleName;
 
 #pragma mark - RCTRootViewFactory Helpers
+
+/**
+ * Initialize React Host/Bridge without creating a view.
+ *
+ * Use it to speed up later viewWithModuleName: calls.
+ *
+ * @parameter: launchOptions  - a dictionary with a set of options.
+ */
+- (void)initializeReactHostWithLaunchOptions:(NSDictionary *__nullable)launchOptions;
 
 - (RCTHost *)createReactHost:(NSDictionary *__nullable)launchOptions;
 

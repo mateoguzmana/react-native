@@ -17,7 +17,6 @@ import static com.facebook.react.uimanager.UIManagerHelper.PADDING_BOTTOM_INDEX;
 import static com.facebook.react.uimanager.UIManagerHelper.PADDING_END_INDEX;
 import static com.facebook.react.uimanager.UIManagerHelper.PADDING_START_INDEX;
 import static com.facebook.react.uimanager.UIManagerHelper.PADDING_TOP_INDEX;
-import static com.facebook.react.uimanager.common.UIManagerType.FABRIC;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -163,7 +162,7 @@ public class FabricUIManager
   @Nullable private FabricUIManagerBinding mBinding;
   @NonNull private final ReactApplicationContext mReactApplicationContext;
   @NonNull private final MountingManager mMountingManager;
-  @NonNull private final EventDispatcher mEventDispatcher;
+  @NonNull private final FabricEventDispatcher mEventDispatcher;
   @NonNull private final MountItemDispatcher mMountItemDispatcher;
   @NonNull private final ViewManagerRegistry mViewManagerRegistry;
 
@@ -173,13 +172,15 @@ public class FabricUIManager
   private final CopyOnWriteArrayList<UIManagerListener> mListeners = new CopyOnWriteArrayList<>();
 
   private boolean mMountNotificationScheduled = false;
-  private final List<Integer> mMountedSurfaceIds = new ArrayList<>();
+  private List<Integer> mSurfaceIdsWithPendingMountNotification = new ArrayList<>();
 
   @ThreadConfined(UI)
   @NonNull
   private final DispatchUIFrameCallback mDispatchUIFrameCallback;
 
   /** Set of events sent synchronously during the current frame render. Cleared after each frame. */
+  @ThreadConfined(UI)
+  @NonNull
   private final Set<SynchronousEvent> mSynchronousEvents = new HashSet<>();
 
   /**
@@ -225,7 +226,7 @@ public class FabricUIManager
     mMountingManager = new MountingManager(viewManagerRegistry, mMountItemExecutor);
     mMountItemDispatcher =
         new MountItemDispatcher(mMountingManager, new MountItemDispatchListener());
-    mEventDispatcher = new FabricEventDispatcher(reactContext);
+    mEventDispatcher = new FabricEventDispatcher(reactContext, new FabricEventEmitter(this));
     mBatchEventDispatchedListener = batchEventDispatchedListener;
     mReactApplicationContext.addLifecycleEventListener(this);
 
@@ -362,7 +363,6 @@ public class FabricUIManager
 
   @Override
   public void initialize() {
-    mEventDispatcher.registerEventEmitter(FABRIC, new FabricEventEmitter(this));
     mEventDispatcher.addBatchEventDispatchedListener(mBatchEventDispatchedListener);
     if (ReactNativeFeatureFlags.enableFabricLogs()) {
       mDevToolsReactPerfLogger = new DevToolsReactPerfLogger();
@@ -397,7 +397,7 @@ public class FabricUIManager
     mDestroyed = true;
 
     mEventDispatcher.removeBatchEventDispatchedListener(mBatchEventDispatchedListener);
-    mEventDispatcher.unregisterEventEmitter(FABRIC);
+    mEventDispatcher.invalidate();
 
     mReactApplicationContext.unregisterComponentCallbacks(mViewManagerRegistry);
     mViewManagerRegistry.invalidate();
@@ -412,14 +412,6 @@ public class FabricUIManager
     mBinding = null;
 
     ViewManagerPropertyUpdater.clear();
-
-    // When StaticViewConfigs is enabled, FabriUIManager is
-    // responsible for initializing and deallocating EventDispatcher. StaticViewConfigs is enabled
-    // only in Bridgeless for now.
-    // TODO T83943316: Remove this IF once StaticViewConfigs are enabled by default
-    if (!ReactNativeFeatureFlags.enableBridgelessArchitecture()) {
-      mEventDispatcher.onCatalystInstanceDestroyed();
-    }
   }
 
   @Override
@@ -968,11 +960,11 @@ public class FabricUIManager
   public void receiveEvent(
       int surfaceId,
       int reactTag,
-      String eventName,
+      @NonNull String eventName,
       boolean canCoalesceEvent,
       @Nullable WritableMap params,
       @EventCategoryDef int eventCategory,
-      boolean experimental_isSynchronous) {
+      boolean experimentalIsSynchronous) {
 
     if (ReactBuildConfig.DEBUG && surfaceId == View.NO_ID) {
       FLog.d(TAG, "Emitted event without surfaceId: [%d] %s", reactTag, eventName);
@@ -993,12 +985,13 @@ public class FabricUIManager
             surfaceId, reactTag, eventName, canCoalesceEvent, params, eventCategory);
       } else {
         // This can happen if the view has disappeared from the screen (because of async events)
-        FLog.d(TAG, "Unable to invoke event: " + eventName + " for reactTag: " + reactTag);
+        FLog.i(TAG, "Unable to invoke event: " + eventName + " for reactTag: " + reactTag);
       }
       return;
     }
 
-    if (experimental_isSynchronous) {
+    if (experimentalIsSynchronous) {
+      UiThreadUtil.assertOnUiThread();
       // add() returns true only if there are no equivalent events already in the set
       boolean firstEventForFrame =
           mSynchronousEvents.add(new SynchronousEvent(surfaceId, reactTag, eventName));
@@ -1251,12 +1244,15 @@ public class FabricUIManager
 
       // Collect surface IDs for all the mount items
       for (MountItem mountItem : mountItems) {
-        if (mountItem != null && !mMountedSurfaceIds.contains(mountItem.getSurfaceId())) {
-          mMountedSurfaceIds.add(mountItem.getSurfaceId());
+        if (mountItem != null
+            && !mSurfaceIdsWithPendingMountNotification.contains(mountItem.getSurfaceId())) {
+          mSurfaceIdsWithPendingMountNotification.add(mountItem.getSurfaceId());
         }
       }
 
-      if (!mMountNotificationScheduled && !mMountedSurfaceIds.isEmpty()) {
+      if (!mMountNotificationScheduled && !mSurfaceIdsWithPendingMountNotification.isEmpty()) {
+        mMountNotificationScheduled = true;
+
         // Notify mount when the effects are visible and prevent mount hooks to
         // delay paint.
         UiThreadUtil.getUiThreadHandler()
@@ -1266,17 +1262,19 @@ public class FabricUIManager
                   public void run() {
                     mMountNotificationScheduled = false;
 
+                    // Create a copy in case mount hooks trigger more mutations
+                    final List<Integer> surfaceIdsToReportMount =
+                        mSurfaceIdsWithPendingMountNotification;
+                    mSurfaceIdsWithPendingMountNotification = new ArrayList<>();
+
                     final @Nullable FabricUIManagerBinding binding = mBinding;
                     if (binding == null || mDestroyed) {
-                      mMountedSurfaceIds.clear();
                       return;
                     }
 
-                    for (int surfaceId : mMountedSurfaceIds) {
+                    for (int surfaceId : surfaceIdsToReportMount) {
                       binding.reportMount(surfaceId);
                     }
-
-                    mMountedSurfaceIds.clear();
                   }
                 });
       }
@@ -1389,7 +1387,7 @@ public class FabricUIManager
       } catch (Exception ex) {
         FLog.e(TAG, "Exception thrown when executing UIFrameGuarded", ex);
         mIsMountingEnabled = false;
-        throw ex;
+        throw new RuntimeException("Exception thrown when executing UIFrameGuarded", ex);
       } finally {
         schedule();
       }

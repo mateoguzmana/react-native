@@ -12,6 +12,7 @@
 import type {DependencyContext} from './simpleResolve';
 import type {ParseResult} from 'hermes-transform/dist/transform/parse';
 
+const resolveTypeInputFile = require('./resolveTypeInputFile');
 const simpleResolve = require('./simpleResolve');
 const debug = require('debug')('build-types:resolution');
 const {traverse} = require('hermes-transform/dist/traverse/traverse');
@@ -52,6 +53,14 @@ async function getDependencies(
           }
         }
       },
+      ExportAllDeclaration(node): void {
+        importPaths.add(node.source.value);
+      },
+      ExportNamedDeclaration(node): void {
+        if (node.source != null) {
+          importPaths.add(node.source.value);
+        }
+      },
     }),
   );
 
@@ -74,7 +83,7 @@ async function getDependencies(
       );
 
       if (resolved != null) {
-        dependencies.add(resolved);
+        dependencies.add(resolveTypeInputFile(resolved) ?? resolved);
       }
     }),
   );

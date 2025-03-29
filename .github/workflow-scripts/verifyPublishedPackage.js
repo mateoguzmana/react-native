@@ -18,7 +18,6 @@ async function verifyPublishedPackage(
   tag = null,
   retries = MAX_RETRIES,
 ) {
-  debugger;
   log(`🔍 Is ${packageName}@${version} on npm?`);
 
   let count = retries;
@@ -43,7 +42,7 @@ async function verifyPublishedPackage(
       }
 
       log(
-        `🐌 ${packageName}@${tag} → ${pkg.version} on npm and not ${version} as expected, retrying...`,
+        `🐌 ${packageName}@${tag} → ${json.version} on npm and not ${version} as expected, retrying...`,
       );
     } catch (e) {
       log(`Nope, fetch failed: ${e.message}`);

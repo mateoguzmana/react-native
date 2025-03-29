@@ -96,6 +96,9 @@ jobs:
           hermes-version: ${{ needs.prepare_hermes_workspace.outputs.hermes-version }}
           react-native-version: ${{ needs.prepare_hermes_workspace.outputs.react-native-version }}
           flavor: ${{ matrix.flavor }}
+  prebuild_apple_dependencies:
+    uses: ./.github/workflows/prebuild-ios.yml
+    secrets: inherit
 
   build_hermesc_linux:
     runs-on: ubuntu-latest
@@ -150,6 +153,7 @@ jobs:
         uses: ./.github/actions/build-android
         with:
           release-type: ${{ needs.set_release_type.outputs.RELEASE_TYPE }}
+          gradle-cache-encryption-key: ${{ secrets.GRADLE_CACHE_ENCRYPTION_KEY }}
 
   build_npm_package:
     runs-on: 8-core-ubuntu
@@ -161,6 +165,7 @@ jobs:
         build_hermesc_linux,
         build_hermesc_windows,
         build_android,
+        prebuild_apple_dependencies,
       ]
     container:
       image: reactnativecommunity/react-native-android:latest
@@ -183,12 +188,13 @@ jobs:
         with:
           fetch-depth: 0
           fetch-tags: true
-      - name: Build and Publish NPM PAckage
+      - name: Build and Publish NPM Package
         uses: ./.github/actions/build-npm-package
         with:
           hermes-ws-dir: ${{ env.HERMES_WS_DIR }}
           release-type: ${{ needs.set_release_type.outputs.RELEASE_TYPE }}
           gha-npm-token: ${{ env.GHA_NPM_TOKEN }}
+          gradle-cache-encryption-key: ${{ secrets.GRADLE_CACHE_ENCRYPTION_KEY }}
       - name: Publish @react-native-community/template
         id: publish-template-to-npm
         uses: actions/github-script@v6
@@ -221,6 +227,28 @@ jobs:
           github-token: ${{ secrets.REACT_NATIVE_BOT_GITHUB_TOKEN }}
           script: |
             const {verifyReleaseOnNpm} = require('./.github/workflow-scripts/verifyReleaseOnNpm.js');
-            const {isLatest()} = require('./.github/workflow-scripts/publishTemplate.js');
+            const {isLatest} = require('./.github/workflow-scripts/publishTemplate.js');
             const version = "${{ github.ref_name }}";
             await verifyReleaseOnNpm(version, isLatest());
+      - name: Verify that artifacts are on Maven
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const {verifyArtifactsAreOnMaven} = require('./.github/workflow-scripts/verifyArtifactsAreOnMaven.js');
+            const version = "${{ github.ref_name }}";
+            await verifyArtifactsAreOnMaven(version);
+
+  generate_changelog:
+    needs: build_npm_package
+    uses: ./.github/workflows/generate-changelog.yml
+    secrets: inherit
+
+  bump_podfile_lock:
+    needs: build_npm_package
+    uses: ./.github/workflows/bump-podfile-lock.yml
+    secrets: inherit
+
+  create_draft_release:
+    needs: generate_changelog
+    uses: ./.github/workflows/create-draft-release.yml
+    secrets: inherit

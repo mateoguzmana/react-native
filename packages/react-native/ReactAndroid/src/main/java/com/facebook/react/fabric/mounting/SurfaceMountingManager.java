@@ -833,9 +833,16 @@ public class SurfaceMountingManager {
       parent.requestLayout();
     }
 
-    ViewState parentViewState = getViewState(parentTag);
+    // TODO T212247085: Make this non-nullable again after rolling out
+    // disableMountItemReorderingAndroid
+    ViewState parentViewState = getNullableViewState(parentTag);
     IViewGroupManager<?> parentViewManager = null;
-    if (parentViewState.mViewManager != null) {
+    if (parentViewState == null) {
+      ReactSoftExceptionLogger.logSoftException(
+          ReactSoftExceptionLogger.Categories.SURFACE_MOUNTING_MANAGER_MISSING_VIEWSTATE,
+          new ReactNoCrashSoftException(
+              "Unable to find viewState for tag: " + parentTag + " for updateLayout"));
+    } else if (parentViewState.mViewManager != null) {
       parentViewManager = (IViewGroupManager) parentViewState.mViewManager;
     }
     if (parentViewManager == null || !parentViewManager.needsCustomLayoutForChildren()) {
@@ -1040,8 +1047,7 @@ public class SurfaceMountingManager {
       return;
     }
 
-    if (ReactNativeFeatureFlags.enableEventEmitterRetentionDuringGesturesOnAndroid()
-        && mViewsWithActiveTouches.contains(reactTag)) {
+    if (mViewsWithActiveTouches.contains(reactTag)) {
       // If the view that went offscreen is still being touched, we can't delete it yet.
       // We have to delay the deletion till the touch is completed.
       // This is causing bugs like those otherwise:
@@ -1180,16 +1186,10 @@ public class SurfaceMountingManager {
   }
 
   public void markActiveTouchForTag(int reactTag) {
-    if (!ReactNativeFeatureFlags.enableEventEmitterRetentionDuringGesturesOnAndroid()) {
-      return;
-    }
     mViewsWithActiveTouches.add(reactTag);
   }
 
   public void sweepActiveTouchForTag(int reactTag) {
-    if (!ReactNativeFeatureFlags.enableEventEmitterRetentionDuringGesturesOnAndroid()) {
-      return;
-    }
     mViewsWithActiveTouches.remove(reactTag);
     if (mViewsToDeleteAfterTouchFinishes.contains(reactTag)) {
       mViewsToDeleteAfterTouchFinishes.remove(reactTag);

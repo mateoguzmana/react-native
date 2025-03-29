@@ -8,11 +8,11 @@
  * @format
  */
 
-import type {HostInstance} from '../../Renderer/shims/ReactNativeTypes';
+import type {HostInstance} from '../../../src/private/types/HostInstance';
 import type {
-  PressEvent,
+  GestureResponderEvent,
+  NativeSyntheticEvent,
   ScrollEvent,
-  SyntheticEvent,
 } from '../../Types/CoreEventTypes';
 import type {ViewProps} from '../View/ViewPropTypes';
 
@@ -23,17 +23,15 @@ import {
 } from '../../StyleSheet/StyleSheet';
 import * as React from 'react';
 
-type ReactRefSetter<T> = {current: null | T, ...} | ((ref: null | T) => mixed);
-
-export type TextInputChangeEventData = $ReadOnly<{
+type TextInputChangeEventData = $ReadOnly<{
   eventCount: number,
   target: number,
   text: string,
 }>;
 
-export type TextInputChangeEvent = SyntheticEvent<TextInputChangeEventData>;
+type TextInputChangeEvent = NativeSyntheticEvent<TextInputChangeEventData>;
 
-export type TextInputEvent = SyntheticEvent<
+export type TextInputEvent = NativeSyntheticEvent<
   $ReadOnly<{
     eventCount: number,
     previousText: string,
@@ -46,7 +44,7 @@ export type TextInputEvent = SyntheticEvent<
   }>,
 >;
 
-export type TextInputContentSizeChangeEventData = $ReadOnly<{
+type TextInputContentSizeChangeEventData = $ReadOnly<{
   target: number,
   contentSize: $ReadOnly<{
     width: number,
@@ -55,47 +53,66 @@ export type TextInputContentSizeChangeEventData = $ReadOnly<{
 }>;
 
 export type TextInputContentSizeChangeEvent =
-  SyntheticEvent<TextInputContentSizeChangeEventData>;
+  NativeSyntheticEvent<TextInputContentSizeChangeEventData>;
 
-export type TargetEvent = $ReadOnly<{
+type TargetEvent = $ReadOnly<{
   target: number,
 }>;
 
-export type TextInputFocusEventData = TargetEvent;
+type TextInputFocusEventData = TargetEvent;
 
-export type TextInputBlurEvent = SyntheticEvent<TextInputFocusEventData>;
-export type TextInputFocusEvent = SyntheticEvent<TextInputFocusEventData>;
+export type TextInputBlurEvent = NativeSyntheticEvent<TextInputFocusEventData>;
+export type TextInputFocusEvent = NativeSyntheticEvent<TextInputFocusEventData>;
 
 type Selection = $ReadOnly<{
   start: number,
   end: number,
 }>;
 
-export type TextInputSelectionChangeEventData = $ReadOnly<{
+type TextInputSelectionChangeEventData = $ReadOnly<{
   ...TargetEvent,
   selection: Selection,
 }>;
 
 export type TextInputSelectionChangeEvent =
-  SyntheticEvent<TextInputSelectionChangeEventData>;
+  NativeSyntheticEvent<TextInputSelectionChangeEventData>;
 
-export type TextInputKeyPressEventData = $ReadOnly<{
+type TextInputKeyPressEventData = $ReadOnly<{
   ...TargetEvent,
   key: string,
   target?: ?number,
   eventCount: number,
 }>;
 
-export type TextInputKeyPressEvent = SyntheticEvent<TextInputKeyPressEventData>;
+export type TextInputKeyPressEvent =
+  NativeSyntheticEvent<TextInputKeyPressEventData>;
 
-export type TextInputEndEditingEventData = $ReadOnly<{
+type TextInputEndEditingEventData = $ReadOnly<{
   ...TargetEvent,
   eventCount: number,
   text: string,
 }>;
 
+/**
+ * @see TextInputProps.onEndEditing
+ */
+export type TextInputEndEditingEvent =
+  NativeSyntheticEvent<TextInputEndEditingEventData>;
+
+type TextInputSubmitEditingEventData = $ReadOnly<{
+  ...TargetEvent,
+  eventCount: number,
+  text: string,
+}>;
+
+/**
+ * @see TextInputProps.onSubmitEditing
+ */
+export type TextInputSubmitEditingEvent =
+  NativeSyntheticEvent<TextInputSubmitEditingEventData>;
+
 export type TextInputEditingEvent =
-  SyntheticEvent<TextInputEndEditingEventData>;
+  NativeSyntheticEvent<TextInputEndEditingEventData>;
 
 type DataDetectorTypesType =
   | 'phoneNumber'
@@ -389,6 +406,21 @@ export type TextInputAndroidProps = $ReadOnly<{
    */
   disableFullscreenUI?: ?boolean,
 
+  /**
+   * Determines whether the individual fields in your app should be included in a
+   * view structure for autofill purposes on Android API Level 26+. Defaults to auto.
+   * To disable auto complete, use `off`.
+   *
+   * *Android Only*
+   *
+   * The following values work on Android only:
+   *
+   * - `auto` - let Android decide
+   * - `no` - not important for autofill
+   * - `noExcludeDescendants` - this view and its children aren't important for autofill
+   * - `yes` - is important for autofill
+   * - `yesExcludeDescendants` - this view is important for autofill but its children aren't
+   */
   importantForAutofill?: ?(
     | 'auto'
     | 'no'
@@ -647,7 +679,7 @@ export type TextInputProps = $ReadOnly<{
    */
   editable?: ?boolean,
 
-  forwardedRef?: ?ReactRefSetter<HostInstance & ImperativeMethods>,
+  forwardedRef?: ?React.RefSetter<TextInputInstance>,
 
   /**
    * `enterKeyHint` defines what action label (or icon) to present for the enter key on virtual keyboards.
@@ -783,7 +815,7 @@ export type TextInputProps = $ReadOnly<{
   /**
    * Callback that is called when text input ends.
    */
-  onEndEditing?: ?(e: TextInputEditingEvent) => mixed,
+  onEndEditing?: ?(e: TextInputEndEditingEvent) => mixed,
 
   /**
    * Callback that is called when the text input is focused.
@@ -817,17 +849,17 @@ export type TextInputProps = $ReadOnly<{
   /**
    * Called when a single tap gesture is detected.
    */
-  onPress?: ?(event: PressEvent) => mixed,
+  onPress?: ?(event: GestureResponderEvent) => mixed,
 
   /**
    * Called when a touch is engaged.
    */
-  onPressIn?: ?(event: PressEvent) => mixed,
+  onPressIn?: ?(event: GestureResponderEvent) => mixed,
 
   /**
    * Called when a touch is released.
    */
-  onPressOut?: ?(event: PressEvent) => mixed,
+  onPressOut?: ?(event: GestureResponderEvent) => mixed,
 
   /**
    * Callback that is called when the text input selection is changed.
@@ -840,7 +872,7 @@ export type TextInputProps = $ReadOnly<{
    * Callback that is called when the text input's submit button is pressed.
    * Invalid if `multiline={true}` is specified.
    */
-  onSubmitEditing?: ?(e: TextInputEditingEvent) => mixed,
+  onSubmitEditing?: ?(e: TextInputSubmitEditingEvent) => mixed,
 
   /**
    * Invoked on content scroll with `{ nativeEvent: { contentOffset: { x, y } } }`.
@@ -990,12 +1022,12 @@ export type TextInputProps = $ReadOnly<{
   value?: ?Stringish,
 }>;
 
-type ImperativeMethods = $ReadOnly<{
-  clear: () => void,
-  isFocused: () => boolean,
-  getNativeRef: () => ?HostInstance,
-  setSelection: (start: number, end: number) => void,
-}>;
+export interface TextInputInstance extends HostInstance {
+  +clear: () => void;
+  +isFocused: () => boolean;
+  +getNativeRef: () => ?HostInstance;
+  +setSelection: (start: number, end: number) => void;
+}
 
 /**
  * A foundational component for inputting text into the app via a
@@ -1109,7 +1141,7 @@ type ImperativeMethods = $ReadOnly<{
  *
  */
 type InternalTextInput = component(
-  ref: React.RefSetter<$ReadOnly<{...HostInstance, ...ImperativeMethods}>>,
+  ref?: React.RefSetter<TextInputInstance>,
   ...TextInputProps
 );
 

@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<67e89ba7eb0c5c16cd4ac556f203aee6>>
+ * @generated SignedSource<<cc7536e8280fdc7d3f2106486439676a>>
  */
 
 /**
@@ -45,17 +45,27 @@ class ReactNativeFeatureFlags {
   RN_EXPORT static bool commonTestFlag();
 
   /**
-   * Prevent FabricMountingManager from reordering mountitems, which may lead to invalid state on the UI thread
+   * Enables start- and finishOperationBatch on any platform.
+   */
+  RN_EXPORT static bool animatedShouldSignalBatch();
+
+  /**
+   * Use a C++ implementation of Native Animated instead of the platform implementation.
+   */
+  RN_EXPORT static bool cxxNativeAnimatedEnabled();
+
+  /**
+   * Prevent FabricMountingManager from reordering mountItems, which may lead to invalid state on the UI thread
    */
   RN_EXPORT static bool disableMountItemReorderingAndroid();
 
   /**
-   * When enabled, Andoid will accumulate updates in rawProps to reduce the number of mounting instructions for cascading rerenders.
+   * When enabled, Android will accumulate updates in rawProps to reduce the number of mounting instructions for cascading re-renders.
    */
   RN_EXPORT static bool enableAccumulatedUpdatesInRawPropsAndroid();
 
   /**
-   * Feature flag to enable the new bridgeless architecture. Note: Enabling this will force enable the following flags: `useTurboModules` & `enableFabricRenderer.
+   * Feature flag to enable the new bridgeless architecture. Note: Enabling this will force enable the following flags: `useTurboModules` & `enableFabricRenderer`.
    */
   RN_EXPORT static bool enableBridgelessArchitecture();
 
@@ -70,11 +80,6 @@ class ReactNativeFeatureFlags {
   RN_EXPORT static bool enableEagerRootViewAttachment();
 
   /**
-   * Enables the retention of EventEmitterWrapper on Android till the touch gesture is over to fix a bug on pressable (#44610)
-   */
-  RN_EXPORT static bool enableEventEmitterRetentionDuringGesturesOnAndroid();
-
-  /**
    * This feature flag enables logs for Fabric.
    */
   RN_EXPORT static bool enableFabricLogs();
@@ -85,22 +90,12 @@ class ReactNativeFeatureFlags {
   RN_EXPORT static bool enableFabricRenderer();
 
   /**
-   * Synchronise the view command dispatching with mounting of new transaction
-   */
-  RN_EXPORT static bool enableFixForViewCommandRace();
-
-  /**
-   * When enabled, the renderer would only fail commits when they propagate state and the last commit that updated state changed before committing.
-   */
-  RN_EXPORT static bool enableGranularShadowTreeStateReconciliation();
-
-  /**
    * iOS Views will clip to their padding box vs border box
    */
   RN_EXPORT static bool enableIOSViewClipToPaddingBox();
 
   /**
-   * When enabled, Andoid will build and initiate image prefetch requests on ImageShadowNode::layout
+   * When enabled, Android will build and initiate image prefetch requests on ImageShadowNode::layout
    */
   RN_EXPORT static bool enableImagePrefetchingAndroid();
 
@@ -125,14 +120,19 @@ class ReactNativeFeatureFlags {
   RN_EXPORT static bool enableLongTaskAPI();
 
   /**
+   * Makes modules requiring main queue setup initialize on the main thread, during React Native init.
+   */
+  RN_EXPORT static bool enableMainQueueModulesOnIOS();
+
+  /**
+   * Parse CSS strings using the Fabric CSS parser instead of ViewConfig processing
+   */
+  RN_EXPORT static bool enableNativeCSSParsing();
+
+  /**
    * Use BackgroundDrawable and BorderDrawable instead of CSSBackgroundDrawable
    */
   RN_EXPORT static bool enableNewBackgroundAndBorderDrawables();
-
-  /**
-   * Moves execution of pre-mount items to outside the choregrapher in the main thread, so we can estimate idle time more precisely (Android only).
-   */
-  RN_EXPORT static bool enablePreciseSchedulingForPremountItemsOnAndroid();
 
   /**
    * When enabled, Android will receive prop updates based on the differences between the last rendered shadow node and the last committed shadow node.
@@ -175,16 +175,6 @@ class ReactNativeFeatureFlags {
   RN_EXPORT static bool enableViewRecyclingForView();
 
   /**
-   * When enabled, rawProps in Props will not include Yoga specific props.
-   */
-  RN_EXPORT static bool excludeYogaFromRawProps();
-
-  /**
-   * Fixes a bug in Differentiator where parent views may be referenced before they're created
-   */
-  RN_EXPORT static bool fixDifferentiatorEmittingUpdatesWithWrongParentTag();
-
-  /**
    * Uses the default event priority instead of the discreet event priority by default when dispatching events from Fabric to React.
    */
   RN_EXPORT static bool fixMappingOfEventPrioritiesBetweenFabricAndReact();
@@ -200,14 +190,19 @@ class ReactNativeFeatureFlags {
   RN_EXPORT static bool fuseboxEnabledRelease();
 
   /**
-   * Enable network inspection support in the React Native DevTools CDP backend. This flag is global and should not be changed across React Host lifetimes.
+   * Enable network inspection support in the React Native DevTools CDP backend. Requires `enableBridgelessArchitecture`. This flag is global and should not be changed across React Host lifetimes.
    */
   RN_EXPORT static bool fuseboxNetworkInspectionEnabled();
 
   /**
-   * Only enqueue Choreographer calls if there is an ongoing animation, instead of enqueueing every frame.
+   * When enabled, mutex _turboModuleManagerDelegateMutex in RCTTurboModuleManager will not be used
    */
-  RN_EXPORT static bool lazyAnimationCallbacks();
+  RN_EXPORT static bool removeTurboModuleManagerDelegateMutex();
+
+  /**
+   * Throw an exception instead of deadlocking when a TurboModule that requires main queue setup is initialized during a synchronous render on iOS.
+   */
+  RN_EXPORT static bool throwExceptionInsteadOfDeadlockOnTurboModuleSetupDuringSyncRenderIOS();
 
   /**
    * Enables storing js caller stack when creating promise in native module. This is useful in case of Promise rejection and tracing the cause.
@@ -296,7 +291,7 @@ class ReactNativeFeatureFlags {
    * This is **dangerous** because it can introduce consistency issues that will
    * be much harder to debug. For example, it could hide the fact that feature
    * flags are read before you set the values you want to use everywhere. It
-   * could also cause a workflow to suddently have different feature flags for
+   * could also cause a workflow to suddenly have different feature flags for
    * behaviors that were configured with different values before.
    *
    * Please see the documentation of `dangerouslyReset` for additional details.

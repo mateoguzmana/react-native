@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<ae55a0a7badfc9d80453d2737f0f87fd>>
+ * @generated SignedSource<<9f43ddaa47a45d604adda2e2296c1484>>
  */
 
 /**
@@ -18,6 +18,8 @@
  */
 
 package com.facebook.react.internal.featureflags
+
+import androidx.annotation.VisibleForTesting
 
 /**
  * This object provides access to internal React Native feature flags.
@@ -35,19 +37,31 @@ public object ReactNativeFeatureFlags {
   public fun commonTestFlag(): Boolean = accessor.commonTestFlag()
 
   /**
-   * Prevent FabricMountingManager from reordering mountitems, which may lead to invalid state on the UI thread
+   * Enables start- and finishOperationBatch on any platform.
+   */
+  @JvmStatic
+  public fun animatedShouldSignalBatch(): Boolean = accessor.animatedShouldSignalBatch()
+
+  /**
+   * Use a C++ implementation of Native Animated instead of the platform implementation.
+   */
+  @JvmStatic
+  public fun cxxNativeAnimatedEnabled(): Boolean = accessor.cxxNativeAnimatedEnabled()
+
+  /**
+   * Prevent FabricMountingManager from reordering mountItems, which may lead to invalid state on the UI thread
    */
   @JvmStatic
   public fun disableMountItemReorderingAndroid(): Boolean = accessor.disableMountItemReorderingAndroid()
 
   /**
-   * When enabled, Andoid will accumulate updates in rawProps to reduce the number of mounting instructions for cascading rerenders.
+   * When enabled, Android will accumulate updates in rawProps to reduce the number of mounting instructions for cascading re-renders.
    */
   @JvmStatic
   public fun enableAccumulatedUpdatesInRawPropsAndroid(): Boolean = accessor.enableAccumulatedUpdatesInRawPropsAndroid()
 
   /**
-   * Feature flag to enable the new bridgeless architecture. Note: Enabling this will force enable the following flags: `useTurboModules` & `enableFabricRenderer.
+   * Feature flag to enable the new bridgeless architecture. Note: Enabling this will force enable the following flags: `useTurboModules` & `enableFabricRenderer`.
    */
   @JvmStatic
   public fun enableBridgelessArchitecture(): Boolean = accessor.enableBridgelessArchitecture()
@@ -65,12 +79,6 @@ public object ReactNativeFeatureFlags {
   public fun enableEagerRootViewAttachment(): Boolean = accessor.enableEagerRootViewAttachment()
 
   /**
-   * Enables the retention of EventEmitterWrapper on Android till the touch gesture is over to fix a bug on pressable (#44610)
-   */
-  @JvmStatic
-  public fun enableEventEmitterRetentionDuringGesturesOnAndroid(): Boolean = accessor.enableEventEmitterRetentionDuringGesturesOnAndroid()
-
-  /**
    * This feature flag enables logs for Fabric.
    */
   @JvmStatic
@@ -83,25 +91,13 @@ public object ReactNativeFeatureFlags {
   public fun enableFabricRenderer(): Boolean = accessor.enableFabricRenderer()
 
   /**
-   * Synchronise the view command dispatching with mounting of new transaction
-   */
-  @JvmStatic
-  public fun enableFixForViewCommandRace(): Boolean = accessor.enableFixForViewCommandRace()
-
-  /**
-   * When enabled, the renderer would only fail commits when they propagate state and the last commit that updated state changed before committing.
-   */
-  @JvmStatic
-  public fun enableGranularShadowTreeStateReconciliation(): Boolean = accessor.enableGranularShadowTreeStateReconciliation()
-
-  /**
    * iOS Views will clip to their padding box vs border box
    */
   @JvmStatic
   public fun enableIOSViewClipToPaddingBox(): Boolean = accessor.enableIOSViewClipToPaddingBox()
 
   /**
-   * When enabled, Andoid will build and initiate image prefetch requests on ImageShadowNode::layout
+   * When enabled, Android will build and initiate image prefetch requests on ImageShadowNode::layout
    */
   @JvmStatic
   public fun enableImagePrefetchingAndroid(): Boolean = accessor.enableImagePrefetchingAndroid()
@@ -131,16 +127,22 @@ public object ReactNativeFeatureFlags {
   public fun enableLongTaskAPI(): Boolean = accessor.enableLongTaskAPI()
 
   /**
+   * Makes modules requiring main queue setup initialize on the main thread, during React Native init.
+   */
+  @JvmStatic
+  public fun enableMainQueueModulesOnIOS(): Boolean = accessor.enableMainQueueModulesOnIOS()
+
+  /**
+   * Parse CSS strings using the Fabric CSS parser instead of ViewConfig processing
+   */
+  @JvmStatic
+  public fun enableNativeCSSParsing(): Boolean = accessor.enableNativeCSSParsing()
+
+  /**
    * Use BackgroundDrawable and BorderDrawable instead of CSSBackgroundDrawable
    */
   @JvmStatic
   public fun enableNewBackgroundAndBorderDrawables(): Boolean = accessor.enableNewBackgroundAndBorderDrawables()
-
-  /**
-   * Moves execution of pre-mount items to outside the choregrapher in the main thread, so we can estimate idle time more precisely (Android only).
-   */
-  @JvmStatic
-  public fun enablePreciseSchedulingForPremountItemsOnAndroid(): Boolean = accessor.enablePreciseSchedulingForPremountItemsOnAndroid()
 
   /**
    * When enabled, Android will receive prop updates based on the differences between the last rendered shadow node and the last committed shadow node.
@@ -191,18 +193,6 @@ public object ReactNativeFeatureFlags {
   public fun enableViewRecyclingForView(): Boolean = accessor.enableViewRecyclingForView()
 
   /**
-   * When enabled, rawProps in Props will not include Yoga specific props.
-   */
-  @JvmStatic
-  public fun excludeYogaFromRawProps(): Boolean = accessor.excludeYogaFromRawProps()
-
-  /**
-   * Fixes a bug in Differentiator where parent views may be referenced before they're created
-   */
-  @JvmStatic
-  public fun fixDifferentiatorEmittingUpdatesWithWrongParentTag(): Boolean = accessor.fixDifferentiatorEmittingUpdatesWithWrongParentTag()
-
-  /**
    * Uses the default event priority instead of the discreet event priority by default when dispatching events from Fabric to React.
    */
   @JvmStatic
@@ -221,16 +211,22 @@ public object ReactNativeFeatureFlags {
   public fun fuseboxEnabledRelease(): Boolean = accessor.fuseboxEnabledRelease()
 
   /**
-   * Enable network inspection support in the React Native DevTools CDP backend. This flag is global and should not be changed across React Host lifetimes.
+   * Enable network inspection support in the React Native DevTools CDP backend. Requires `enableBridgelessArchitecture`. This flag is global and should not be changed across React Host lifetimes.
    */
   @JvmStatic
   public fun fuseboxNetworkInspectionEnabled(): Boolean = accessor.fuseboxNetworkInspectionEnabled()
 
   /**
-   * Only enqueue Choreographer calls if there is an ongoing animation, instead of enqueueing every frame.
+   * When enabled, mutex _turboModuleManagerDelegateMutex in RCTTurboModuleManager will not be used
    */
   @JvmStatic
-  public fun lazyAnimationCallbacks(): Boolean = accessor.lazyAnimationCallbacks()
+  public fun removeTurboModuleManagerDelegateMutex(): Boolean = accessor.removeTurboModuleManagerDelegateMutex()
+
+  /**
+   * Throw an exception instead of deadlocking when a TurboModule that requires main queue setup is initialized during a synchronous render on iOS.
+   */
+  @JvmStatic
+  public fun throwExceptionInsteadOfDeadlockOnTurboModuleSetupDuringSyncRenderIOS(): Boolean = accessor.throwExceptionInsteadOfDeadlockOnTurboModuleSetupDuringSyncRenderIOS()
 
   /**
    * Enables storing js caller stack when creating promise in native module. This is useful in case of Promise rejection and tracing the cause.
@@ -329,7 +325,7 @@ public object ReactNativeFeatureFlags {
    * This is **dangerous** because it can introduce consistency issues that will
    * be much harder to debug. For example, it could hide the fact that feature
    * flags are read before you set the values you want to use everywhere. It
-   * could also cause a workflow to suddently have different feature flags for
+   * could also cause a workflow to suddenly have different feature flags for
    * behaviors that were configured with different values before.
    *
    * It returns a string that contains the feature flags that were accessed
@@ -352,6 +348,7 @@ public object ReactNativeFeatureFlags {
    * This is just used to replace the default ReactNativeFeatureFlagsCxxAccessor
    * that uses JNI with a version that doesn't, to simplify testing.
    */
+  @VisibleForTesting
   internal fun setAccessorProvider(newAccessorProvider: () -> ReactNativeFeatureFlagsAccessor) {
     accessorProvider = newAccessorProvider
     accessor = accessorProvider()

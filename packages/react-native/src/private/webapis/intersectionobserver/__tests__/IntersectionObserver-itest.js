@@ -7,24 +7,20 @@
  * @flow strict-local
  * @format
  * @oncall react_native
- * @fantom_flags enableAccessToHostTreeInFabric:true
  */
 
-/* eslint-disable lint/sort-imports */
-import type IntersectionObserverType from '../IntersectionObserver';
+import 'react-native/Libraries/Core/InitializeCore';
 
-import DOMRectReadOnly from '../../geometry/DOMRectReadOnly';
-import Fantom from '@react-native/fantom';
-import setUpIntersectionObserver from '../../../setup/setUpIntersectionObserver';
-import ReactNativeElement from '../../dom/nodes/ReactNativeElement';
-import IntersectionObserverEntry from '../IntersectionObserverEntry';
+import type IntersectionObserverType from 'react-native/src/private/webapis/intersectionobserver/IntersectionObserver';
+
+import ensureInstance from '../../../__tests__/utilities/ensureInstance';
+import * as Fantom from '@react-native/fantom';
 import * as React from 'react';
-
-import '../../../../../Libraries/Core/InitializeCore.js';
-
-import ScrollView from '../../../../../Libraries/Components/ScrollView/ScrollView';
-import View from '../../../../../Libraries/Components/View/View';
-import ensureInstance from '../../../utilities/ensureInstance';
+import {ScrollView, View} from 'react-native';
+import setUpIntersectionObserver from 'react-native/src/private/setup/setUpIntersectionObserver';
+import ReactNativeElement from 'react-native/src/private/webapis/dom/nodes/ReactNativeElement';
+import DOMRectReadOnly from 'react-native/src/private/webapis/geometry/DOMRectReadOnly';
+import IntersectionObserverEntry from 'react-native/src/private/webapis/intersectionobserver/IntersectionObserverEntry';
 
 declare const IntersectionObserver: Class<IntersectionObserverType>;
 

@@ -10,10 +10,10 @@
  */
 
 const {PACKAGES_DIR, REPO_ROOT} = require('../../consts');
+const getRequireStack = require('./resolution/getRequireStack');
 const translatedModuleTemplate = require('./templates/translatedModule.d.ts-template');
 const translateSourceFile = require('./translateSourceFile');
-const debug = require('debug')('build-types:main');
-const {existsSync, promises: fs} = require('fs');
+const {promises: fs} = require('fs');
 const micromatch = require('micromatch');
 const path = require('path');
 
@@ -22,16 +22,17 @@ const OUTPUT_DIR = 'types_generated';
 const IGNORE_PATTERNS = [
   '**/__{tests,mocks,fixtures,flowtests}__/**',
   '**/*.{macos,windows}.js',
+
+  // TODO(T210505449): Enable remaining library entry points
+  'packages/react-native/Libraries/Animated/Animated.js',
+  'packages/react-native/Libraries/StyleSheet/PlatformColorValueTypesIOS.js',
+  'packages/react-native/Libraries/StyleSheet/processColor.js',
+  'packages/react-native/Libraries/StyleSheet/StyleSheet.js',
+  'packages/react-native/Libraries/Components/TextInput/TextInput.js',
+  'packages/react-native/Libraries/Components/TextInput/InputAccessoryView.js',
 ];
 
-const ENTRY_POINTS = [
-  // TODO: Re-include when all deps are translatable
-  // 'packages/react-native/Libraries/ActionSheetIOS/ActionSheetIOS.js',
-  'packages/react-native/Libraries/Alert/Alert.js',
-  'packages/react-native/Libraries/Components/ToastAndroid/ToastAndroid.js',
-  'packages/react-native/Libraries/Settings/Settings.js',
-  'packages/react-native/Libraries/Share/Share.js',
-];
+const ENTRY_POINTS = ['packages/react-native/index.js.flow'];
 
 /**
  * [Experimental] Build generated TypeScript types for react-native.
@@ -41,14 +42,16 @@ async function buildTypes(): Promise<void> {
     ENTRY_POINTS.map(file => path.join(REPO_ROOT, file)),
   );
   const translatedFiles = new Set<string>();
+  const dependencyEdges: DependencyEdges = [];
 
   while (files.size > 0) {
-    const dependencies = await translateSourceFiles(files);
+    const dependencies = await translateSourceFiles(dependencyEdges, files);
+    dependencyEdges.push(...dependencies);
 
-    translatedFiles.add(...files);
+    files.forEach(file => translatedFiles.add(file));
     files.clear();
 
-    for (const dep of dependencies) {
+    for (const [, dep] of dependencies) {
       if (
         !translatedFiles.has(dep) &&
         !IGNORE_PATTERNS.some(pattern => micromatch.isMatch(dep, pattern))
@@ -58,54 +61,20 @@ async function buildTypes(): Promise<void> {
     }
   }
 
-  await translateSourceFiles(files);
+  await fs.copyFile(
+    path.join(__dirname, 'templates/tsconfig.json'),
+    path.join(PACKAGES_DIR, 'react-native', OUTPUT_DIR, 'tsconfig.json'),
+  );
 }
 
+type DependencyEdges = Array<[string, string]>;
+
 async function translateSourceFiles(
-  inputFiles: $ReadOnlySet<string>,
-): Promise<Set<string>> {
+  dependencyEdges: DependencyEdges,
+  inputFiles: Iterable<string>,
+): Promise<DependencyEdges> {
   const files = new Set<string>([...inputFiles]);
-
-  // Require common interface file (js.flow) or base implementation (.js) for
-  // platform-specific files (.android.js or .ios.js)
-  for (const file of files) {
-    const [pathWithoutExt, extension] = splitPathAndExtension(file);
-
-    if (/(\.android\.js|\.ios\.js)$/.test(extension)) {
-      files.delete(file);
-
-      let resolved = false;
-
-      for (const ext of ['.js.flow', '.js']) {
-        let interfaceFile = pathWithoutExt + ext;
-
-        if (files.has(interfaceFile)) {
-          resolved = true;
-          break;
-        }
-
-        if (existsSync(interfaceFile)) {
-          files.add(interfaceFile);
-          resolved = true;
-          debug(
-            'Resolved %s to %s',
-            path.relative(REPO_ROOT, file),
-            path.relative(REPO_ROOT, interfaceFile),
-          );
-          break;
-        }
-      }
-
-      if (!resolved) {
-        throw new Error(
-          `No common interface found for ${file}.[android|ios].js. This ` +
-            'should either be a base .js implementation or a .js.flow interface file.',
-        );
-      }
-    }
-  }
-
-  const dependencies = new Set<string>();
+  const dependencies: DependencyEdges = [];
 
   await Promise.all(
     Array.from(files).map(async file => {
@@ -117,7 +86,7 @@ async function translateSourceFiles(
           await translateSourceFile(source, file);
 
         for (const dep of fileDeps) {
-          dependencies.add(dep);
+          dependencies.push([file, dep]);
         }
 
         await fs.mkdir(path.dirname(buildPath), {recursive: true});
@@ -126,10 +95,18 @@ async function translateSourceFiles(
           translatedModuleTemplate({
             originalFileName: path.relative(REPO_ROOT, file),
             source: stripDocblock(typescriptDef),
+            tripleSlashDirectives: extractTripleSlashDirectives(source),
           }),
         );
       } catch (e) {
         console.error(`Failed to build ${path.relative(REPO_ROOT, file)}\n`, e);
+        const requireStack = getRequireStack(dependencyEdges, file);
+        if (requireStack.length > 0) {
+          console.error('Require stack:');
+          for (const stackEntry of requireStack) {
+            console.error(`- ${stackEntry}`);
+          }
+        }
       }
     }),
   );
@@ -153,17 +130,18 @@ function getBuildPath(file: string): string {
   );
 }
 
-function splitPathAndExtension(file: string): [string, string] {
-  const lastSep = file.lastIndexOf(path.sep);
-  const extensionStart = file.indexOf('.', lastSep);
-  return [
-    file.substring(0, extensionStart),
-    file.substring(extensionStart, file.length),
-  ];
-}
-
 function stripDocblock(source: string): string {
   return source.replace(/\/\*\*[\s\S]*?\*\/\n/, '');
+}
+
+function extractTripleSlashDirectives(source: string): Array<string> {
+  const directives = source.match(/^\/\/\/.*$/gm);
+
+  if (directives == null) {
+    return [];
+  }
+
+  return directives.map(directive => directive.replace(/^\/\/\//g, '').trim());
 }
 
 module.exports = buildTypes;

@@ -8,10 +8,8 @@
  * @flow
  */
 
-import type {
-  HostInstance,
-  TouchedViewDataAtPoint,
-} from '../../../Libraries/Renderer/shims/ReactNativeTypes';
+import type {TouchedViewDataAtPoint} from '../../../Libraries/Renderer/shims/ReactNativeTypes';
+import type {HostInstance} from '../types/HostInstance';
 
 const invariant = require('invariant');
 
@@ -28,14 +26,14 @@ export type ReactRenderer = {
 };
 type AttachedRendererEventPayload = {id: number, renderer: ReactRenderer};
 
-const reactDevToolsHook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+const reactDevToolsHook = (window: any).__REACT_DEVTOOLS_GLOBAL_HOOK__;
 invariant(
   Boolean(reactDevToolsHook),
   'getInspectorDataForViewAtPoint should not be used if React DevTools hook is not injected',
 );
 
 const renderers: Array<ReactRenderer> = Array.from(
-  window.__REACT_DEVTOOLS_GLOBAL_HOOK__.renderers.values(),
+  (window: any).__REACT_DEVTOOLS_GLOBAL_HOOK__.renderers.values(),
 );
 
 const appendRenderer = ({renderer}: AttachedRendererEventPayload) =>

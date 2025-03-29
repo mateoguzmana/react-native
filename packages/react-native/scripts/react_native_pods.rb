@@ -8,6 +8,7 @@ require 'open3'
 require 'pathname'
 require_relative './react_native_pods_utils/script_phases.rb'
 require_relative './cocoapods/jsengine.rb'
+require_relative './cocoapods/rndependencies.rb'
 require_relative './cocoapods/fabric.rb'
 require_relative './cocoapods/codegen.rb'
 require_relative './cocoapods/codegen_utils.rb'
@@ -100,6 +101,9 @@ def use_react_native! (
 
   ReactNativePodsUtils.warn_if_not_on_arm64()
 
+  # Update ReactNativeDependencies so that we can easily switch between source and prebuilt
+  ReactNativeDependenciesUtils.setup_react_native_dependencies(prefix, react_native_version)
+
   Pod::UI.puts "Configuring the target with the #{new_arch_enabled ? "New" : "Legacy"} Architecture\n"
 
   # The Pods which should be included in all projects
@@ -109,6 +113,7 @@ def use_react_native! (
   pod 'React', :path => "#{prefix}/"
   pod 'React-Core', :path => "#{prefix}/"
   pod 'React-CoreModules', :path => "#{prefix}/React/CoreModules"
+  pod 'React-RCTRuntime', :path => "#{prefix}/React/Runtime"
   pod 'React-RCTAppDelegate', :path => "#{prefix}/Libraries/AppDelegate"
   pod 'React-RCTActionSheet', :path => "#{prefix}/Libraries/ActionSheetIOS"
   pod 'React-RCTAnimation', :path => "#{prefix}/Libraries/NativeAnimation"
@@ -134,6 +139,7 @@ def use_react_native! (
   pod 'React-jserrorhandler', :path => "#{prefix}/ReactCommon/jserrorhandler"
   pod 'RCTDeprecation', :path => "#{prefix}/ReactApple/Libraries/RCTFoundation/RCTDeprecation"
   pod 'React-RCTFBReactNativeSpec', :path => "#{prefix}/React"
+  pod 'React-jsi', :path => "#{prefix}/ReactCommon/jsi"
 
   if hermes_enabled
     setup_hermes!(:react_native_path => prefix)
@@ -143,6 +149,9 @@ def use_react_native! (
 
   pod 'React-jsiexecutor', :path => "#{prefix}/ReactCommon/jsiexecutor"
   pod 'React-jsinspector', :path => "#{prefix}/ReactCommon/jsinspector-modern"
+  pod 'React-jsitooling', :path => "#{prefix}/ReactCommon/jsitooling"
+  pod 'React-jsinspectorcdp', :path => "#{prefix}/ReactCommon/jsinspector-modern/cdp"
+  pod 'React-jsinspectornetwork', :path => "#{prefix}/ReactCommon/jsinspector-modern/network"
   pod 'React-jsinspectortracing', :path => "#{prefix}/ReactCommon/jsinspector-modern/tracing"
 
   pod 'React-callinvoker', :path => "#{prefix}/ReactCommon/callinvoker"
@@ -150,20 +159,26 @@ def use_react_native! (
   pod 'React-timing', :path => "#{prefix}/ReactCommon/react/timing"
   pod 'React-runtimeexecutor', :path => "#{prefix}/ReactCommon/runtimeexecutor"
   pod 'React-runtimescheduler', :path => "#{prefix}/ReactCommon/react/renderer/runtimescheduler"
+  pod 'React-renderercss', :path => "#{prefix}/ReactCommon/react/renderer/css"
   pod 'React-rendererdebug', :path => "#{prefix}/ReactCommon/react/renderer/debug"
   pod 'React-rendererconsistency', :path => "#{prefix}/ReactCommon/react/renderer/consistency"
   pod 'React-perflogger', :path => "#{prefix}/ReactCommon/reactperflogger"
+  pod 'React-oscompat', :path => "#{prefix}/ReactCommon/oscompat"
   pod 'React-logger', :path => "#{prefix}/ReactCommon/logger"
   pod 'ReactCommon/turbomodule/core', :path => "#{prefix}/ReactCommon", :modular_headers => true
   pod 'React-NativeModulesApple', :path => "#{prefix}/ReactCommon/react/nativemodule/core/platform/ios", :modular_headers => true
   pod 'Yoga', :path => "#{prefix}/ReactCommon/yoga", :modular_headers => true
 
-  pod 'DoubleConversion', :podspec => "#{prefix}/third-party-podspecs/DoubleConversion.podspec"
-  pod 'glog', :podspec => "#{prefix}/third-party-podspecs/glog.podspec"
-  pod 'boost', :podspec => "#{prefix}/third-party-podspecs/boost.podspec"
-  pod 'fast_float', :podspec => "#{prefix}/third-party-podspecs/fast_float.podspec"
-  pod 'fmt', :podspec => "#{prefix}/third-party-podspecs/fmt.podspec"
-  pod 'RCT-Folly', :podspec => "#{prefix}/third-party-podspecs/RCT-Folly.podspec", :modular_headers => true
+  if ReactNativeDependenciesUtils.build_react_native_deps_from_source()
+    pod 'DoubleConversion', :podspec => "#{prefix}/third-party-podspecs/DoubleConversion.podspec"
+    pod 'glog', :podspec => "#{prefix}/third-party-podspecs/glog.podspec"
+    pod 'boost', :podspec => "#{prefix}/third-party-podspecs/boost.podspec"
+    pod 'fast_float', :podspec => "#{prefix}/third-party-podspecs/fast_float.podspec"
+    pod 'fmt', :podspec => "#{prefix}/third-party-podspecs/fmt.podspec"
+    pod 'RCT-Folly', :podspec => "#{prefix}/third-party-podspecs/RCT-Folly.podspec", :modular_headers => true
+  else
+    pod 'ReactNativeDependencies', :podspec => "#{prefix}/third-party-podspecs/ReactNativeDependencies.podspec", :modular_headers => true
+  end
 
   folly_config = get_folly_config()
   run_codegen!(
@@ -367,6 +382,17 @@ def rct_cxx_language_standard()
   return Helpers::Constants.cxx_language_standard
 end
 
+def print_jsc_removal_message()
+  puts ''
+  puts '=============== JavaScriptCore is being moved ==============='.yellow
+  puts 'JavaScriptCore has been extracted from react-native core'.yellow
+  puts 'and will be removed in a future release. It can now be'.yellow
+  puts 'installed from `@react-native-community/javascriptcore`'.yellow
+  puts 'See: https://github.com/react-native-community/javascriptcore'.yellow
+  puts '============================================================='.yellow
+  puts ''
+end
+
 def print_cocoapods_deprecation_message()
   if ENV["RCT_IGNORE_PODS_DEPRECATION"] == "1"
     return
@@ -403,13 +429,13 @@ def react_native_post_install(
 
   ReactNativePodsUtils.apply_mac_catalyst_patches(installer) if mac_catalyst_enabled
 
-  fabric_enabled = ENV['RCT_FABRIC_ENABLED'] == '1'
   hermes_enabled = ENV['USE_HERMES'] == '1'
   privacy_file_aggregation_enabled = ENV['RCT_AGGREGATE_PRIVACY_FILES'] == '1'
 
   if hermes_enabled
     ReactNativePodsUtils.set_gcc_preprocessor_definition_for_React_hermes(installer)
   end
+  ReactNativePodsUtils.set_gcc_preprocessor_definition_for_debugger(installer)
 
   ReactNativePodsUtils.fix_library_search_paths(installer)
   ReactNativePodsUtils.update_search_paths(installer)
@@ -434,6 +460,11 @@ def react_native_post_install(
 
   NewArchitectureHelper.set_clang_cxx_language_standard_if_needed(installer)
   NewArchitectureHelper.modify_flags_for_new_architecture(installer, NewArchitectureHelper.new_arch_enabled)
+  NewArchitectureHelper.set_RCTNewArchEnabled_in_info_plist(installer, NewArchitectureHelper.new_arch_enabled)
+
+  if ENV['USE_HERMES'] == '0' && ENV['USE_THIRD_PARTY_JSC'] != '1'
+    print_jsc_removal_message()
+  end
 
   print_cocoapods_deprecation_message
   Pod::UI.puts "Pod install took #{Time.now.to_i - $START_TIME} [s] to run".green

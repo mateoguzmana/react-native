@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<388b3ed59d34f964d667ed641f270738>>
+ * @generated SignedSource<<1465adf7db643faefb579cafd9ef9dcf>>
  */
 
 /**
@@ -39,6 +39,10 @@ class NativeReactNativeFeatureFlags
 
   bool commonTestFlagWithoutNativeImplementation(jsi::Runtime& runtime);
 
+  bool animatedShouldSignalBatch(jsi::Runtime& runtime);
+
+  bool cxxNativeAnimatedEnabled(jsi::Runtime& runtime);
+
   bool disableMountItemReorderingAndroid(jsi::Runtime& runtime);
 
   bool enableAccumulatedUpdatesInRawPropsAndroid(jsi::Runtime& runtime);
@@ -49,15 +53,9 @@ class NativeReactNativeFeatureFlags
 
   bool enableEagerRootViewAttachment(jsi::Runtime& runtime);
 
-  bool enableEventEmitterRetentionDuringGesturesOnAndroid(jsi::Runtime& runtime);
-
   bool enableFabricLogs(jsi::Runtime& runtime);
 
   bool enableFabricRenderer(jsi::Runtime& runtime);
-
-  bool enableFixForViewCommandRace(jsi::Runtime& runtime);
-
-  bool enableGranularShadowTreeStateReconciliation(jsi::Runtime& runtime);
 
   bool enableIOSViewClipToPaddingBox(jsi::Runtime& runtime);
 
@@ -71,9 +69,11 @@ class NativeReactNativeFeatureFlags
 
   bool enableLongTaskAPI(jsi::Runtime& runtime);
 
-  bool enableNewBackgroundAndBorderDrawables(jsi::Runtime& runtime);
+  bool enableMainQueueModulesOnIOS(jsi::Runtime& runtime);
 
-  bool enablePreciseSchedulingForPremountItemsOnAndroid(jsi::Runtime& runtime);
+  bool enableNativeCSSParsing(jsi::Runtime& runtime);
+
+  bool enableNewBackgroundAndBorderDrawables(jsi::Runtime& runtime);
 
   bool enablePropsUpdateReconciliationAndroid(jsi::Runtime& runtime);
 
@@ -91,10 +91,6 @@ class NativeReactNativeFeatureFlags
 
   bool enableViewRecyclingForView(jsi::Runtime& runtime);
 
-  bool excludeYogaFromRawProps(jsi::Runtime& runtime);
-
-  bool fixDifferentiatorEmittingUpdatesWithWrongParentTag(jsi::Runtime& runtime);
-
   bool fixMappingOfEventPrioritiesBetweenFabricAndReact(jsi::Runtime& runtime);
 
   bool fixMountingCoordinatorReportedPendingTransactionsOnAndroid(jsi::Runtime& runtime);
@@ -103,7 +99,9 @@ class NativeReactNativeFeatureFlags
 
   bool fuseboxNetworkInspectionEnabled(jsi::Runtime& runtime);
 
-  bool lazyAnimationCallbacks(jsi::Runtime& runtime);
+  bool removeTurboModuleManagerDelegateMutex(jsi::Runtime& runtime);
+
+  bool throwExceptionInsteadOfDeadlockOnTurboModuleSetupDuringSyncRenderIOS(jsi::Runtime& runtime);
 
   bool traceTurboModulePromiseRejectionsOnAndroid(jsi::Runtime& runtime);
 

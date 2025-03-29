@@ -32,7 +32,6 @@
     "outputName": "js-test-results.xml"
   },
   "files": [
-    "android",
     "build.gradle.kts",
     "cli.js",
     "flow",
@@ -108,13 +107,13 @@
   },
   "dependencies": {
     "@jest/create-cache-key-function": "^29.7.0",
-    "@react-native/assets-registry": "0.79.0-main",
-    "@react-native/codegen": "0.79.0-main",
-    "@react-native/community-cli-plugin": "0.79.0-main",
-    "@react-native/gradle-plugin": "0.79.0-main",
-    "@react-native/js-polyfills": "0.79.0-main",
-    "@react-native/normalize-colors": "0.79.0-main",
-    "@react-native/virtualized-lists": "0.79.0-main",
+    "@react-native/assets-registry": "0.80.0-main",
+    "@react-native/codegen": "0.80.0-main",
+    "@react-native/community-cli-plugin": "0.80.0-main",
+    "@react-native/gradle-plugin": "0.80.0-main",
+    "@react-native/js-polyfills": "0.80.0-main",
+    "@react-native/normalize-colors": "0.80.0-main",
+    "@react-native/virtualized-lists": "0.80.0-main",
     "abort-controller": "^3.0.0",
     "anser": "^1.4.9",
     "ansi-regex": "^5.0.0",
@@ -129,12 +128,12 @@
     "invariant": "^2.2.4",
     "jest-environment-node": "^29.7.0",
     "memoize-one": "^5.0.0",
-    "metro-runtime": "^0.81.0",
-    "metro-source-map": "^0.81.0",
+    "metro-runtime": "^0.82.0",
+    "metro-source-map": "^0.82.0",
     "nullthrows": "^1.1.1",
     "pretty-format": "^29.7.0",
     "promise": "^8.3.0",
-    "react-devtools-core": "^6.1.0",
+    "react-devtools-core": "^6.1.1",
     "react-refresh": "^0.14.0",
     "regenerator-runtime": "^0.13.2",
     "scheduler": "0.25.0",
@@ -149,7 +148,28 @@
       {
         "name": "FBReactNativeSpec",
         "type": "modules",
-        "ios": {},
+        "ios": {
+          "modules": {
+            "AccessibilityManager": {
+              "unstableRequiresMainQueueSetup": true
+            },
+            "Appearance": {
+              "unstableRequiresMainQueueSetup": true
+            },
+            "AppState": {
+              "unstableRequiresMainQueueSetup": true
+            },
+            "DeviceInfo": {
+              "unstableRequiresMainQueueSetup": true
+            },
+            "PlatformConstants": {
+              "unstableRequiresMainQueueSetup": true
+            },
+            "StatusBarManager": {
+              "unstableRequiresMainQueueSetup": true
+            }
+          }
+        },
         "android": {},
         "jsSrcsDir": "src"
       },

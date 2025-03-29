@@ -24,6 +24,7 @@ import {
   useCallback,
   useEffect,
   useInsertionEffect,
+  useMemo,
   useReducer,
   useRef,
 } from 'react';
@@ -51,6 +52,31 @@ export default function createAnimatedPropsHook(
 ): AnimatedPropsHook {
   const useAnimatedPropsMemo = createAnimatedPropsMemoHook(allowlist);
 
+  const useNativePropsInFabric =
+    ReactNativeFeatureFlags.shouldUseSetNativePropsInFabric();
+
+  const useNativeAnimatedEvents: <TProps: {...}>(
+    node: AnimatedProps,
+    props: TProps,
+  ) => $ReadOnlyArray<[string, AnimatedEvent]> =
+    ReactNativeFeatureFlags.avoidAnimatedRefInvalidation()
+      ? function useNativeAnimatedEventsFromAnimatedProps(node, props) {
+          return useMemo(() => node.__getNativeAnimatedEventTuples(), [node]);
+        }
+      : function useNativeAnimatedEventsFromProps(node, props) {
+          return useMemo(() => {
+            const tuples = [];
+            for (const propName in props) {
+              // $FlowFixMe[invalid-computed-prop]
+              const propValue = props[propName];
+              if (propValue instanceof AnimatedEvent && propValue.__isNative) {
+                tuples.push([propName, propValue]);
+              }
+            }
+            return tuples;
+          }, [props]);
+        };
+
   return function useAnimatedProps<TProps: {...}, TInstance>(
     props: TProps,
   ): [ReducedProps<TProps>, CallbackRef<TInstance | null>] {
@@ -62,9 +88,6 @@ export default function createAnimatedPropsHook(
       () => new AnimatedProps(props, () => onUpdateRef.current?.(), allowlist),
       props,
     );
-
-    const useNativePropsInFabric =
-      ReactNativeFeatureFlags.shouldUseSetNativePropsInFabric();
 
     useEffect(() => {
       // If multiple components call `flushQueue`, the first one will flush the
@@ -95,6 +118,8 @@ export default function createAnimatedPropsHook(
 
     useAnimatedPropsLifecycle(node);
 
+    const eventTuples = useNativeAnimatedEvents(node, props);
+
     // TODO: This "effect" does three things:
     //
     //   1) Call `setNativeView`.
@@ -112,6 +137,7 @@ export default function createAnimatedPropsHook(
       (instance: TInstance) => {
         // NOTE: This may be called more often than necessary (e.g. when `props`
         // changes), but `setNativeView` already optimizes for that.
+        // $FlowFixMe[incompatible-call]
         node.setNativeView(instance);
 
         // NOTE: When using the JS animation driver, this callback is called on
@@ -182,24 +208,18 @@ export default function createAnimatedPropsHook(
         };
 
         const target = getEventTarget(instance);
-        const events = [];
         const animatedValueListeners: AnimatedValueListeners = [];
 
-        for (const propName in props) {
-          // $FlowFixMe[invalid-computed-prop]
-          const propValue = props[propName];
-          if (propValue instanceof AnimatedEvent && propValue.__isNative) {
-            propValue.__attach(target, propName);
-            events.push([propName, propValue]);
-            // $FlowFixMe[incompatible-call] - the `addListenersToPropsValue` drills down the propValue.
-            addListenersToPropsValue(propValue, animatedValueListeners);
-          }
+        for (const [propName, propValue] of eventTuples) {
+          propValue.__attach(target, propName);
+          // $FlowFixMe[incompatible-call] - the `addListenersToPropsValue` drills down the propValue.
+          addListenersToPropsValue(propValue, animatedValueListeners);
         }
 
         return () => {
           onUpdateRef.current = null;
 
-          for (const [propName, propValue] of events) {
+          for (const [propName, propValue] of eventTuples) {
             propValue.__detach(target, propName);
           }
 
@@ -208,7 +228,7 @@ export default function createAnimatedPropsHook(
           }
         };
       },
-      [node, useNativePropsInFabric, props],
+      [eventTuples, node],
     );
     const callbackRef = useRefEffect<TInstance>(refEffect);
 

@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<13d834955b12d1660fa4f64d5454a136>>
+ * @generated SignedSource<<ca15768ea69f30904f9f6453287ca834>>
  */
 
 /**
@@ -33,24 +33,24 @@ class ReactNativeFeatureFlagsAccessor {
   ReactNativeFeatureFlagsAccessor();
 
   bool commonTestFlag();
+  bool animatedShouldSignalBatch();
+  bool cxxNativeAnimatedEnabled();
   bool disableMountItemReorderingAndroid();
   bool enableAccumulatedUpdatesInRawPropsAndroid();
   bool enableBridgelessArchitecture();
   bool enableCppPropsIteratorSetter();
   bool enableEagerRootViewAttachment();
-  bool enableEventEmitterRetentionDuringGesturesOnAndroid();
   bool enableFabricLogs();
   bool enableFabricRenderer();
-  bool enableFixForViewCommandRace();
-  bool enableGranularShadowTreeStateReconciliation();
   bool enableIOSViewClipToPaddingBox();
   bool enableImagePrefetchingAndroid();
   bool enableJSRuntimeGCOnMemoryPressureOnIOS();
   bool enableLayoutAnimationsOnAndroid();
   bool enableLayoutAnimationsOnIOS();
   bool enableLongTaskAPI();
+  bool enableMainQueueModulesOnIOS();
+  bool enableNativeCSSParsing();
   bool enableNewBackgroundAndBorderDrawables();
-  bool enablePreciseSchedulingForPremountItemsOnAndroid();
   bool enablePropsUpdateReconciliationAndroid();
   bool enableReportEventPaintTime();
   bool enableSynchronousStateUpdates();
@@ -59,13 +59,12 @@ class ReactNativeFeatureFlagsAccessor {
   bool enableViewRecycling();
   bool enableViewRecyclingForText();
   bool enableViewRecyclingForView();
-  bool excludeYogaFromRawProps();
-  bool fixDifferentiatorEmittingUpdatesWithWrongParentTag();
   bool fixMappingOfEventPrioritiesBetweenFabricAndReact();
   bool fixMountingCoordinatorReportedPendingTransactionsOnAndroid();
   bool fuseboxEnabledRelease();
   bool fuseboxNetworkInspectionEnabled();
-  bool lazyAnimationCallbacks();
+  bool removeTurboModuleManagerDelegateMutex();
+  bool throwExceptionInsteadOfDeadlockOnTurboModuleSetupDuringSyncRenderIOS();
   bool traceTurboModulePromiseRejectionsOnAndroid();
   bool useAlwaysAvailableJSErrorHandling();
   bool useEditTextStockAndroidFocusBehavior();
@@ -86,27 +85,27 @@ class ReactNativeFeatureFlagsAccessor {
   std::unique_ptr<ReactNativeFeatureFlagsProvider> currentProvider_;
   bool wasOverridden_;
 
-  std::array<std::atomic<const char*>, 43> accessedFeatureFlags_;
+  std::array<std::atomic<const char*>, 42> accessedFeatureFlags_;
 
   std::atomic<std::optional<bool>> commonTestFlag_;
+  std::atomic<std::optional<bool>> animatedShouldSignalBatch_;
+  std::atomic<std::optional<bool>> cxxNativeAnimatedEnabled_;
   std::atomic<std::optional<bool>> disableMountItemReorderingAndroid_;
   std::atomic<std::optional<bool>> enableAccumulatedUpdatesInRawPropsAndroid_;
   std::atomic<std::optional<bool>> enableBridgelessArchitecture_;
   std::atomic<std::optional<bool>> enableCppPropsIteratorSetter_;
   std::atomic<std::optional<bool>> enableEagerRootViewAttachment_;
-  std::atomic<std::optional<bool>> enableEventEmitterRetentionDuringGesturesOnAndroid_;
   std::atomic<std::optional<bool>> enableFabricLogs_;
   std::atomic<std::optional<bool>> enableFabricRenderer_;
-  std::atomic<std::optional<bool>> enableFixForViewCommandRace_;
-  std::atomic<std::optional<bool>> enableGranularShadowTreeStateReconciliation_;
   std::atomic<std::optional<bool>> enableIOSViewClipToPaddingBox_;
   std::atomic<std::optional<bool>> enableImagePrefetchingAndroid_;
   std::atomic<std::optional<bool>> enableJSRuntimeGCOnMemoryPressureOnIOS_;
   std::atomic<std::optional<bool>> enableLayoutAnimationsOnAndroid_;
   std::atomic<std::optional<bool>> enableLayoutAnimationsOnIOS_;
   std::atomic<std::optional<bool>> enableLongTaskAPI_;
+  std::atomic<std::optional<bool>> enableMainQueueModulesOnIOS_;
+  std::atomic<std::optional<bool>> enableNativeCSSParsing_;
   std::atomic<std::optional<bool>> enableNewBackgroundAndBorderDrawables_;
-  std::atomic<std::optional<bool>> enablePreciseSchedulingForPremountItemsOnAndroid_;
   std::atomic<std::optional<bool>> enablePropsUpdateReconciliationAndroid_;
   std::atomic<std::optional<bool>> enableReportEventPaintTime_;
   std::atomic<std::optional<bool>> enableSynchronousStateUpdates_;
@@ -115,13 +114,12 @@ class ReactNativeFeatureFlagsAccessor {
   std::atomic<std::optional<bool>> enableViewRecycling_;
   std::atomic<std::optional<bool>> enableViewRecyclingForText_;
   std::atomic<std::optional<bool>> enableViewRecyclingForView_;
-  std::atomic<std::optional<bool>> excludeYogaFromRawProps_;
-  std::atomic<std::optional<bool>> fixDifferentiatorEmittingUpdatesWithWrongParentTag_;
   std::atomic<std::optional<bool>> fixMappingOfEventPrioritiesBetweenFabricAndReact_;
   std::atomic<std::optional<bool>> fixMountingCoordinatorReportedPendingTransactionsOnAndroid_;
   std::atomic<std::optional<bool>> fuseboxEnabledRelease_;
   std::atomic<std::optional<bool>> fuseboxNetworkInspectionEnabled_;
-  std::atomic<std::optional<bool>> lazyAnimationCallbacks_;
+  std::atomic<std::optional<bool>> removeTurboModuleManagerDelegateMutex_;
+  std::atomic<std::optional<bool>> throwExceptionInsteadOfDeadlockOnTurboModuleSetupDuringSyncRenderIOS_;
   std::atomic<std::optional<bool>> traceTurboModulePromiseRejectionsOnAndroid_;
   std::atomic<std::optional<bool>> useAlwaysAvailableJSErrorHandling_;
   std::atomic<std::optional<bool>> useEditTextStockAndroidFocusBehavior_;

@@ -67,11 +67,8 @@ export function createNativeFlagGetter<K: $Keys<NativeFeatureFlags>>(
   return createGetter(
     configName,
     () => {
-      const valueFromNative = NativeReactNativeFeatureFlags?.[configName]?.();
-      if (valueFromNative == null && !skipUnavailableNativeModuleError) {
-        logUnavailableNativeModuleError(configName);
-      }
-      return valueFromNative;
+      maybeLogUnavailableNativeModuleError(configName);
+      return NativeReactNativeFeatureFlags?.[configName]?.();
     },
     defaultValue,
   );
@@ -99,9 +96,17 @@ export function setOverrides(
 }
 
 const reportedConfigNames: Set<string> = new Set();
+const hasTurboModules =
+  global.RN$Bridgeless === true || global.__turboModuleProxy != null;
 
-function logUnavailableNativeModuleError(configName: string): void {
-  if (!reportedConfigNames.has(configName)) {
+function maybeLogUnavailableNativeModuleError(configName: string): void {
+  if (
+    !NativeReactNativeFeatureFlags &&
+    // Don't log more than once per config
+    !reportedConfigNames.has(configName) &&
+    // Don't log in the legacy architecture.
+    hasTurboModules
+  ) {
     reportedConfigNames.add(configName);
     console.error(
       `Could not access feature flag '${configName}' because native module method was not available`,

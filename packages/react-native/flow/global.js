@@ -15,6 +15,7 @@
  * when defining the types here. Consider both presence (`?`) as well as
  * writeability (`+`) when defining types.
  */
+// $FlowFixMe[libdef-override]
 declare var global: {
   // setUpGlobals
   +window: typeof global,
@@ -85,3 +86,5 @@ declare var global: {
   // Undeclared properties are implicitly `any`.
   [string | symbol]: any,
 };
+
+type $PropertyType<T, K> = T[K];

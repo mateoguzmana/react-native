@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<38cbef40f99ede9ea9a98d9987f978c0>>
+ * @generated SignedSource<<cef4c40e8e1b2064065f5c835b940db2>>
  */
 
 /**
@@ -26,24 +26,24 @@ class ReactNativeFeatureFlagsProvider {
   virtual ~ReactNativeFeatureFlagsProvider() = default;
 
   virtual bool commonTestFlag() = 0;
+  virtual bool animatedShouldSignalBatch() = 0;
+  virtual bool cxxNativeAnimatedEnabled() = 0;
   virtual bool disableMountItemReorderingAndroid() = 0;
   virtual bool enableAccumulatedUpdatesInRawPropsAndroid() = 0;
   virtual bool enableBridgelessArchitecture() = 0;
   virtual bool enableCppPropsIteratorSetter() = 0;
   virtual bool enableEagerRootViewAttachment() = 0;
-  virtual bool enableEventEmitterRetentionDuringGesturesOnAndroid() = 0;
   virtual bool enableFabricLogs() = 0;
   virtual bool enableFabricRenderer() = 0;
-  virtual bool enableFixForViewCommandRace() = 0;
-  virtual bool enableGranularShadowTreeStateReconciliation() = 0;
   virtual bool enableIOSViewClipToPaddingBox() = 0;
   virtual bool enableImagePrefetchingAndroid() = 0;
   virtual bool enableJSRuntimeGCOnMemoryPressureOnIOS() = 0;
   virtual bool enableLayoutAnimationsOnAndroid() = 0;
   virtual bool enableLayoutAnimationsOnIOS() = 0;
   virtual bool enableLongTaskAPI() = 0;
+  virtual bool enableMainQueueModulesOnIOS() = 0;
+  virtual bool enableNativeCSSParsing() = 0;
   virtual bool enableNewBackgroundAndBorderDrawables() = 0;
-  virtual bool enablePreciseSchedulingForPremountItemsOnAndroid() = 0;
   virtual bool enablePropsUpdateReconciliationAndroid() = 0;
   virtual bool enableReportEventPaintTime() = 0;
   virtual bool enableSynchronousStateUpdates() = 0;
@@ -52,13 +52,12 @@ class ReactNativeFeatureFlagsProvider {
   virtual bool enableViewRecycling() = 0;
   virtual bool enableViewRecyclingForText() = 0;
   virtual bool enableViewRecyclingForView() = 0;
-  virtual bool excludeYogaFromRawProps() = 0;
-  virtual bool fixDifferentiatorEmittingUpdatesWithWrongParentTag() = 0;
   virtual bool fixMappingOfEventPrioritiesBetweenFabricAndReact() = 0;
   virtual bool fixMountingCoordinatorReportedPendingTransactionsOnAndroid() = 0;
   virtual bool fuseboxEnabledRelease() = 0;
   virtual bool fuseboxNetworkInspectionEnabled() = 0;
-  virtual bool lazyAnimationCallbacks() = 0;
+  virtual bool removeTurboModuleManagerDelegateMutex() = 0;
+  virtual bool throwExceptionInsteadOfDeadlockOnTurboModuleSetupDuringSyncRenderIOS() = 0;
   virtual bool traceTurboModulePromiseRejectionsOnAndroid() = 0;
   virtual bool useAlwaysAvailableJSErrorHandling() = 0;
   virtual bool useEditTextStockAndroidFocusBehavior() = 0;

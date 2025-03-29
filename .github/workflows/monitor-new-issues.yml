@@ -2,7 +2,7 @@ name: Monitor React Native New Issues
 
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 0,6,12,18 * * *"
   workflow_dispatch:
 
 jobs:
@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: '20'
       - name: Monitor New Issues
-        uses: react-native-community/repo-monitor@v1.0.0
+        uses: react-native-community/repo-monitor@v1.0.1
         with:
           task: "monitor-issues"
           git_secret: ${{ secrets.GITHUB_TOKEN }}
@@ -24,4 +24,4 @@ jobs:
           repo_name: "react-native"
           discord_webhook_url: "${{ secrets.DISCORD_WEBHOOK_URL }}"
           discord_id_type: "role"
-          discord_ids: "1295340673779630141"
+          discord_ids: "1339243367841927228"

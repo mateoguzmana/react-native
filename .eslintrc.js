@@ -74,6 +74,7 @@ module.exports = {
         'lint/no-haste-imports': 2,
         'lint/no-react-native-imports': 2,
         'lint/require-extends-error': 2,
+        'lint/no-react-node-imports': 2,
       },
     },
     {
@@ -122,6 +123,12 @@ module.exports = {
           'error',
           {followExactOptionalPropertyTypes: true},
         ],
+      },
+    },
+    {
+      files: ['**/*-itest{.fb,}.js'],
+      rules: {
+        'lint/no-react-native-imports': 'off',
       },
     },
   ],

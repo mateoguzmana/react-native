@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<28634dd2fab612ceddaa3c1a39e9c617>>
+ * @generated SignedSource<<a4f3222340cd676eefdd3794d3f1d4da>>
  */
 
 /**
@@ -25,6 +25,10 @@ import com.facebook.proguard.annotations.DoNotStrip
 public interface ReactNativeFeatureFlagsProvider {
   @DoNotStrip public fun commonTestFlag(): Boolean
 
+  @DoNotStrip public fun animatedShouldSignalBatch(): Boolean
+
+  @DoNotStrip public fun cxxNativeAnimatedEnabled(): Boolean
+
   @DoNotStrip public fun disableMountItemReorderingAndroid(): Boolean
 
   @DoNotStrip public fun enableAccumulatedUpdatesInRawPropsAndroid(): Boolean
@@ -35,15 +39,9 @@ public interface ReactNativeFeatureFlagsProvider {
 
   @DoNotStrip public fun enableEagerRootViewAttachment(): Boolean
 
-  @DoNotStrip public fun enableEventEmitterRetentionDuringGesturesOnAndroid(): Boolean
-
   @DoNotStrip public fun enableFabricLogs(): Boolean
 
   @DoNotStrip public fun enableFabricRenderer(): Boolean
-
-  @DoNotStrip public fun enableFixForViewCommandRace(): Boolean
-
-  @DoNotStrip public fun enableGranularShadowTreeStateReconciliation(): Boolean
 
   @DoNotStrip public fun enableIOSViewClipToPaddingBox(): Boolean
 
@@ -57,9 +55,11 @@ public interface ReactNativeFeatureFlagsProvider {
 
   @DoNotStrip public fun enableLongTaskAPI(): Boolean
 
-  @DoNotStrip public fun enableNewBackgroundAndBorderDrawables(): Boolean
+  @DoNotStrip public fun enableMainQueueModulesOnIOS(): Boolean
 
-  @DoNotStrip public fun enablePreciseSchedulingForPremountItemsOnAndroid(): Boolean
+  @DoNotStrip public fun enableNativeCSSParsing(): Boolean
+
+  @DoNotStrip public fun enableNewBackgroundAndBorderDrawables(): Boolean
 
   @DoNotStrip public fun enablePropsUpdateReconciliationAndroid(): Boolean
 
@@ -77,10 +77,6 @@ public interface ReactNativeFeatureFlagsProvider {
 
   @DoNotStrip public fun enableViewRecyclingForView(): Boolean
 
-  @DoNotStrip public fun excludeYogaFromRawProps(): Boolean
-
-  @DoNotStrip public fun fixDifferentiatorEmittingUpdatesWithWrongParentTag(): Boolean
-
   @DoNotStrip public fun fixMappingOfEventPrioritiesBetweenFabricAndReact(): Boolean
 
   @DoNotStrip public fun fixMountingCoordinatorReportedPendingTransactionsOnAndroid(): Boolean
@@ -89,7 +85,9 @@ public interface ReactNativeFeatureFlagsProvider {
 
   @DoNotStrip public fun fuseboxNetworkInspectionEnabled(): Boolean
 
-  @DoNotStrip public fun lazyAnimationCallbacks(): Boolean
+  @DoNotStrip public fun removeTurboModuleManagerDelegateMutex(): Boolean
+
+  @DoNotStrip public fun throwExceptionInsteadOfDeadlockOnTurboModuleSetupDuringSyncRenderIOS(): Boolean
 
   @DoNotStrip public fun traceTurboModulePromiseRejectionsOnAndroid(): Boolean
 

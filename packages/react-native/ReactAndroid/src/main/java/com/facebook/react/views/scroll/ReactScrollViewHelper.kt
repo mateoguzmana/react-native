@@ -312,7 +312,12 @@ public object ReactScrollViewHelper {
       FLog.i(
           TAG, "updateFabricScrollState[%d] scrollX %d scrollY %d", scrollView.id, scrollX, scrollY)
     }
-    if (ViewUtil.getUIManagerType(scrollView.id) == UIManagerType.DEFAULT) {
+    if (ViewUtil.getUIManagerType(scrollView.id) == UIManagerType.LEGACY) {
+      return
+    }
+    // NOTE: if the state wrapper is null, we shouldn't even update
+    // the scroll state because there is a chance of going out of sync!
+    if (scrollView.stateWrapper == null) {
       return
     }
     val scrollState = scrollView.reactScrollViewScrollState
@@ -476,8 +481,7 @@ public object ReactScrollViewHelper {
     public val stateWrapper: StateWrapper?
   }
 
-  private class OverScrollerDurationGetter internal constructor(context: Context?) :
-      OverScroller(context) {
+  private class OverScrollerDurationGetter(context: Context?) : OverScroller(context) {
     // This is the default in AOSP, hardcoded in OverScroller.java.
     private var currentScrollAnimationDuration = 250
     val scrollAnimationDuration: Int

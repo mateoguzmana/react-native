@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<b927f7ca41eb2656f0d1d7b7b4d5356f>>
+ * @generated SignedSource<<db41f69099c193919e931d3879541fe3>>
  */
 
 /**
@@ -31,6 +31,14 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
     return false;
   }
 
+  bool animatedShouldSignalBatch() override {
+    return false;
+  }
+
+  bool cxxNativeAnimatedEnabled() override {
+    return false;
+  }
+
   bool disableMountItemReorderingAndroid() override {
     return false;
   }
@@ -51,23 +59,11 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
     return false;
   }
 
-  bool enableEventEmitterRetentionDuringGesturesOnAndroid() override {
-    return false;
-  }
-
   bool enableFabricLogs() override {
     return false;
   }
 
   bool enableFabricRenderer() override {
-    return false;
-  }
-
-  bool enableFixForViewCommandRace() override {
-    return false;
-  }
-
-  bool enableGranularShadowTreeStateReconciliation() override {
     return false;
   }
 
@@ -95,11 +91,15 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
     return false;
   }
 
-  bool enableNewBackgroundAndBorderDrawables() override {
+  bool enableMainQueueModulesOnIOS() override {
     return false;
   }
 
-  bool enablePreciseSchedulingForPremountItemsOnAndroid() override {
+  bool enableNativeCSSParsing() override {
+    return false;
+  }
+
+  bool enableNewBackgroundAndBorderDrawables() override {
     return false;
   }
 
@@ -135,14 +135,6 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
     return true;
   }
 
-  bool excludeYogaFromRawProps() override {
-    return false;
-  }
-
-  bool fixDifferentiatorEmittingUpdatesWithWrongParentTag() override {
-    return true;
-  }
-
   bool fixMappingOfEventPrioritiesBetweenFabricAndReact() override {
     return false;
   }
@@ -159,7 +151,11 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
     return false;
   }
 
-  bool lazyAnimationCallbacks() override {
+  bool removeTurboModuleManagerDelegateMutex() override {
+    return false;
+  }
+
+  bool throwExceptionInsteadOfDeadlockOnTurboModuleSetupDuringSyncRenderIOS() override {
     return false;
   }
 
@@ -176,7 +172,7 @@ class ReactNativeFeatureFlagsDefaults : public ReactNativeFeatureFlagsProvider {
   }
 
   bool useFabricInterop() override {
-    return false;
+    return true;
   }
 
   bool useNativeViewConfigsInBridgelessMode() override {

@@ -10,11 +10,13 @@
 
 import type {
   HostInstance,
-  INativeMethods,
-  InternalInstanceHandle,
   MeasureInWindowOnSuccessCallback,
   MeasureLayoutOnSuccessCallback,
   MeasureOnSuccessCallback,
+  NativeMethods,
+} from '../../../src/private/types/HostInstance';
+import type {
+  InternalInstanceHandle,
   ViewConfig,
 } from '../../Renderer/shims/ReactNativeTypes';
 
@@ -38,7 +40,7 @@ const noop = () => {};
 /**
  * This is used for refs on host components.
  */
-export default class ReactFabricHostComponent implements INativeMethods {
+export default class ReactFabricHostComponent implements NativeMethods {
   // These need to be accessible from `ReactFabricPublicInstanceUtils`.
   __nativeTag: number;
   __internalInstanceHandle: InternalInstanceHandle;
@@ -56,12 +58,10 @@ export default class ReactFabricHostComponent implements INativeMethods {
   }
 
   blur() {
-    // $FlowFixMe[incompatible-exact] Migrate all usages of `NativeMethods` to an interface to fix this.
     TextInputState.blurTextInput(this);
   }
 
   focus() {
-    // $FlowFixMe[incompatible-exact] Migrate all usages of `NativeMethods` to an interface to fix this.
     TextInputState.focusTextInput(this);
   }
 

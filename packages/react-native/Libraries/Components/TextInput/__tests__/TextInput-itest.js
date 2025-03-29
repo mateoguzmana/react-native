@@ -7,17 +7,16 @@
  * @flow strict-local
  * @format
  * @oncall react_native
- * @fantom_flags enableFixForViewCommandRace:true
- * @fantom_flags enableAccessToHostTreeInFabric:true
  */
 
-import '../../../Core/InitializeCore.js';
-import ensureInstance from '../../../../src/private/utilities/ensureInstance';
-import ReactNativeElement from '../../../../src/private/webapis/dom/nodes/ReactNativeElement';
-import TextInput from '../TextInput';
-import Fantom from '@react-native/fantom';
+import 'react-native/Libraries/Core/InitializeCore';
+
+import ensureInstance from '../../../../src/private/__tests__/utilities/ensureInstance';
+import * as Fantom from '@react-native/fantom';
 import * as React from 'react';
 import {useEffect, useLayoutEffect, useRef} from 'react';
+import {TextInput} from 'react-native';
+import ReactNativeElement from 'react-native/src/private/webapis/dom/nodes/ReactNativeElement';
 
 describe('focus view command', () => {
   it('creates view before dispatching view command from ref function', () => {
@@ -212,5 +211,26 @@ describe('onChangeText', () => {
     expect(onChangeText).toHaveBeenCalledTimes(1);
     const [entry] = onChangeText.mock.lastCall;
     expect(entry).toEqual('Hello World');
+  });
+});
+
+describe('props.selection', () => {
+  it('the selection is passed to component view by command', () => {
+    const root = Fantom.createRoot();
+
+    Fantom.runTask(() => {
+      root.render(
+        <TextInput nativeID="text-input" selection={{start: 0, end: 4}}>
+          hello World!
+        </TextInput>,
+      );
+    });
+
+    expect(root.takeMountingManagerLogs()).toEqual([
+      'Update {type: "RootView", nativeID: (root)}',
+      'Create {type: "AndroidTextInput", nativeID: "text-input"}',
+      'Insert {type: "AndroidTextInput", parentNativeID: (root), index: 0, nativeID: "text-input"}',
+      'Command {type: "AndroidTextInput", nativeID: "text-input", name: "setTextAndSelection, args: [0,null,0,4]"}',
+    ]);
   });
 });

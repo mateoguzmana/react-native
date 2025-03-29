@@ -7,13 +7,12 @@
  * @flow strict-local
  * @format
  * @oncall react_native
- * @fantom_flags enableAccessToHostTreeInFabric:true
  */
 
-import '../../../../../../Libraries/Core/InitializeCore.js';
+import 'react-native/Libraries/Core/InitializeCore';
 
-import Event from '../Event';
-import {setInPassiveListenerFlag} from '../internals/EventInternals';
+import Event from 'react-native/src/private/webapis/dom/events/Event';
+import {setInPassiveListenerFlag} from 'react-native/src/private/webapis/dom/events/internals/EventInternals';
 
 describe('Event', () => {
   it('provides read-only constants for event phases', () => {
@@ -94,14 +93,14 @@ describe('Event', () => {
 
   it('should throw an error if the given options is not an object, function, null or undefined', () => {
     expect(() => {
-      // $FlowExpectedError[incompatible-call]
+      // $FlowExpectedError[incompatible-type]
       return new Event('custom', 1);
     }).toThrow(
       "Failed to construct 'Event': The provided value is not of type 'EventInit'.",
     );
 
     expect(() => {
-      // $FlowExpectedError[incompatible-call]
+      // $FlowExpectedError[incompatible-type]
       return new Event('custom', '1');
     }).toThrow(
       "Failed to construct 'Event': The provided value is not of type 'EventInit'.",
