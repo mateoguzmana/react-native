@@ -84,7 +84,7 @@ next            </div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-cxx-module-wrapper-base/can-override-existing-module.html"><span class="token function">canOverrideExistingModule</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief ">Return true if you intend to override some other native module that was registered e.g.</div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-cxx-module-wrapper-base/can-override-existing-module.html"><span class="token function">canOverrideExistingModule</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Return true if you intend to override some other native module that was registered e.g. as part of a different package (such as the core one). Trying to override without returning true from this method is considered an error and will throw an exception during initialization. By default all modules return false.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -99,7 +99,7 @@ next            </div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-cxx-module-wrapper-base/get-name.html"><span class="token function">getName</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/lang/String.html">String</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">external override </span><span class="token keyword">fun </span><a href="../-cxx-module-wrapper-base/get-name.html"><span class="token function">getName</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
                 </div>
               </div>
             </div>
@@ -114,7 +114,7 @@ next            </div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-cxx-module-wrapper-base/initialize.html"><span class="token function">initialize</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief ">This method is called after <a href="../-react-application-context/index.html">ReactApplicationContext</a> has been created.</div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-cxx-module-wrapper-base/initialize.html"><span class="token function">initialize</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">This method is called after <a href="../-react-application-context/index.html">ReactApplicationContext</a> has been created.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -129,7 +129,7 @@ next            </div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-cxx-module-wrapper-base/invalidate.html"><span class="token function">invalidate</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief ">Allow NativeModule to clean up.</div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-cxx-module-wrapper-base/invalidate.html"><span class="token function">invalidate</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Allow NativeModule to clean up. Called before React Native instance is destroyed.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -144,7 +144,7 @@ next            </div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-native-module/on-catalyst-instance-destroy.html"><span class="token function"><strike>onCatalystInstanceDestroy</strike></span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief ">Allow NativeModule to clean up.</div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":packages:react-native:ReactAndroid:dokkaHtml/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-native-module/on-catalyst-instance-destroy.html"><span class="token function"><strike>onCatalystInstanceDestroy</strike></span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Allow NativeModule to clean up. Called before {CatalystInstance#onHostDestroy}</p></div></div></div>
                 </div>
               </div>
             </div>
