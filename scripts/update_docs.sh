@@ -18,6 +18,7 @@ git add docs/
 # Commit changes, with current date in format [DD-MM-YYYY]
 git commit -m "[$(date +%d-%m-%Y)]"
 
-git push origin docs/dokka
+# Push to remote
+git push origin head
 
 echo "Dokka docs updated and pushed!"
