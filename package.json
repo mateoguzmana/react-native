@@ -36,7 +36,8 @@
     "trigger-react-native-release": "node ./scripts/releases-local/trigger-react-native-release.js",
     "update-lock": "npx yarn-deduplicate",
     "dokka": "./gradlew :packages:react-native:ReactAndroid:dokkaHtml",
-    "copy:dokka": "cp -r packages/react-native/ReactAndroid/build/dokka/* docs"
+    "copy:dokka": "cp -r packages/react-native/ReactAndroid/build/dokka/* docs",
+    "update-docs": "chmod +x scripts/update_docs.sh && ./scripts/update_docs.sh"
   },
   "workspaces": [
     "packages/*",
