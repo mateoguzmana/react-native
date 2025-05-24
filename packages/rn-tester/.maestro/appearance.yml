@@ -1,0 +1,35 @@
+appId: ${APP_ID} # iOS: com.meta.RNTester.localDevelopment | Android: com.facebook.react.uiapp
+---
+- launchApp
+- assertVisible:
+    text: "APIs"
+- tapOn:
+    id: "apis-tab"
+- assertVisible:
+    id: "explorer_search"
+- tapOn:
+    id: "explorer_search"
+- inputText:
+    text: "Appearance"
+- assertVisible:
+    id: "Appearance"
+- tapOn:
+    id: "Appearance"
+- assertVisible:
+    id: "example_search"
+- tapOn:
+    id: "example_search"
+- inputText:
+    text: "Toggle native"
+- tapOn: 
+    id: "set-to-light-button"
+- assertVisible:
+    id: "current-color-scheme-light"
+- tapOn:
+    id: "set-to-dark-button"
+- assertVisible:
+    id: "current-color-scheme-dark"
+- tapOn:
+    id: "unset-button"
+- assertVisible:
+    id: "current-color-scheme-light"

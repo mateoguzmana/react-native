@@ -145,16 +145,24 @@ const ToggleNativeAppearance = () => {
   return (
     <View>
       <RNTesterText>Native colorScheme: {nativeColorScheme}</RNTesterText>
-      <RNTesterText>Current colorScheme: {colorScheme}</RNTesterText>
+      <RNTesterText testID={`current-color-scheme-${colorScheme}`}>
+        Current colorScheme: {colorScheme}
+      </RNTesterText>
       <Button
         title="Set to light"
         onPress={() => setNativeColorScheme('light')}
+        testID="set-to-light-button"
       />
       <Button
         title="Set to dark"
         onPress={() => setNativeColorScheme('dark')}
+        testID="set-to-dark-button"
       />
-      <Button title="Unset" onPress={() => setNativeColorScheme(null)} />
+      <Button
+        title="Unset"
+        onPress={() => setNativeColorScheme(null)}
+        testID="unset-button"
+      />
     </View>
   );
 };
