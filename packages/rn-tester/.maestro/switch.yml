@@ -1,0 +1,40 @@
+appId: ${APP_ID} # iOS: com.meta.RNTester.localDevelopment | Android: com.facebook.react.uiapp
+---
+- launchApp
+- assertVisible: "Components"
+- assertVisible:
+    id: "explorer_search"
+- tapOn:
+    id: "explorer_search"
+- inputText:
+    text: "Switch"
+- tapOn:
+    id: "Switch"
+# Verify that the switch, with initial state off, turns on
+- assertVisible:
+    id: "on-off-initial-off-indicator-false"
+- tapOn:
+    id: "on-off-initial-off"
+- assertVisible:
+    id: "on-off-initial-off-indicator-true"
+# Verify that the switch, with initial state on, turns off
+- assertVisible:
+    id: "on-off-initial-on-indicator-true"
+- tapOn:
+    id: "on-off-initial-on"
+- assertVisible:
+    id: "on-off-initial-on-indicator-false"
+# Verify that disabled switch, with initial state off, stays off when tapped
+- assertVisible:
+    id: "disabled-initial-off-indicator-false"
+- tapOn:
+    id: "disabled-initial-off"
+- assertVisible:
+    id: "disabled-initial-off-indicator-false"
+# Verify that disabled switch, with initial state on, stays on when tapped
+- assertVisible:
+    id: "disabled-initial-on-indicator-true"
+- tapOn:
+    id: "disabled-initial-on"
+- assertVisible:
+    id: "disabled-initial-on-indicator-true"
