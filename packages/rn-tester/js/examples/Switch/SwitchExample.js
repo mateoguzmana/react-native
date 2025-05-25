@@ -12,7 +12,8 @@
 
 import RNTesterText from '../../components/RNTesterText';
 import React from 'react';
-import {Platform, Switch, View} from 'react-native';
+import {useState} from 'react';
+import {Alert, Platform, Switch, View} from 'react-native';
 
 type OnOffIndicatorProps = $ReadOnly<{on: boolean, testID: string}>;
 function OnOffIndicator({on, testID}: OnOffIndicatorProps) {
@@ -34,218 +35,182 @@ function ExampleRow({children}: ExampleRowProps) {
   );
 }
 
-type SimpleSwitchExampleState = $ReadOnly<{
-  trueSwitchIsOn: boolean,
-  falseSwitchIsOn: boolean,
-}>;
+function BasicSwitchExample(): React.Node {
+  const [trueSwitchIsOn, setTrueSwitchIsOn] = useState<boolean>(true);
+  const [falseSwitchIsOn, setFalseSwitchIsOn] = useState<boolean>(false);
 
-class BasicSwitchExample extends React.Component<{}, SimpleSwitchExampleState> {
-  state: SimpleSwitchExampleState = {
-    trueSwitchIsOn: true,
-    falseSwitchIsOn: false,
-  };
-
-  render(): React.Node {
-    return (
-      <View>
-        <ExampleRow>
-          <Switch
-            testID="on-off-initial-off"
-            onValueChange={value => this.setState({falseSwitchIsOn: value})}
-            trackColor={{
-              true: 'yellow',
-              false: 'purple',
-            }}
-            value={this.state.falseSwitchIsOn}
-          />
-          <OnOffIndicator
-            on={this.state.falseSwitchIsOn}
-            testID="on-off-initial-off-indicator"
-          />
-        </ExampleRow>
-        <ExampleRow>
-          <Switch
-            testID="on-off-initial-on"
-            onValueChange={value => this.setState({trueSwitchIsOn: value})}
-            value={this.state.trueSwitchIsOn}
-          />
-          <OnOffIndicator
-            on={this.state.trueSwitchIsOn}
-            testID="on-off-initial-on-indicator"
-          />
-        </ExampleRow>
-      </View>
-    );
-  }
+  return (
+    <View>
+      <ExampleRow>
+        <Switch
+          testID="on-off-initial-off"
+          onValueChange={value => setFalseSwitchIsOn(value)}
+          trackColor={{
+            true: 'yellow',
+            false: 'purple',
+          }}
+          value={falseSwitchIsOn}
+        />
+        <OnOffIndicator
+          on={falseSwitchIsOn}
+          testID="on-off-initial-off-indicator"
+        />
+      </ExampleRow>
+      <ExampleRow>
+        <Switch
+          testID="on-off-initial-on"
+          onValueChange={value => setTrueSwitchIsOn(value)}
+          value={trueSwitchIsOn}
+        />
+        <OnOffIndicator
+          on={trueSwitchIsOn}
+          testID="on-off-initial-on-indicator"
+        />
+      </ExampleRow>
+    </View>
+  );
 }
 
-class DisabledSwitchExample extends React.Component<
-  {},
-  SimpleSwitchExampleState,
-> {
-  state: SimpleSwitchExampleState = {
-    trueSwitchIsOn: true,
-    falseSwitchIsOn: false,
-  };
+function DisabledSwitchExample(): React.Node {
+  const [trueSwitchIsOn, setTrueSwitchIsOn] = useState<boolean>(true);
+  const [falseSwitchIsOn, setFalseSwitchIsOn] = useState<boolean>(false);
 
-  render(): React.Node {
-    return (
-      <View>
-        <ExampleRow>
-          <Switch
-            testID="disabled-initial-off"
-            disabled={true}
-            onValueChange={value => this.setState({falseSwitchIsOn: value})}
-            value={this.state.falseSwitchIsOn}
-          />
+  return (
+    <View>
+      <ExampleRow>
+        <Switch
+          testID="disabled-initial-off"
+          disabled={true}
+          onValueChange={value => setFalseSwitchIsOn(value)}
+          value={falseSwitchIsOn}
+        />
 
-          <OnOffIndicator
-            on={this.state.falseSwitchIsOn}
-            testID="disabled-initial-off-indicator"
-          />
-        </ExampleRow>
+        <OnOffIndicator
+          on={falseSwitchIsOn}
+          testID="disabled-initial-off-indicator"
+        />
+      </ExampleRow>
 
-        <ExampleRow>
-          <Switch
-            testID="disabled-initial-on"
-            disabled={true}
-            onValueChange={value => this.setState({trueSwitchIsOn: value})}
-            value={this.state.trueSwitchIsOn}
-          />
+      <ExampleRow>
+        <Switch
+          testID="disabled-initial-on"
+          disabled={true}
+          onValueChange={value => setTrueSwitchIsOn(value)}
+          value={trueSwitchIsOn}
+        />
 
-          <OnOffIndicator
-            on={this.state.trueSwitchIsOn}
-            testID="disabled-initial-on-indicator"
-          />
-        </ExampleRow>
-      </View>
-    );
-  }
+        <OnOffIndicator
+          on={trueSwitchIsOn}
+          testID="disabled-initial-on-indicator"
+        />
+      </ExampleRow>
+    </View>
+  );
 }
 
-class ColorSwitchExample extends React.Component<{...}, $FlowFixMeState> {
-  state: any | {colorFalseSwitchIsOn: boolean, colorTrueSwitchIsOn: boolean} = {
-    colorTrueSwitchIsOn: true,
-    colorFalseSwitchIsOn: false,
-  };
+function ColorSwitchExample(): React.Node {
+  const [colorFalseSwitchIsOn, setColorFalseSwitchIsOn] =
+    useState<boolean>(false);
+  const [colorTrueSwitchIsOn, setColorTrueSwitchIsOn] = useState<boolean>(true);
 
-  render(): React.Node {
-    return (
+  return (
+    <View>
+      <Switch
+        testID="initial-false-switch"
+        onValueChange={value => setColorFalseSwitchIsOn(value)}
+        style={{marginBottom: 10}}
+        thumbColor="#0000ff"
+        trackColor={{
+          false: '#ff0000',
+          true: '#00ff00',
+        }}
+        value={colorFalseSwitchIsOn}
+      />
+      <Switch
+        testID="initial-true-switch"
+        onValueChange={value => setColorTrueSwitchIsOn(value)}
+        thumbColor="#0000ff"
+        trackColor={{
+          false: '#ff0000',
+          true: '#00ff00',
+        }}
+        value={colorTrueSwitchIsOn}
+      />
+    </View>
+  );
+}
+
+function EventSwitchExample(): React.Node {
+  const [eventSwitchIsOn, setEventSwitchIsOn] = useState<boolean>(false);
+  const [eventSwitchRegressionIsOn, setEventSwitchRegressionIsOn] =
+    useState<boolean>(true);
+
+  return (
+    <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
       <View>
         <Switch
-          testID="initial-false-switch"
-          onValueChange={value => this.setState({colorFalseSwitchIsOn: value})}
+          testID="event-switch-top"
+          onValueChange={value => setEventSwitchIsOn(value)}
           style={{marginBottom: 10}}
-          thumbColor="#0000ff"
-          trackColor={{
-            false: '#ff0000',
-            true: '#00ff00',
-          }}
-          value={this.state.colorFalseSwitchIsOn}
+          value={eventSwitchIsOn}
         />
         <Switch
-          testID="initial-true-switch"
-          onValueChange={value => this.setState({colorTrueSwitchIsOn: value})}
-          thumbColor="#0000ff"
-          trackColor={{
-            false: '#ff0000',
-            true: '#00ff00',
-          }}
-          value={this.state.colorTrueSwitchIsOn}
+          testID="event-switch-bottom"
+          onValueChange={value => setEventSwitchIsOn(value)}
+          style={{marginBottom: 10}}
+          value={eventSwitchIsOn}
         />
-      </View>
-    );
-  }
-}
-
-class EventSwitchExample extends React.Component<{...}, $FlowFixMeState> {
-  state: any | {eventSwitchIsOn: boolean, eventSwitchRegressionIsOn: boolean} =
-    {
-      eventSwitchIsOn: false,
-      eventSwitchRegressionIsOn: true,
-    };
-
-  render(): React.Node {
-    return (
-      <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
-        <View>
-          <Switch
-            testID="event-switch-top"
-            onValueChange={value => this.setState({eventSwitchIsOn: value})}
-            style={{marginBottom: 10}}
-            value={this.state.eventSwitchIsOn}
-          />
-          <Switch
-            testID="event-switch-bottom"
-            onValueChange={value => this.setState({eventSwitchIsOn: value})}
-            style={{marginBottom: 10}}
-            value={this.state.eventSwitchIsOn}
-          />
-          <RNTesterText testID="event-switch-indicator">
-            {this.state.eventSwitchIsOn ? 'On' : 'Off'}
-          </RNTesterText>
-        </View>
-        <View>
-          <Switch
-            testID="event-switch-regression-top"
-            onValueChange={value =>
-              this.setState({eventSwitchRegressionIsOn: value})
-            }
-            style={{marginBottom: 10}}
-            value={this.state.eventSwitchRegressionIsOn}
-          />
-          <Switch
-            testID="event-switch-regression-bottom"
-            onValueChange={value =>
-              this.setState({eventSwitchRegressionIsOn: value})
-            }
-            style={{marginBottom: 10}}
-            value={this.state.eventSwitchRegressionIsOn}
-          />
-          <RNTesterText testID="event-switch-regression-indicator">
-            {this.state.eventSwitchRegressionIsOn ? 'On' : 'Off'}
-          </RNTesterText>
-        </View>
-      </View>
-    );
-  }
-}
-
-class IOSBackgroundColEx extends React.Component<{...}, $FlowFixMeState> {
-  state: any | {iosBackgroundColor: string} = {
-    iosBackgroundColor: '#ffa500',
-  };
-
-  render(): React.Node {
-    return (
-      <View>
-        <Switch
-          disabled
-          ios_backgroundColor={this.state.iosBackgroundColor}
-          style={{marginBottom: 20}}
-        />
-        <RNTesterText>
-          The background color can be seen either when the switch value is false
-          or when the switch is disabled (and the switch is translucent).{' '}
+        <RNTesterText testID="event-switch-indicator">
+          {eventSwitchIsOn ? 'On' : 'Off'}
         </RNTesterText>
       </View>
-    );
-  }
-}
-
-class OnChangeExample extends React.Component<{...}, $FlowFixMeState> {
-  render(): React.Node {
-    return (
       <View>
         <Switch
-          onChange={() => {
-            // eslint-disable-next-line no-alert
-            alert('OnChange Called');
-          }}
+          testID="event-switch-regression-top"
+          onValueChange={value => setEventSwitchRegressionIsOn(value)}
+          style={{marginBottom: 10}}
+          value={eventSwitchRegressionIsOn}
         />
+        <Switch
+          testID="event-switch-regression-bottom"
+          onValueChange={value => setEventSwitchRegressionIsOn(value)}
+          style={{marginBottom: 10}}
+          value={eventSwitchRegressionIsOn}
+        />
+        <RNTesterText testID="event-switch-regression-indicator">
+          {eventSwitchRegressionIsOn ? 'On' : 'Off'}
+        </RNTesterText>
       </View>
-    );
-  }
+    </View>
+  );
+}
+
+function IOSBackgroundColEx(): React.Node {
+  return (
+    <View>
+      <Switch
+        disabled
+        ios_backgroundColor="#ffa500"
+        style={{marginBottom: 20}}
+      />
+      <RNTesterText>
+        The background color can be seen either when the switch value is false
+        or when the switch is disabled (and the switch is translucent).{' '}
+      </RNTesterText>
+    </View>
+  );
+}
+
+function OnChangeExample(): React.Node {
+  return (
+    <View>
+      <Switch
+        onChange={() => {
+          Alert.alert('OnChange Called');
+        }}
+      />
+    </View>
+  );
 }
 
 class ContainerBackgroundColorStyleExample extends React.Component<
