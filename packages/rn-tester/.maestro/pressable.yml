@@ -2,13 +2,7 @@ appId: ${APP_ID} # iOS: com.meta.RNTester.localDevelopment | Android: com.facebo
 ---
 - launchApp
 - assertVisible: "Components"
-- scrollUntilVisible:
-    element:
-      id: "Pressable"
-    direction: DOWN
-    speed: 40
-- tapOn:
-    id: "Pressable"
+- openLink: "rntester://example/PressableExample"
 - assertVisible:
     text: "Change content based on Press"
 - assertVisible:

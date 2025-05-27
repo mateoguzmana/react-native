@@ -2,14 +2,7 @@ appId: ${APP_ID} # iOS: com.meta.RNTester.localDevelopment | Android: com.facebo
 ---
 - launchApp
 - assertVisible: "Components"
-- assertVisible:
-    id: "explorer_search"
-- tapOn:
-    id: "explorer_search"
-- inputText:
-    text: "Switch"
-- tapOn:
-    id: "Switch"
+- openLink: "rntester://example/SwitchExample"
 # Verify that the switch, with initial state off, turns on
 - assertVisible:
     id: "on-off-initial-off-indicator-false"
