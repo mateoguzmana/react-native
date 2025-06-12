@@ -44,10 +44,10 @@ public open class ReactFragment : Fragment(), PermissionAwareActivity {
 
     reactDelegate =
         if (ReactNativeNewArchitectureFeatureFlags.enableBridgelessArchitecture()) {
-          ReactDelegate(activity, reactHost, mainComponentName, launchOptions)
+          ReactDelegate(activity as Activity, checkNotNull(reactHost), mainComponentName, launchOptions)
         } else {
           @Suppress("DEPRECATION")
-          ReactDelegate(activity, reactNativeHost, mainComponentName, launchOptions, fabricEnabled)
+          ReactDelegate(activity as Activity, checkNotNull(reactNativeHost), mainComponentName, launchOptions, fabricEnabled)
         }
   }
 
